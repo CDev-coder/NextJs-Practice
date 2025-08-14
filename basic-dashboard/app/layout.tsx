@@ -1,3 +1,6 @@
+import "@/app/ui/global.css";
+import { inter } from "@/app/fonts";
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +8,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      {/* MAIN layout.tsx acts as the body element */}
+      <body className={`${inter.className} antialiased`} id="Main_layout.tsx">
+        {children}
+      </body>
     </html>
   );
 }
