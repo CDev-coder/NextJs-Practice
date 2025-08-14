@@ -9,12 +9,16 @@ import {
 } from "./definitions";
 import { formatCurrency } from "./utils";
 
-const sql = postgres(process.env.DATABASE_URL!);
-//const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+const sql = postgres(process.env.POSTGRES_URL!, {
+  ssl: "require",
+  max: 1, // Important for serverless environments
+  idle_timeout: 20, // Close idle connections after 20 seconds
+});
+console.log(process.env.POSTGRES_URL);
 
 export async function fetchRevenue() {
   try {
-    // Artificially delay a response for demo purposes.
+    // Artificially delay a response for demo purposes.c
     // Don't do this in production :)
 
     // console.log('Fetching revenue data...');
