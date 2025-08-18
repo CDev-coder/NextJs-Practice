@@ -12,6 +12,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const handleSearch = useDebouncedCallback((term) => {
     console.log(`Searching... ${term}`);
     const params = new URLSearchParams(searchParams);
+    params.set("page", "1"); //Default the results to page 1
     console.log(term);
     if (term) {
       params.set("query", term);
