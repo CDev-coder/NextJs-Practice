@@ -14,9 +14,14 @@ import { useActionState } from "react";
 
 export default function Form({ customers }: { customers: CustomerField[] }) {
   const initialState: State = { message: null, errors: {} };
+  ///useActionState is a indexed react hook stored in Next.js that will combine the server action and a default state
   const [state, formAction] = useActionState(createInvoice, initialState);
+  ///Then make a local copy/state on the client side so it has something to see. If not, then it will be blank and cause errors/render issues
+  ///So this method creates defaults that will be overrided later.
   return (
     <form action={formAction}>
+      {/*formAction is a wrapper that links this whole form element (or any other element) to the useActionState via one of the server functions*/}
+      {/*formAction is listening to changes to it's own data it wraps around, then triggers 'createInvoice' by itself*/}
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
