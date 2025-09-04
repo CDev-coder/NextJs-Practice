@@ -3,7 +3,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
 export const metadata = {
-  title: "Pet Project Pantry",
+  title: "Pet Pantry",
   description: "Your one-stop shop for all things pets!",
   icons: {
     icon: "/favicon.ico", // default

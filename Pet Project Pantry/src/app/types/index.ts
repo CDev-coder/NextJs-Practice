@@ -8,6 +8,8 @@ export interface Product {
   animalType: string;
   category: string;
   subcategory: string;
+  brand: string;
+  SKU: string;
 }
 
 // You can also create specific animal types if needed
@@ -21,10 +23,3 @@ export type AnimalType =
   | "all";
 
 export type CategoryType = "food" | "accessories" | "treats" | "toys" | "all";
-
-// If you want to extend with more specific properties later
-export interface ProductWithDetails extends Product {
-  inStock?: boolean;
-  rating?: number;
-  brand?: string;
-}

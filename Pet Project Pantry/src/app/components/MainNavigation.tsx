@@ -99,7 +99,7 @@ const MainNavigation = ({
 
               {/* Dropdown menu */}
               {activeCategory === key && (
-                <div className="absolute left-0 top-full w-max bg-white shadow-xl z-50 rounded-b-md overflow-hidden">
+                <div className="absolute left-0 top-full w-max bg-white shadow-xl z-50 rounded-b-md overflow-hidden text-black">
                   <div className="p-6 grid grid-cols-3 gap-8">
                     {/* Dogs column */}
                     <div>
@@ -178,7 +178,7 @@ const MainNavigation = ({
                   </div>
 
                   {/* View all button */}
-                  <div className="bg-gray-100 px-6 py-3 border-t">
+                  <div className="bg-gray-100 px-6 py-3 border-t text-black">
                     <button
                       className="text-petflow-blue font-semibold hover:underline"
                       onClick={() => onCategorySelect && onCategorySelect(key)}
