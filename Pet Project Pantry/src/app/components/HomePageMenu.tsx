@@ -7,6 +7,7 @@ import ProductCard from "./ProductCard";
 import { Product } from "../types";
 import SideBarFilterMenu from "./SideBarFilterMenu";
 import { useEffect, useState } from "react";
+import { normalizeSubcategory } from "../context/normalizer";
 
 interface HomePageMenuProps {
   products: Product[];
@@ -34,6 +35,7 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
   ];
 
   const handleCategorySelect = (category: string) => {
+    console.log("HomePageMenu handleCategorySelect - category: " + category);
     const filtered = products.filter((p) => p.category === category);
     setFilteredProducts(filtered);
     setCurrentFilter(category.charAt(0).toUpperCase() + category.slice(1));
@@ -52,13 +54,16 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     animal: string,
     subcategory: string
   ) => {
+    // Normalize the subcategory to match product data format
+    const normalizedSubcategory = normalizeSubcategory(subcategory);
+
     const filtered = products.filter(
       (p) =>
         p.category === category &&
         p.animalType === animal &&
-        p.subcategory === subcategory
+        p.subcategory === normalizedSubcategory
     );
-
+    console.log("filtered: ", filtered);
     setFilteredProducts(filtered);
     setCurrentFilter(
       `${
@@ -81,7 +86,10 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
 
   const handlePropertyFilter = (property: keyof Product, value: string) => {
     console.log(
-      "handlePropertyFilter-- property: " + property + " value: " + value
+      "HomePageMenu handlePropertyFilter-- property: " +
+        property +
+        " value: " +
+        value
     );
     setSelectedFilterValue(value);
     if (value != "all") {
@@ -96,6 +104,22 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
       console.log("filtered: ", filtered);
       setFilteredProducts(filtered);
     }
+  };
+
+  const handleDetailedPropertyFilter = (
+    property: keyof Product | string,
+    subproperty: keyof Product | string,
+    animal: string
+  ) => {
+    console.log(
+      "handleDetailedPropertyFilter -- property: " +
+        property +
+        " value: " +
+        subproperty +
+        " subproperty: " +
+        " animal: " +
+        animal
+    );
   };
 
   // Update baseFilteredProducts when category/subcategory changes
@@ -134,6 +158,10 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
       <MainNavigation
         onCategorySelect={handleCategorySelect}
         onSubcategorySelect={handleSubcategorySelect}
+        onSetActiveFilters={setActiveFilters}
+        onHandlePropertyFilter={handlePropertyFilter}
+        onHandleDetailedPropertyFilter={handleDetailedPropertyFilter}
+        currentFilter={currentFilter}
       />
 
       <div className="container mx-auto px-4 py-8">

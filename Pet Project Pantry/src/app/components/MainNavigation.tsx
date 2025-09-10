@@ -2,6 +2,8 @@
 "use client";
 
 import { useState } from "react";
+import { Product } from "../types";
+import { normalizeSubcategory } from "../context/normalizer";
 
 // Define TypeScript interfaces for the props
 interface MenuItem {
@@ -20,11 +22,25 @@ interface MainNavigationProps {
     animal: string,
     subcategory: string
   ) => void;
+  onSetActiveFilters?: (
+    filters: { property: keyof Product; values: string[] } | null
+  ) => void;
+  onHandlePropertyFilter?: (property: keyof Product, value: string) => void;
+  onHandleDetailedPropertyFilter?: (
+    property: keyof Product | string,
+    subproperty: keyof Product | string,
+    animal: string
+  ) => void;
+  currentFilter: string;
 }
 
 const MainNavigation = ({
   onCategorySelect,
   onSubcategorySelect,
+  onSetActiveFilters,
+  onHandlePropertyFilter,
+  onHandleDetailedPropertyFilter,
+  currentFilter,
 }: MainNavigationProps) => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
@@ -73,12 +89,54 @@ const MainNavigation = ({
   };
 
   const handleSubcategoryClick = (
-    category: string,
+    category: keyof Product | string,
     animal: string,
-    subcategory: string
+    subcategory: keyof Product | string
   ) => {
+    console.log(
+      "MAINNAV handleSubcategoryClick: " + category,
+      animal,
+      subcategory
+    );
     if (onSubcategorySelect) {
-      onSubcategorySelect(category, animal, subcategory);
+      // Normalize the subcategory to match product data format
+      const normalizedSubcategory = normalizeSubcategory(subcategory);
+      console.log("normalizedSubcategory: " + normalizedSubcategory);
+      onSubcategorySelect(category, animal, normalizedSubcategory);
+
+      // Also trigger the sidebar filter mechanism
+      if (
+        onSetActiveFilters &&
+        onHandlePropertyFilter &&
+        onHandleDetailedPropertyFilter
+      ) {
+        // Set active filters for the sidebar
+        onSetActiveFilters({
+          property: "subcategory",
+          values: [normalizedSubcategory],
+        });
+        // Apply the filter
+        onHandleDetailedPropertyFilter(category, normalizedSubcategory, animal);
+      }
+    }
+  };
+
+  const handleCategoryClick = (category: string) => {
+    console.log("MainNavigation handleCategoryClick category: " + category);
+    if (onCategorySelect) {
+      onCategorySelect(category);
+
+      // Also trigger the sidebar filter mechanism
+      if (onSetActiveFilters && onHandlePropertyFilter) {
+        // Set active filters for the sidebar
+        onSetActiveFilters({
+          property: "category",
+          values: [category],
+        });
+
+        // Apply the filter
+        onHandlePropertyFilter("category", category);
+      }
     }
   };
 
@@ -93,7 +151,10 @@ const MainNavigation = ({
               onMouseEnter={() => handleCategoryHover(key)}
               onMouseLeave={handleCategoryLeave}
             >
-              <button className="px-3 py-2 hover:bg-blue-700 rounded transition-colors">
+              <button
+                className="px-3 py-2 hover:bg-blue-700 rounded transition-colors"
+                onClick={() => handleCategoryClick(key)}
+              >
                 {item.name}
               </button>
 
@@ -112,11 +173,7 @@ const MainNavigation = ({
                             <button
                               className="text-gray-700 hover:text-petflow-blue text-left"
                               onClick={() =>
-                                handleSubcategoryClick(
-                                  key,
-                                  "dog",
-                                  subcat.toLowerCase()
-                                )
+                                handleSubcategoryClick(key, "dog", subcat)
                               }
                             >
                               {subcat}
@@ -137,11 +194,7 @@ const MainNavigation = ({
                             <button
                               className="text-gray-700 hover:text-petflow-blue text-left"
                               onClick={() =>
-                                handleSubcategoryClick(
-                                  key,
-                                  "cat",
-                                  subcat.toLowerCase()
-                                )
+                                handleSubcategoryClick(key, "cat", subcat)
                               }
                             >
                               {subcat}
@@ -162,11 +215,7 @@ const MainNavigation = ({
                             <button
                               className="text-gray-700 hover:text-petflow-blue text-left"
                               onClick={() =>
-                                handleSubcategoryClick(
-                                  key,
-                                  "bird",
-                                  subcat.toLowerCase()
-                                )
+                                handleSubcategoryClick(key, "bird", subcat)
                               }
                             >
                               {subcat}
@@ -181,7 +230,7 @@ const MainNavigation = ({
                   <div className="bg-gray-100 px-6 py-3 border-t text-black">
                     <button
                       className="text-petflow-blue font-semibold hover:underline"
-                      onClick={() => onCategorySelect && onCategorySelect(key)}
+                      onClick={() => handleCategoryClick(key)}
                     >
                       View All {item.name}
                     </button>
