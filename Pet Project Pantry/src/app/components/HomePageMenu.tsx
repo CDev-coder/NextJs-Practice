@@ -1,8 +1,8 @@
 // components/HomePageMenu.tsx
 "use client";
 
-import { useState } from "react";
 import MainNavigation from "./MainNavigation";
+import { useFilters } from "../context/FilterContext";
 import ProductCard from "./ProductCard";
 import { Product } from "../types";
 
@@ -11,15 +11,16 @@ interface HomePageMenuProps {
 }
 
 const HomePageMenu = ({ products }: HomePageMenuProps) => {
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
-  const [currentFilter, setCurrentFilter] = useState("All Products");
-  const [activeFilters, setActiveFilters] = useState<{
-    property: keyof Product;
-    values: string[];
-  } | null>(null);
-  const [selectedFilterValue, setSelectedFilterValue] = useState<string | null>(
-    null
-  );
+  const {
+    filteredProducts,
+    setFilteredProducts,
+    currentFilter,
+    setCurrentFilter,
+    activeFilters,
+    setActiveFilters,
+    selectedFilterValue,
+    setSelectedFilterValue,
+  } = useFilters();
 
   // Properties that can be used for filtering
   const filterableProperties: (keyof Product)[] = [
