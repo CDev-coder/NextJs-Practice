@@ -5,6 +5,8 @@ import MainNavigation from "./MainNavigation";
 import { useFilters } from "../context/FilterContext";
 import ProductCard from "./ProductCard";
 import { Product } from "../types";
+import SideBarFilterMenu from "./SideBarFilterMenu";
+import { useEffect, useState } from "react";
 
 interface HomePageMenuProps {
   products: Product[];
@@ -20,6 +22,7 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     setActiveFilters,
     selectedFilterValue,
     setSelectedFilterValue,
+    resetFilters,
   } = useFilters();
 
   // Properties that can be used for filtering
@@ -72,22 +75,42 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     setSelectedFilterValue(null);
   };
 
+  // Store the base filtered products (before property filters)
+  const [baseFilteredProducts, setBaseFilteredProducts] =
+    useState<Product[]>(products);
+
   const handlePropertyFilter = (property: keyof Product, value: string) => {
+    console.log(
+      "handlePropertyFilter-- property: " + property + " value: " + value
+    );
     setSelectedFilterValue(value);
-
-    // Filter products by the selected property value
-    const filtered = filteredProducts.filter((p) => p[property] === value);
-
-    setFilteredProducts(filtered);
+    if (value != "all") {
+      // Filter from the base filtered products, not the already property-filtered products
+      const filtered = baseFilteredProducts.filter(
+        (p) => p[property] === value
+      );
+      console.log("filtered: ", filtered);
+      setFilteredProducts(filtered);
+    } else {
+      const filtered = baseFilteredProducts.filter((p) => p[property]);
+      console.log("filtered: ", filtered);
+      setFilteredProducts(filtered);
+    }
   };
+
+  // Update baseFilteredProducts when category/subcategory changes
+  useEffect(() => {
+    setBaseFilteredProducts(filteredProducts);
+  }, [currentFilter]); // Update when the main filter changes
 
   const getAvailableFilters = () => {
     const availableFilters: Partial<Record<keyof Product, string[]>> = {};
 
     filterableProperties.forEach((property) => {
       if (property !== activeFilters?.property) {
+        // Use baseFilteredProducts for available filters to show all options
         const values = Array.from(
-          new Set(filteredProducts.map((p) => p[property]))
+          new Set(baseFilteredProducts.map((p) => p[property]))
         );
         availableFilters[property] = values as string[];
       }
@@ -98,6 +121,7 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
 
   const clearFilters = () => {
     setFilteredProducts(products);
+    setBaseFilteredProducts(products);
     setCurrentFilter("All Products");
     setActiveFilters(null);
     setSelectedFilterValue(null);
@@ -132,96 +156,17 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
 
         <div className="flex gap-8">
           {/* Side navigation for filters */}
-          {(activeFilters || Object.keys(availableFilters).length > 0) && (
-            <div className="w-64 flex-shrink-0">
-              <div className="bg-white rounded-lg shadow-md p-4 text-black">
-                {/* Active filter section */}
-                {activeFilters && (
-                  <div className="mb-6">
-                    <h3 className="font-semibold text-lg mb-4 border-b pb-2">
-                      Filter by {activeFilters.property}
-                    </h3>
-                    <ul className="space-y-2">
-                      <li>
-                        <button
-                          className={`w-full text-left px-3 py-2 rounded text-black ${
-                            selectedFilterValue === null
-                              ? "bg-petflow-blue text-white"
-                              : "hover:bg-gray-100"
-                          }`}
-                          onClick={() => {
-                            setSelectedFilterValue(null);
-                            // Reset to the current category filter
-                            if (currentFilter !== "All Products") {
-                              handleCategorySelect(currentFilter.toLowerCase());
-                            }
-                          }}
-                        >
-                          All {activeFilters.property}
-                        </button>
-                      </li>
-                      {activeFilters.values.map((value, index) => (
-                        <li key={index}>
-                          <button
-                            className={`w-full text-left px-3 py-2 rounded text-black ${
-                              selectedFilterValue === value
-                                ? "bg-petflow-blue text-white"
-                                : "hover:bg-gray-100"
-                            }`}
-                            onClick={() =>
-                              handlePropertyFilter(
-                                activeFilters.property,
-                                value
-                              )
-                            }
-                          >
-                            {value}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {/* Additional filter options */}
-                {Object.entries(availableFilters).map(([property, values]) => (
-                  <div key={property} className="mb-6">
-                    <h3 className="font-semibold text-lg text-black mb-4 border-b pb-2">
-                      Filter by {property}
-                    </h3>
-                    <ul className="space-y-2">
-                      {values.map((value, index) => (
-                        <li key={index}>
-                          <button
-                            className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
-                            onClick={() => {
-                              setActiveFilters({
-                                property: property as keyof Product,
-                                values: Array.from(
-                                  new Set(
-                                    filteredProducts.map(
-                                      (p) => p[property as keyof Product]
-                                    )
-                                  )
-                                ) as string[],
-                              });
-                              handlePropertyFilter(
-                                property as keyof Product,
-                                value
-                              );
-                            }}
-                          >
-                            {value}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
+          <SideBarFilterMenu
+            activeFilters={activeFilters}
+            availableFilters={availableFilters}
+            selectedFilterValue={selectedFilterValue}
+            filteredProducts={filteredProducts}
+            currentFilter={currentFilter}
+            onSetSelectedFilterValue={setSelectedFilterValue}
+            onSetActiveFilters={setActiveFilters}
+            onHandlePropertyFilter={handlePropertyFilter}
+            onHandleCategorySelect={handleCategorySelect}
+          />
           {/* Product grid */}
           <div
             className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ${
