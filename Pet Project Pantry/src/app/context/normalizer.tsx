@@ -14,7 +14,7 @@ export const normalizeSubcategory = (subcategory: string): string => {
 
   // Convert to lowercase and replace spaces with hyphens
   const normalized = subcategory.toLowerCase();
-  console.log("normalized: " + normalized);
+  //console.log("normalized: " + normalized);
   // Return mapped value if exists, otherwise return subcategory
   return mappings[normalized] || subcategory;
 };

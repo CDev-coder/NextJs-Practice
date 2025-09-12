@@ -54,6 +54,7 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     animal: string,
     subcategory: string
   ) => {
+    console.log("HPM handleSubcategorySelect");
     // Normalize the subcategory to match product data format
     const normalizedSubcategory = normalizeSubcategory(subcategory);
 
@@ -63,7 +64,7 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
         p.animalType === animal &&
         p.subcategory === normalizedSubcategory
     );
-    console.log("filtered: ", filtered);
+    console.log("HPM handleSubcategorySelect filtered: ", filtered);
     setFilteredProducts(filtered);
     setCurrentFilter(
       `${
@@ -73,6 +74,8 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
 
     // Set up filter options for brands within this subcategory
     const brands = Array.from(new Set(filtered.map((p) => p.brand)));
+    console.log("HPM handleSubcategorySelect brands: ", brands);
+
     setActiveFilters({
       property: "brand",
       values: brands,
@@ -92,6 +95,7 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
         value
     );
     setSelectedFilterValue(value);
+    console.log("current baseFilteredProducts: ", baseFilteredProducts);
     if (value != "all") {
       // Filter from the base filtered products, not the already property-filtered products
       const filtered = baseFilteredProducts.filter(
@@ -124,8 +128,13 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
 
   // Update baseFilteredProducts when category/subcategory changes
   useEffect(() => {
+    console.log("HPM currentFilter: ", currentFilter);
     setBaseFilteredProducts(filteredProducts);
   }, [currentFilter]); // Update when the main filter changes
+  //activeFilters
+  useEffect(() => {
+    console.log("HPM activeFilters: ", activeFilters);
+  }, [activeFilters]); // Update when the main filter changes
 
   const getAvailableFilters = () => {
     const availableFilters: Partial<Record<keyof Product, string[]>> = {};
