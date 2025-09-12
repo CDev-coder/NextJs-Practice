@@ -16,7 +16,11 @@ interface MenuItem {
 }
 
 interface MainNavigationProps {
-  onCategorySelect?: (category: string) => void;
+  onCategorySelect?: (
+    category: string,
+    animal: string,
+    subcategory: string
+  ) => void;
   onSubcategorySelect?: (
     category: string,
     animal: string,
@@ -124,9 +128,10 @@ const MainNavigation = ({
   const handleCategoryClick = (category: string) => {
     console.log("MainNavigation handleCategoryClick category: " + category);
     if (onCategorySelect) {
-      onCategorySelect(category);
+      onCategorySelect(category, "all", "all");
 
       // Also trigger the sidebar filter mechanism
+      /*
       if (onSetActiveFilters && onHandlePropertyFilter) {
         // Set active filters for the sidebar
         onSetActiveFilters({
@@ -137,6 +142,7 @@ const MainNavigation = ({
         // Apply the filter
         onHandlePropertyFilter("category", category);
       }
+        */
     }
   };
 

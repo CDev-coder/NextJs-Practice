@@ -6,7 +6,7 @@ import { useFilters } from "../context/FilterContext";
 import ProductCard from "./ProductCard";
 import { Product } from "../types";
 import SideBarFilterMenu from "./SideBarFilterMenu";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { normalizeSubcategory } from "../context/normalizer";
 
 interface HomePageMenuProps {
@@ -15,14 +15,11 @@ interface HomePageMenuProps {
 
 const HomePageMenu = ({ products }: HomePageMenuProps) => {
   const {
+    applyFilter,
     filteredProducts,
-    setFilteredProducts,
     currentFilter,
-    setCurrentFilter,
     activeFilters,
-    setActiveFilters,
     selectedFilterValue,
-    setSelectedFilterValue,
     resetFilters,
   } = useFilters();
 
@@ -34,19 +31,25 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     "brand",
   ];
 
-  const handleCategorySelect = (category: string) => {
+  const handleCategorySelect = (
+    category: keyof Product | string,
+    animal: string,
+    subcategory: keyof Product | string
+  ) => {
     console.log("HomePageMenu handleCategorySelect - category: " + category);
-    const filtered = products.filter((p) => p.category === category);
-    setFilteredProducts(filtered);
-    setCurrentFilter(category.charAt(0).toUpperCase() + category.slice(1));
+    //const filtered = products.filter((p) => p.category === category);
+
+    applyFilter(category, animal, subcategory);
 
     // Set up filter options for brands within this category
+    /*
     const brands = Array.from(new Set(filtered.map((p) => p.brand)));
     setActiveFilters({
       property: "brand",
       values: brands,
     });
     setSelectedFilterValue(null);
+    */
   };
 
   const handleSubcategorySelect = (
@@ -65,27 +68,41 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
         p.subcategory === normalizedSubcategory
     );
     console.log("HPM handleSubcategorySelect filtered: ", filtered);
+    applyFilter(category, animal, subcategory);
+    /*
     setFilteredProducts(filtered);
     setCurrentFilter(
       `${
         animal.charAt(0).toUpperCase() + animal.slice(1)
       } ${subcategory} ${category}`
     );
-
+    */
     // Set up filter options for brands within this subcategory
     const brands = Array.from(new Set(filtered.map((p) => p.brand)));
     console.log("HPM handleSubcategorySelect brands: ", brands);
-
+    /*
     setActiveFilters({
       property: "brand",
       values: brands,
     });
     setSelectedFilterValue(null);
+    */
   };
 
-  // Store the base filtered products (before property filters)
-  const [baseFilteredProducts, setBaseFilteredProducts] =
-    useState<Product[]>(products);
+  // Memoize the base products to prevent unnecessary re-renders
+  const baseFilteredProducts = useMemo(() => products, [products]);
+
+  // Use useCallback for the filter function
+  const handleFilter = useCallback(
+    (filter: string) => {
+      const filtered = baseFilteredProducts.filter(
+        (product) => product.category.toLowerCase() === filter.toLowerCase()
+      );
+      //setFilteredProducts(filtered);
+      // setActiveFilters(filter);
+    },
+    [baseFilteredProducts]
+  );
 
   const handlePropertyFilter = (property: keyof Product, value: string) => {
     console.log(
@@ -94,7 +111,7 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
         " value: " +
         value
     );
-    setSelectedFilterValue(value);
+    // setSelectedFilterValue(value);
     console.log("current baseFilteredProducts: ", baseFilteredProducts);
     if (value != "all") {
       // Filter from the base filtered products, not the already property-filtered products
@@ -102,11 +119,11 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
         (p) => p[property] === value
       );
       console.log("filtered: ", filtered);
-      setFilteredProducts(filtered);
+      // setFilteredProducts(filtered);
     } else {
       const filtered = baseFilteredProducts.filter((p) => p[property]);
       console.log("filtered: ", filtered);
-      setFilteredProducts(filtered);
+      //  setFilteredProducts(filtered);
     }
   };
 
@@ -126,19 +143,20 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     );
   };
 
-  // Update baseFilteredProducts when category/subcategory changes
+  // Update when the main filter changes
+  useEffect(() => {
+    console.log("HPM filteredProducts: ", filteredProducts);
+  }, [filteredProducts]);
   useEffect(() => {
     console.log("HPM currentFilter: ", currentFilter);
-    setBaseFilteredProducts(filteredProducts);
   }, [currentFilter]); // Update when the main filter changes
-  //activeFilters
   useEffect(() => {
     console.log("HPM activeFilters: ", activeFilters);
-  }, [activeFilters]); // Update when the main filter changes
+  }, [activeFilters]);
 
+  /*
   const getAvailableFilters = () => {
     const availableFilters: Partial<Record<keyof Product, string[]>> = {};
-
     filterableProperties.forEach((property) => {
       if (property !== activeFilters?.property) {
         // Use baseFilteredProducts for available filters to show all options
@@ -151,23 +169,19 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
 
     return availableFilters;
   };
+  const availableFilters = getAvailableFilters();
+  */
 
   const clearFilters = () => {
-    setFilteredProducts(products);
-    setBaseFilteredProducts(products);
-    setCurrentFilter("All Products");
-    setActiveFilters(null);
-    setSelectedFilterValue(null);
+    resetFilters();
   };
-
-  const availableFilters = getAvailableFilters();
 
   return (
     <div className="HomePageMenu">
       <MainNavigation
         onCategorySelect={handleCategorySelect}
         onSubcategorySelect={handleSubcategorySelect}
-        onSetActiveFilters={setActiveFilters}
+        // onSetActiveFilters={setActiveFilters}
         onHandlePropertyFilter={handlePropertyFilter}
         onHandleDetailedPropertyFilter={handleDetailedPropertyFilter}
         currentFilter={currentFilter}
@@ -176,12 +190,15 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center">
-            <span className="text-gray-600 mr-4">Showing: {currentFilter}</span>
-            {selectedFilterValue && (
-              <span className="text-gray-600 mr-2">
-                / {selectedFilterValue}
-              </span>
-            )}
+            <span className="text-gray-600 mr-4">
+              Showing: {currentFilter}
+              {selectedFilterValue && (
+                <span className="text-gray-600 mr-1">
+                  / {selectedFilterValue}
+                </span>
+              )}
+            </span>
+
             <button
               onClick={clearFilters}
               className="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded text-sm"
@@ -193,23 +210,23 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
 
         <div className="flex gap-8">
           {/* Side navigation for filters */}
+          {/*
           <SideBarFilterMenu
-            activeFilters={activeFilters}
-            availableFilters={availableFilters}
+            //activeFilters={activeFilters}
+            //availableFilters={availableFilters}
             selectedFilterValue={selectedFilterValue}
             filteredProducts={filteredProducts}
             currentFilter={currentFilter}
-            onSetSelectedFilterValue={setSelectedFilterValue}
-            onSetActiveFilters={setActiveFilters}
+            // onSetSelectedFilterValue={setSelectedFilterValue}
+            // onSetActiveFilters={setActiveFilters}
             onHandlePropertyFilter={handlePropertyFilter}
             onHandleCategorySelect={handleCategorySelect}
           />
+          */}
           {/* Product grid */}
           <div
             className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ${
-              activeFilters || Object.keys(availableFilters).length > 0
-                ? "flex-1"
-                : "w-full"
+              activeFilters ? "flex-1" : "w-full"
             }`}
           >
             {filteredProducts.map((p) => (

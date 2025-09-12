@@ -4,23 +4,27 @@
 import { Product } from "../types";
 
 interface SideBarFilterMenuProps {
-  activeFilters: {
+  activeFilters?: {
     property: keyof Product;
     values: string[];
   } | null;
-  availableFilters: Partial<Record<keyof Product, string[]>>;
+  availableFilters?: Partial<Record<keyof Product, string[]>>;
   selectedFilterValue: string | null;
   filteredProducts: Product[];
   currentFilter: string;
-  onSetSelectedFilterValue: (value: string | null) => void;
-  onSetActiveFilters: (
+  onSetSelectedFilterValue?: (value: string | null) => void;
+  onSetActiveFilters?: (
     filters: {
       property: keyof Product;
       values: string[];
     } | null
   ) => void;
   onHandlePropertyFilter: (property: keyof Product, value: string) => void;
-  onHandleCategorySelect: (category: string) => void;
+  onHandleCategorySelect: (
+    category: string,
+    animal: string,
+    subcategory: string
+  ) => void;
 }
 
 const SideBarFilterMenu = ({
@@ -79,6 +83,7 @@ const SideBarFilterMenu = ({
                               value
                           );
                           onHandlePropertyFilter(activeFilters.property, value);
+                          ///Will need to fix this
                         }}
                       >
                         {value}
@@ -101,16 +106,19 @@ const SideBarFilterMenu = ({
                       <button
                         className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
                         onClick={() => {
-                          onSetActiveFilters({
-                            property: property as keyof Product,
-                            values: Array.from(
-                              new Set(
-                                filteredProducts.map(
-                                  (p) => p[property as keyof Product]
+                          if (onSetActiveFilters) {
+                            onSetActiveFilters({
+                              property: property as keyof Product,
+                              values: Array.from(
+                                new Set(
+                                  filteredProducts.map(
+                                    (p) => p[property as keyof Product]
+                                  )
                                 )
-                              )
-                            ) as string[],
-                          });
+                              ) as string[],
+                            });
+                          }
+
                           onHandlePropertyFilter(
                             property as keyof Product,
                             value
