@@ -4,14 +4,15 @@
 import { Product } from "../types";
 
 interface SideBarFilterMenuProps {
+  searched_Brand?: string[];
+  searched_Animal?: string[];
+  searched_Names?: string[];
+  searched_Prices?: string[];
   activeFilters?: {
     property: keyof Product;
     values: string[];
   } | null;
   availableFilters?: Partial<Record<keyof Product, string[]>>;
-  selectedFilterValue: string | null;
-  filteredProducts: Product[];
-  currentFilter: string;
   onSetSelectedFilterValue?: (value: string | null) => void;
   onSetActiveFilters?: (
     filters: {
@@ -19,31 +20,19 @@ interface SideBarFilterMenuProps {
       values: string[];
     } | null
   ) => void;
-  onHandlePropertyFilter: (property: keyof Product, value: string) => void;
-  onHandleCategorySelect: (
-    category: string,
-    animal: string,
-    subcategory: string
-  ) => void;
 }
 
-const SideBarFilterMenu = ({
-  activeFilters,
-  availableFilters,
-  selectedFilterValue,
-  filteredProducts,
-  currentFilter,
-  onSetSelectedFilterValue,
-  onSetActiveFilters,
-  onHandlePropertyFilter,
-  onHandleCategorySelect,
-}: SideBarFilterMenuProps) => {
+const SideBarFilterMenu = ({ searched_Animal }: SideBarFilterMenuProps) => {
   return (
     <>
-      {(activeFilters || Object.keys(availableFilters).length > 0) && (
+      <div></div>
+      {/*    
+      ///activeFilters is how the selected secondary filter is shown at the top of the bar. 
+      Once something is toggled by the first search, this area is also rendering that specific type of category search. 
+
+       {(activeFilters || Object.keys(availableFilters).length > 0) && (
         <div className="w-64 flex-shrink-0">
           <div className="bg-white rounded-lg shadow-md p-4 text-black">
-            {/* Filter By aninmal Type */}
             {activeFilters && (
               <div className="mb-6">
                 <h3
@@ -94,7 +83,6 @@ const SideBarFilterMenu = ({
               </div>
             )}
 
-            {/* Additional filter options */}
             {Object.entries(availableFilters).map(([property, values]) => (
               <div key={property} className="mb-6">
                 <h3 className="font-semibold text-lg text-black mb-4 border-b pb-2">
@@ -134,7 +122,7 @@ const SideBarFilterMenu = ({
             ))}
           </div>
         </div>
-      )}
+        */}
     </>
   );
 };

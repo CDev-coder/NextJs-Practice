@@ -125,10 +125,15 @@ const MainNavigation = ({
     }
   };
 
-  const handleCategoryClick = (category: string) => {
-    console.log("MainNavigation handleCategoryClick category: " + category);
+  const handleCategoryClick = (category: string, copyKey: string) => {
+    console.log(
+      "MainNavigation handleCategoryClick category: " +
+        category +
+        " key| " +
+        copyKey
+    );
     if (onCategorySelect) {
-      onCategorySelect(category, "all", "all");
+      onCategorySelect(copyKey, category, "all");
 
       // Also trigger the sidebar filter mechanism
       /*
@@ -142,7 +147,7 @@ const MainNavigation = ({
         // Apply the filter
         onHandlePropertyFilter("category", category);
       }
-        */
+      */
     }
   };
 
@@ -159,7 +164,7 @@ const MainNavigation = ({
             >
               <button
                 className="px-3 py-2 hover:bg-blue-700 rounded transition-colors"
-                onClick={() => handleCategoryClick(key)}
+                onClick={() => handleCategoryClick("all", key)}
               >
                 {item.name}
               </button>
@@ -170,7 +175,10 @@ const MainNavigation = ({
                   <div className="p-6 grid grid-cols-3 gap-8">
                     {/* Dogs column */}
                     <div>
-                      <h3 className="text-lg font-bold text-petflow-blue mb-3 border-b pb-2">
+                      <h3
+                        className="text-lg font-bold text-petflow-blue mb-3 border-b pb-2"
+                        onClick={() => handleCategoryClick("dog", key)}
+                      >
                         Dogs
                       </h3>
                       <ul className="space-y-2">
@@ -191,7 +199,10 @@ const MainNavigation = ({
 
                     {/* Cats column */}
                     <div>
-                      <h3 className="text-lg font-bold text-petflow-blue mb-3 border-b pb-2">
+                      <h3
+                        className="text-lg font-bold text-petflow-blue mb-3 border-b pb-2"
+                        onClick={() => handleCategoryClick("cat", key)}
+                      >
                         Cats
                       </h3>
                       <ul className="space-y-2">
@@ -212,7 +223,10 @@ const MainNavigation = ({
 
                     {/* Birds column */}
                     <div>
-                      <h3 className="text-lg font-bold text-petflow-blue mb-3 border-b pb-2">
+                      <h3
+                        className="text-lg font-bold text-petflow-blue mb-3 border-b pb-2"
+                        onClick={() => handleCategoryClick("bird", key)}
+                      >
                         Birds
                       </h3>
                       <ul className="space-y-2">
@@ -236,7 +250,7 @@ const MainNavigation = ({
                   <div className="bg-gray-100 px-6 py-3 border-t text-black">
                     <button
                       className="text-petflow-blue font-semibold hover:underline"
-                      onClick={() => handleCategoryClick(key)}
+                      onClick={() => handleCategoryClick("all", key)}
                     >
                       View All {item.name}
                     </button>

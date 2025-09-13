@@ -1,2 +1,2 @@
-const SideBarList = {};
+const SideBarList () = {};
 export default SideBarList;

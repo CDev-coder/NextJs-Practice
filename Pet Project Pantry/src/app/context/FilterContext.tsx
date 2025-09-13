@@ -31,6 +31,11 @@ interface FilterContextType {
   // Additional state for tracking animal and subcategory
   currentAnimal: string;
   currentSubcategory: string;
+
+  searched_Brand: string[];
+  searched_Animal: string[];
+  searched_Names: string[];
+  searched_Prices: string[];
 }
 
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
@@ -47,6 +52,11 @@ export function FilterProvider({
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
   const [currentFilter, setCurrentFilter] = useState("All Products");
   const [availableFilters, setAvailableFilters] = useState<string[]>([]);
+
+  const [searched_Brand, setSearchedBrand] = useState<string[]>([]);
+  const [searched_Animal, setSearchedAnimal] = useState<string[]>([]);
+  const [searched_Names, setSearchedNames] = useState<string[]>([]);
+  const [searched_Prices, setSearchedPrices] = useState<string[]>([]);
 
   const [activeFilters, setActiveFilters] = useState<{
     category: string;
@@ -122,6 +132,7 @@ export function FilterProvider({
     setCurrentFilter(
       capitalizeFirst(category) + " / " + capitalizeFirst(animal) + " "
     );
+
     setActiveFilters({
       category,
       animal,
@@ -159,6 +170,10 @@ export function FilterProvider({
     selectedFilterValue,
     currentAnimal,
     currentSubcategory,
+    searched_Brand,
+    searched_Animal,
+    searched_Names,
+    searched_Prices,
   };
 
   return (

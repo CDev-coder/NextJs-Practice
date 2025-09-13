@@ -21,6 +21,10 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     activeFilters,
     selectedFilterValue,
     resetFilters,
+    searched_Brand,
+    searched_Animal,
+    searched_Names,
+    searched_Prices,
   } = useFilters();
 
   // Properties that can be used for filtering
@@ -127,6 +131,11 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     }
   };
 
+  const handleFilterClick = (copyCurrentFilter: string) => {
+    console.log("copyCurrentFilter: " + copyCurrentFilter);
+    //applyFilter();
+  };
+
   const handleDetailedPropertyFilter = (
     property: keyof Product | string,
     subproperty: keyof Product | string,
@@ -191,7 +200,13 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center">
             <span className="text-gray-600 mr-4">
-              Showing: {currentFilter}
+              Showing:{" "}
+              <span
+                className="text-blue-500 hover:text-blue-700 cursor-pointer mr-1"
+                onClick={() => handleFilterClick(currentFilter)}
+              >
+                {currentFilter}
+              </span>
               {selectedFilterValue && (
                 <span className="text-gray-600 mr-1">
                   / {selectedFilterValue}
@@ -210,19 +225,14 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
 
         <div className="flex gap-8">
           {/* Side navigation for filters */}
-          {/*
+
           <SideBarFilterMenu
-            //activeFilters={activeFilters}
-            //availableFilters={availableFilters}
-            selectedFilterValue={selectedFilterValue}
-            filteredProducts={filteredProducts}
-            currentFilter={currentFilter}
-            // onSetSelectedFilterValue={setSelectedFilterValue}
-            // onSetActiveFilters={setActiveFilters}
-            onHandlePropertyFilter={handlePropertyFilter}
-            onHandleCategorySelect={handleCategorySelect}
+            searched_Animal={searched_Animal}
+            searched_Names={searched_Names}
+            searched_Brand={searched_Brand}
+            searched_Prices={searched_Prices}
           />
-          */}
+
           {/* Product grid */}
           <div
             className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ${
