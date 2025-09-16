@@ -8,16 +8,8 @@ import React, {
   ReactNode,
   useMemo,
 } from "react";
-import { Product } from "../types";
+import { Product, ActiveFilters } from "../types";
 import { capitalizeFirst } from "./helperFunctions";
-
-// Define a more appropriate interface for your active filters
-export interface ActiveFilters {
-  category: string;
-  animal: string;
-  subcategory: string;
-  results: Product[];
-}
 
 interface FilterContextType {
   filteredProducts: Product[];
@@ -27,6 +19,7 @@ interface FilterContextType {
   applyFilter: (category: string, animal: string, subcategory: string) => void;
   removeFilter: () => void;
   resetFilters: () => void;
+  sort_Alphabetically: (order: string) => void;
   setSelectedFilterValue: (value: string | null) => void;
   selectedFilterValue: string | null;
   // Additional state for tracking animal and subcategory
@@ -61,17 +54,9 @@ export function FilterProvider({
   const [searched_Names, setSearchedNames] = useState<string[]>([]);
   const [searched_Prices, setSearchedPrices] = useState<string[]>([]);
 
-  const [activeFilters, setActiveFilters] = useState<{
-    category: string;
-    animal: string;
-    subcategory: string;
-    results: Product[];
-    filtered_prices: number[];
-    filtered_brands: string[];
-    filtered_subcategories: string[];
-    filtered_animals: string[];
-    filtered_names: string[];
-  } | null>(null);
+  const [activeFilters, setActiveFilters] = useState<ActiveFilters | null>(
+    null
+  );
 
   const [selectedFilterValue, setSelectedFilterValue] = useState<string | null>(
     null
@@ -102,11 +87,6 @@ export function FilterProvider({
       // If all non-"all" filters pass, include the product
       return true;
     });
-    console.log("ApplyFilter category: " + currentCategory);
-    console.log("ApplyFilter animal: ", animal);
-    console.log("ApplyFilter subcategory: ", subcategory);
-    console.log("ApplyFilter newFilteredProducts: ", newFilteredProducts);
-
     setFilteredProducts(newFilteredProducts);
     setCurrentCatetory(category);
     setSelectedFilterValue(subcategory);
@@ -127,15 +107,6 @@ export function FilterProvider({
       ...new Set(newFilteredProducts.map((product) => product.subcategory)),
     ].sort();
 
-    console.log("filtered_Brands:", filtered_brands);
-    console.log("filtered_Animal Types:", filtered_animalTypes);
-    console.log("filtered_Prices:", filtered_prices);
-    console.log("filtered_Names (sorted):", filtered_names);
-    console.log(
-      "filtered_subcategoryFitlered (sorted):",
-      filtered_subcategoryFitlered
-    );
-
     setCurrentFilter(
       capitalizeFirst(category) + " / " + capitalizeFirst(animal) + " "
     );
@@ -151,6 +122,36 @@ export function FilterProvider({
       filtered_animals: filtered_animalTypes,
       filtered_names: filtered_names,
     });
+  };
+
+  const sort_Alphabetically = (order: string) => {
+    console.log("sort_Alphabetically");
+    const sortProductsByName = (products: Product[], order: string) => {
+      return [...products].sort((a, b) => {
+        if (order === "asc") {
+          return a.name.localeCompare(b.name);
+        } else {
+          return b.name.localeCompare(a.name);
+        }
+      });
+    };
+    const sortedProducts = sortProductsByName(filteredProducts, order);
+    setFilteredProducts(sortedProducts);
+  };
+
+  const sort_Price = (order: string) => {
+    console.log("sort_Price");
+    const sortProductsByName = (products: Product[], order: string) => {
+      return [...products].sort((a, b) => {
+        if (order === "asc") {
+          return a.name.localeCompare(b.name);
+        } else {
+          return b.name.localeCompare(a.name);
+        }
+      });
+    };
+    const sortedProducts = sortProductsByName(filteredProducts, order);
+    setFilteredProducts(sortedProducts);
   };
 
   const getAvailableFilters = () => {};
@@ -180,6 +181,7 @@ export function FilterProvider({
     activeFilters,
     applyFilter,
     removeFilter,
+    sort_Alphabetically,
     resetFilters,
     setSelectedFilterValue,
     selectedFilterValue,

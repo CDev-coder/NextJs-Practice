@@ -12,6 +12,18 @@ export interface Product {
   SKU: string;
 }
 
+export interface ActiveFilters {
+  category: string;
+  animal: string;
+  subcategory: string;
+  results: Product[];
+  filtered_prices: number[];
+  filtered_brands: string[];
+  filtered_subcategories: string[];
+  filtered_animals: string[];
+  filtered_names: string[];
+}
+
 // You can also create specific animal types if needed
 export type AnimalType =
   | "dog"

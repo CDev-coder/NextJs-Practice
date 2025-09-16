@@ -1,17 +1,16 @@
 // components/SideBarFilterMenu.tsx
 "use client";
 
-import { Product } from "../types";
+import { capitalizeFirst } from "../context/helperFunctions";
+import { Product, ActiveFilters } from "../types";
+import SideBarList from "./SideBarList";
 
 interface SideBarFilterMenuProps {
   searched_Brand?: string[];
   searched_Animal?: string[];
   searched_Names?: string[];
   searched_Prices?: string[];
-  activeFilters?: {
-    property: keyof Product;
-    values: string[];
-  } | null;
+  activeFilters?: ActiveFilters | null;
   availableFilters?: Partial<Record<keyof Product, string[]>>;
   onSetSelectedFilterValue?: (value: string | null) => void;
   onSetActiveFilters?: (
@@ -20,12 +19,116 @@ interface SideBarFilterMenuProps {
       values: string[];
     } | null
   ) => void;
+  sort_Alphabetically: (order: string) => void;
 }
 
-const SideBarFilterMenu = ({ searched_Animal }: SideBarFilterMenuProps) => {
+const SideBarFilterMenu = ({
+  activeFilters,
+  sort_Alphabetically,
+}: SideBarFilterMenuProps) => {
+  console.log("activeFilters: ", activeFilters);
+  const handleSort = (sortingRule: string) => {
+    console.log("handleSort sortingRule: ", sortingRule);
+    sort_Alphabetically(sortingRule);
+  };
   return (
     <>
-      <div></div>
+      {activeFilters && (
+        <>
+          <div className="w-64 flex-shrink-0">
+            <div className="bg-white rounded-lg shadow-md p-4 text-black">
+              <SideBarList
+                filterName={"Animal"}
+                activeFilters={activeFilters}
+                copyList={activeFilters.filtered_animals}
+              />
+              <SideBarList
+                filterName={"Brands"}
+                activeFilters={activeFilters}
+                copyList={activeFilters.filtered_brands}
+              />
+              {activeFilters.filtered_names.length > 1 && (
+                <>
+                  <h3
+                    className="font-semibold text-lg mb-4 border-b pb-2"
+                    id={`sbfm_h3_Name`}
+                  >
+                    Filter {capitalizeFirst(activeFilters.category)} by Name
+                  </h3>
+                  <div className="mb-6">
+                    <ul className="space-y-2">
+                      <li key={1}>
+                        <button
+                          className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
+                          onClick={() => {
+                            handleSort("asc");
+                          }}
+                        >
+                          {"A to Z"}
+                        </button>
+                      </li>
+                      <li key={2}>
+                        <button
+                          className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
+                          onClick={() => {
+                            handleSort("dsc");
+                          }}
+                        >
+                          {"Z to A"}
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              )}
+              {activeFilters.filtered_prices.length > 1 && (
+                <>
+                  <h3
+                    className="font-semibold text-lg mb-4 border-b pb-2"
+                    id={`sbfm_h3_Name`}
+                  >
+                    Filter {capitalizeFirst(activeFilters.category)} by Price
+                  </h3>
+                  <div className="mb-6">
+                    <ul className="space-y-2">
+                      <li key={1}>
+                        <button
+                          className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
+                          onClick={() => {
+                            handleSort("asc");
+                          }}
+                        >
+                          {"$ to $$$"}
+                        </button>
+                      </li>
+                      <li key={2}>
+                        <button
+                          className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
+                          onClick={() => {
+                            handleSort("dsc");
+                          }}
+                        >
+                          {"$$$ to $"}
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              )}
+              <SideBarList
+                filterName={"Price"}
+                activeFilters={activeFilters}
+                copyList={activeFilters.filtered_prices}
+              />
+              <SideBarList
+                filterName={"Sub-Categories"}
+                activeFilters={activeFilters}
+                copyList={activeFilters.filtered_subcategories}
+              />
+            </div>
+          </div>
+        </>
+      )}
       {/*    
       ///activeFilters is how the selected secondary filter is shown at the top of the bar. 
       Once something is toggled by the first search, this area is also rendering that specific type of category search. 

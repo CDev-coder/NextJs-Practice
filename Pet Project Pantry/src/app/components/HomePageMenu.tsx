@@ -2,9 +2,9 @@
 "use client";
 
 import MainNavigation from "./MainNavigation";
-import { ActiveFilters, useFilters } from "../context/FilterContext";
+import { useFilters } from "../context/FilterContext";
 import ProductCard from "./ProductCard";
-import { Product } from "../types";
+import { ActiveFilters, Product } from "../types";
 import SideBarFilterMenu from "./SideBarFilterMenu";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { normalizeSubcategory } from "../context/normalizer";
@@ -20,21 +20,9 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     filteredProducts,
     currentFilter,
     activeFilters,
-    selectedFilterValue,
+    sort_Alphabetically,
     resetFilters,
-    searched_Brand,
-    searched_Animal,
-    searched_Names,
-    searched_Prices,
   } = useFilters();
-
-  // Properties that can be used for filtering
-  const filterableProperties: (keyof Product)[] = [
-    "animalType",
-    "category",
-    "subcategory",
-    "brand",
-  ];
 
   const handleCategorySelect = (
     category: keyof Product | string,
@@ -175,24 +163,6 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     console.log("HPM activeFilters: ", activeFilters);
   }, [activeFilters]);
 
-  /*
-  const getAvailableFilters = () => {
-    const availableFilters: Partial<Record<keyof Product, string[]>> = {};
-    filterableProperties.forEach((property) => {
-      if (property !== activeFilters?.property) {
-        // Use baseFilteredProducts for available filters to show all options
-        const values = Array.from(
-          new Set(baseFilteredProducts.map((p) => p[property]))
-        );
-        availableFilters[property] = values as string[];
-      }
-    });
-
-    return availableFilters;
-  };
-  const availableFilters = getAvailableFilters();
-  */
-
   const clearFilters = () => {
     resetFilters();
   };
@@ -202,7 +172,6 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
       <MainNavigation
         onCategorySelect={handleCategorySelect}
         onSubcategorySelect={handleSubcategorySelect}
-        // onSetActiveFilters={setActiveFilters}
         onHandlePropertyFilter={handlePropertyFilter}
         onHandleDetailedPropertyFilter={handleDetailedPropertyFilter}
         currentFilter={currentFilter}
@@ -280,10 +249,8 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
           {/* Side navigation for filters */}
 
           <SideBarFilterMenu
-            searched_Animal={searched_Animal}
-            searched_Names={searched_Names}
-            searched_Brand={searched_Brand}
-            searched_Prices={searched_Prices}
+            activeFilters={activeFilters}
+            sort_Alphabetically={sort_Alphabetically}
           />
 
           {/* Product grid */}
