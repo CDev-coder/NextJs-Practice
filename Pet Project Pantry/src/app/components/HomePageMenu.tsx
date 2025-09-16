@@ -2,12 +2,13 @@
 "use client";
 
 import MainNavigation from "./MainNavigation";
-import { useFilters } from "../context/FilterContext";
+import { ActiveFilters, useFilters } from "../context/FilterContext";
 import ProductCard from "./ProductCard";
 import { Product } from "../types";
 import SideBarFilterMenu from "./SideBarFilterMenu";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { normalizeSubcategory } from "../context/normalizer";
+import { capitalizeFirst } from "../context/helperFunctions";
 
 interface HomePageMenuProps {
   products: Product[];
@@ -131,9 +132,20 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     }
   };
 
-  const handleFilterClick = (copyCurrentFilter: string) => {
-    console.log("copyCurrentFilter: " + copyCurrentFilter);
-    //applyFilter();
+  const handleFilterClick = (
+    copyCurrentFilter: ActiveFilters,
+    searchBy: string
+  ) => {
+    console.log(
+      "handleCategoryFilterClick copyCurrentFilter: ",
+      copyCurrentFilter,
+      " searching by: " + searchBy
+    );
+    if (searchBy == "category") {
+      applyFilter(copyCurrentFilter.category, "all", "all");
+    } else if (searchBy == "animal") {
+      applyFilter(copyCurrentFilter.category, copyCurrentFilter.animal, "all");
+    }
   };
 
   const handleDetailedPropertyFilter = (
@@ -200,18 +212,59 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center">
             <span className="text-gray-600 mr-4">
-              Showing:{" "}
-              <span
-                className="text-blue-500 hover:text-blue-700 cursor-pointer mr-1"
-                onClick={() => handleFilterClick(currentFilter)}
-              >
-                {currentFilter}
-              </span>
-              {selectedFilterValue && (
+              Showing: {activeFilters == null && "All Products"}
+              {activeFilters && (
+                <>
+                  <span
+                    className="text-blue-500 hover:text-blue-700 cursor-pointer mr-1"
+                    onClick={() => {
+                      if (activeFilters != null)
+                        handleFilterClick(activeFilters, "category");
+                    }}
+                  >
+                    {activeFilters != undefined
+                      ? capitalizeFirst(activeFilters?.category)
+                      : "All Products"}
+                  </span>
+                  {activeFilters?.animal != "all" && (
+                    <>
+                      {" / "}
+                      <span
+                        className="text-blue-500 hover:text-blue-700 cursor-pointer mr-1"
+                        onClick={() => {
+                          if (activeFilters != null)
+                            handleFilterClick(activeFilters, "animal");
+                        }}
+                      >
+                        {activeFilters != undefined
+                          ? capitalizeFirst(activeFilters?.animal)
+                          : ""}
+                      </span>
+                    </>
+                  )}
+                  {activeFilters?.subcategory != "all" && (
+                    <>
+                      {" / "}
+                      <span
+                        className="text-blue-500 hover:text-blue-700 cursor-pointer mr-1"
+                        onClick={() => {
+                          if (activeFilters != null)
+                            handleFilterClick(activeFilters, "subcategory");
+                        }}
+                      >
+                        {capitalizeFirst(activeFilters?.subcategory)}
+                      </span>
+                    </>
+                  )}
+                </>
+              )}
+              {/*
+                {selectedFilterValue && (
                 <span className="text-gray-600 mr-1">
                   / {selectedFilterValue}
                 </span>
               )}
+                */}
             </span>
 
             <button

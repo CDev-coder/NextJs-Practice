@@ -9,9 +9,10 @@ import React, {
   useMemo,
 } from "react";
 import { Product } from "../types";
+import { capitalizeFirst } from "./helperFunctions";
 
 // Define a more appropriate interface for your active filters
-interface ActiveFilters {
+export interface ActiveFilters {
   category: string;
   animal: string;
   subcategory: string;
@@ -30,6 +31,7 @@ interface FilterContextType {
   selectedFilterValue: string | null;
   // Additional state for tracking animal and subcategory
   currentAnimal: string;
+  currentCategory: string;
   currentSubcategory: string;
 
   searched_Brand: string[];
@@ -51,6 +53,7 @@ export function FilterProvider({
   const [baseProducts] = useState<Product[]>(products);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
   const [currentFilter, setCurrentFilter] = useState("All Products");
+
   const [availableFilters, setAvailableFilters] = useState<string[]>([]);
 
   const [searched_Brand, setSearchedBrand] = useState<string[]>([]);
@@ -63,6 +66,11 @@ export function FilterProvider({
     animal: string;
     subcategory: string;
     results: Product[];
+    filtered_prices: number[];
+    filtered_brands: string[];
+    filtered_subcategories: string[];
+    filtered_animals: string[];
+    filtered_names: string[];
   } | null>(null);
 
   const [selectedFilterValue, setSelectedFilterValue] = useState<string | null>(
@@ -71,12 +79,8 @@ export function FilterProvider({
 
   // Additional state for animal and subcategory
   const [currentAnimal, setCurrentAnimal] = useState("All");
+  const [currentCategory, setCurrentCatetory] = useState("All Products");
   const [currentSubcategory, setCurrentSubcategory] = useState("All");
-
-  const capitalizeFirst = (str: string): string => {
-    if (!str) return "";
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
 
   // Apply a new filter (always works from base products)
   const applyFilter = (
@@ -98,36 +102,39 @@ export function FilterProvider({
       // If all non-"all" filters pass, include the product
       return true;
     });
-
-    console.log("ApplyFilter newFilteredProducts: ", newFilteredProducts);
+    console.log("ApplyFilter category: " + currentCategory);
+    console.log("ApplyFilter animal: ", animal);
     console.log("ApplyFilter subcategory: ", subcategory);
-    setSelectedFilterValue(subcategory);
+    console.log("ApplyFilter newFilteredProducts: ", newFilteredProducts);
+
     setFilteredProducts(newFilteredProducts);
+    setCurrentCatetory(category);
+    setSelectedFilterValue(subcategory);
+    setCurrentAnimal(animal);
 
     // Extract and sort the properties you want
-    const brands = [
+    const filtered_brands = [
       ...new Set(newFilteredProducts.map((product) => product.brand)),
     ].sort();
-    const animalTypes = [
+    const filtered_animalTypes = [
       ...new Set(newFilteredProducts.map((product) => product.animalType)),
     ].sort();
-    const prices = newFilteredProducts.map((product) => product.price);
-    const names = newFilteredProducts.map((product) => product.name).sort();
-    // Or create an array of objects with the specific structure
-    const structuredData = newFilteredProducts
-      .map((product) => ({
-        brand: product.brand,
-        animalType: product.animalType,
-        price: product.price,
-        name: product.name,
-      }))
-      .sort((a, b) => a.name.localeCompare(b.name)); // Sort by name alphabetically
+    const filtered_prices = newFilteredProducts.map((product) => product.price);
+    const filtered_names = newFilteredProducts
+      .map((product) => product.name)
+      .sort();
+    const filtered_subcategoryFitlered = [
+      ...new Set(newFilteredProducts.map((product) => product.subcategory)),
+    ].sort();
 
-    console.log("Brands:", brands);
-    console.log("Animal Types:", animalTypes);
-    console.log("Prices:", prices);
-    console.log("Names (sorted):", names);
-    console.log("Structured Data:", structuredData);
+    console.log("filtered_Brands:", filtered_brands);
+    console.log("filtered_Animal Types:", filtered_animalTypes);
+    console.log("filtered_Prices:", filtered_prices);
+    console.log("filtered_Names (sorted):", filtered_names);
+    console.log(
+      "filtered_subcategoryFitlered (sorted):",
+      filtered_subcategoryFitlered
+    );
 
     setCurrentFilter(
       capitalizeFirst(category) + " / " + capitalizeFirst(animal) + " "
@@ -138,6 +145,11 @@ export function FilterProvider({
       animal,
       subcategory,
       results: newFilteredProducts,
+      filtered_prices: filtered_prices,
+      filtered_brands: filtered_brands,
+      filtered_subcategories: filtered_subcategoryFitlered,
+      filtered_animals: filtered_animalTypes,
+      filtered_names: filtered_names,
     });
   };
 
@@ -155,6 +167,9 @@ export function FilterProvider({
   const resetFilters = () => {
     setFilteredProducts(baseProducts);
     setCurrentFilter("All Products");
+    setCurrentCatetory("All Products");
+    setCurrentAnimal("All");
+    setCurrentSubcategory("All");
     setActiveFilters(null);
     setSelectedFilterValue(null);
   };
@@ -169,6 +184,7 @@ export function FilterProvider({
     setSelectedFilterValue,
     selectedFilterValue,
     currentAnimal,
+    currentCategory,
     currentSubcategory,
     searched_Brand,
     searched_Animal,
