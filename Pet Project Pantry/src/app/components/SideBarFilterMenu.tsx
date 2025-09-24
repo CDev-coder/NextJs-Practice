@@ -4,6 +4,7 @@
 import { capitalizeFirst } from "../context/helperFunctions";
 import { Product, ActiveFilters } from "../types";
 import SideBarList from "./SideBarList";
+import PriceRangeSlider from "./SideBarSlider";
 
 interface SideBarFilterMenuProps {
   searched_Brand?: string[];
@@ -120,6 +121,12 @@ const SideBarFilterMenu = ({
                 activeFilters={activeFilters}
                 copyList={activeFilters.filtered_prices}
               />
+              {/*
+              <PriceRangeSlider
+                products={allProducts}
+                onPriceRangeChange={handlePriceRangeChange}
+              />
+              */}
               <SideBarList
                 filterName={"Sub-Categories"}
                 activeFilters={activeFilters}

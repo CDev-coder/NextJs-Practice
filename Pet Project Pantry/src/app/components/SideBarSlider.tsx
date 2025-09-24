@@ -1,40 +1,103 @@
+import React, { useState, useEffect } from "react";
+import Slider from "@mui/material/Slider";
+import { Product } from "../types";
+
 interface PriceRangeSliderProps {
-  priceArray: number[];
-  onFilter: () => void;
+  products: Product[];
+  onPriceRangeChange: (filteredProducts: Product[]) => void;
 }
 
-export const PriceRangeSlider({ priceArray, onFilter }:PriceRangeSliderProps) {
-  const prices = priceArray.map((p) => p.price);
-  const minPrice = Math.min(...prices);
-  const maxPrice = Math.max(...prices);
+const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
+  products,
+  onPriceRangeChange,
+}) => {
+  // Get all prices and calculate min/max
+  const prices = products.map((product) => product.price);
+  const absoluteMin = Math.min(...prices);
+  const absoluteMax = Math.max(...prices);
 
-  const [range, setRange] = useState([minPrice, maxPrice]);
+  // State for current range
+  const [range, setRange] = useState<number[]>([absoluteMin, absoluteMax]);
 
-  const handleRangeChange = (e, newValue) => {
-    setRange(newValue);
-    const filtered = priceArray.filter(
-      (product) => product.price >= newValue[0] && product.price <= newValue[1]
+  // Update range when products change
+  useEffect(() => {
+    setRange([absoluteMin, absoluteMax]);
+  }, [absoluteMin, absoluteMax]);
+
+  // Handle slider change
+  const handleRangeChange = (event: Event, newValue: number | number[]) => {
+    const newRange = newValue as number[];
+    setRange(newRange);
+
+    // Filter products based on the new range
+    const filteredProducts = products.filter(
+      (product) => product.price >= newRange[0] && product.price <= newRange[1]
     );
-    onFilter(filtered);
+
+    onPriceRangeChange(filteredProducts);
+  };
+
+  // Format price for display
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(price);
   };
 
   return (
-    <div className="price-slider">
-      <h4>
-        Price Range: ${range[0]} - ${range[1]}
-      </h4>
-      <Slider
-        value={range}
-        onChange={handleRangeChange}
-        valueLabelDisplay="auto"
-        min={minPrice}
-        max={maxPrice}
-        step={1}
-      />
-      <div className="slider-labels">
-        <span>${minPrice}</span>
-        <span>${maxPrice}</span>
+    <div className="price-range-slider">
+      <h3>Price Range</h3>
+
+      <div className="slider-container">
+        <Slider
+          value={range}
+          onChange={handleRangeChange}
+          onChangeCommitted={(event, newValue) => {
+            // This fires when user stops sliding (for better performance)
+            console.log("Final selection:", newValue);
+          }}
+          valueLabelDisplay="auto"
+          valueLabelFormat={formatPrice}
+          min={absoluteMin}
+          max={absoluteMax}
+          step={1}
+          sx={{
+            color: "#3f51b5", // Custom color
+            height: 8,
+            "& .MuiSlider-thumb": {
+              height: 24,
+              width: 24,
+              backgroundColor: "#fff",
+              border: "2px solid currentColor",
+            },
+            "& .MuiSlider-valueLabel": {
+              backgroundColor: "#3f51b5",
+            },
+          }}
+        />
+      </div>
+
+      <div className="price-labels">
+        <span>{formatPrice(absoluteMin)}</span>
+        <span>{formatPrice(absoluteMax)}</span>
+      </div>
+
+      <div className="selected-range">
+        <p>
+          Selected range: {formatPrice(range[0])} - {formatPrice(range[1])}
+        </p>
+        <p>
+          Showing{" "}
+          {
+            products.filter((p) => p.price >= range[0] && p.price <= range[1])
+              .length
+          }{" "}
+          products
+        </p>
       </div>
     </div>
   );
-}
+};
+
+export default PriceRangeSlider;
