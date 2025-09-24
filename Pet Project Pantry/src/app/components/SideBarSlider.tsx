@@ -3,16 +3,16 @@ import Slider from "@mui/material/Slider";
 import { Product } from "../types";
 
 interface PriceRangeSliderProps {
-  products: Product[];
-  onPriceRangeChange: (filteredProducts: Product[]) => void;
+  priceArray: any[];
+  onPriceRangeChange?: (filteredProducts: Product[]) => void;
 }
 
 const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
-  products,
+  priceArray,
   onPriceRangeChange,
 }) => {
   // Get all prices and calculate min/max
-  const prices = products.map((product) => product.price);
+  const prices = priceArray.map((prices) => prices);
   const absoluteMin = Math.min(...prices);
   const absoluteMax = Math.max(...prices);
 
@@ -30,11 +30,12 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
     setRange(newRange);
 
     // Filter products based on the new range
-    const filteredProducts = products.filter(
-      (product) => product.price >= newRange[0] && product.price <= newRange[1]
+    const filteredProducts = priceArray.filter(
+      (priceArray) => priceArray >= newRange[0] && priceArray <= newRange[1]
     );
-
-    onPriceRangeChange(filteredProducts);
+    if (onPriceRangeChange) {
+      onPriceRangeChange(filteredProducts);
+    }
   };
 
   // Format price for display
@@ -47,6 +48,12 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
 
   return (
     <div className="price-range-slider">
+      <h3
+        className="font-semibold text-lg mb-4 border-b pb-2"
+        id={`sbfm_h3_PriceRange`}
+      >
+        Filter by Price Range
+      </h3>
       <h3>Price Range</h3>
 
       <div className="slider-container">
@@ -80,6 +87,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
 
       <div className="price-labels">
         <span>{formatPrice(absoluteMin)}</span>
+        {" - "}
         <span>{formatPrice(absoluteMax)}</span>
       </div>
 
@@ -89,10 +97,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
         </p>
         <p>
           Showing{" "}
-          {
-            products.filter((p) => p.price >= range[0] && p.price <= range[1])
-              .length
-          }{" "}
+          {priceArray.filter((p) => p >= range[0] && p <= range[1]).length}{" "}
           products
         </p>
       </div>

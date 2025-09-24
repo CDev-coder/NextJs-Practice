@@ -115,12 +115,15 @@ const SideBarFilterMenu = ({
                     </ul>
                   </div>
                 </>
-              )}
+              )}{" "}
+              {/*
               <SideBarList
                 filterName={"Price"}
                 activeFilters={activeFilters}
                 copyList={activeFilters.filtered_prices}
-              />
+              /> 
+              */}
+              <PriceRangeSlider priceArray={activeFilters.filtered_prices} />
               {/*
               <PriceRangeSlider
                 products={allProducts}
