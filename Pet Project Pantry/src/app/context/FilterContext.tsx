@@ -20,6 +20,9 @@ interface FilterContextType {
   removeFilter: () => void;
   resetFilters: () => void;
   sort_Alphabetically: (order: string) => void;
+  sort_PricePoint: (order: string) => void;
+  sort_PriceRange: (order: number[]) => void;
+  sort_ByField: <K extends keyof Product>(field: K, value: Product[K]) => void;
   setSelectedFilterValue: (value: string | null) => void;
   selectedFilterValue: string | null;
   // Additional state for tracking animal and subcategory
@@ -45,6 +48,7 @@ export function FilterProvider({
   // Store the base products array
   const [baseProducts] = useState<Product[]>(products);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
+  const [displayProducts, setDisplayProducts] = useState<Product[]>(products);
   const [currentFilter, setCurrentFilter] = useState("All Products");
 
   const [availableFilters, setAvailableFilters] = useState<string[]>([]);
@@ -88,6 +92,7 @@ export function FilterProvider({
       return true;
     });
     setFilteredProducts(newFilteredProducts);
+    setDisplayProducts(newFilteredProducts);
     setCurrentCatetory(category);
     setSelectedFilterValue(subcategory);
     setCurrentAnimal(animal);
@@ -136,22 +141,53 @@ export function FilterProvider({
       });
     };
     const sortedProducts = sortProductsByName(filteredProducts, order);
-    setFilteredProducts(sortedProducts);
+    setDisplayProducts(sortedProducts);
   };
 
-  const sort_Price = (order: string) => {
+  const sort_PricePoint = (order: string) => {
+    console.log("sort_PricePoint - Order:", order);
+
+    const sortedProducts = [...filteredProducts].sort((a, b) => {
+      // Handle potential undefined or null prices
+      const priceA = a.price || 0;
+      const priceB = b.price || 0;
+
+      if (order === "low") {
+        return priceA - priceB; // Ascending: low to high
+      } else {
+        return priceB - priceA; // Descending: high to low
+      }
+    });
+
+    setDisplayProducts(sortedProducts);
+  };
+
+  const sort_PriceRange = (order: number[]) => {
     console.log("sort_Price");
-    const sortProductsByName = (products: Product[], order: string) => {
-      return [...products].sort((a, b) => {
-        if (order === "asc") {
-          return a.name.localeCompare(b.name);
-        } else {
-          return b.name.localeCompare(a.name);
-        }
-      });
+    console.log("filteredProducts: ", filteredProducts);
+    console.log("Price Order: ", order);
+    const filterProductsByPrices = (
+      products: Product[],
+      priceArray: number[]
+    ) => {
+      const priceSet = new Set(priceArray);
+      return products.filter((product) => priceSet.has(product.price));
     };
-    const sortedProducts = sortProductsByName(filteredProducts, order);
-    setFilteredProducts(sortedProducts);
+    const sortedProducts = filterProductsByPrices(filteredProducts, order);
+    setDisplayProducts(sortedProducts);
+  };
+
+  const sort_ByField = <K extends keyof Product>(
+    field: K,
+    value: Product[K]
+  ) => {
+    console.log(`Filtering by ${String(field)} = ${value}`);
+
+    const filtered = filteredProducts.filter(
+      (product) => product[field] === value
+    );
+
+    setDisplayProducts(filtered);
   };
 
   const getAvailableFilters = () => {};
@@ -160,6 +196,7 @@ export function FilterProvider({
   const removeFilter = () => {
     if (activeFilters) {
       setFilteredProducts(baseProducts);
+      setDisplayProducts(baseProducts);
       setCurrentFilter("All Products");
       setActiveFilters(null);
     }
@@ -167,6 +204,7 @@ export function FilterProvider({
 
   const resetFilters = () => {
     setFilteredProducts(baseProducts);
+    setDisplayProducts(baseProducts);
     setCurrentFilter("All Products");
     setCurrentCatetory("All Products");
     setCurrentAnimal("All");
@@ -176,12 +214,15 @@ export function FilterProvider({
   };
 
   const value = {
-    filteredProducts,
+    filteredProducts: displayProducts,
     currentFilter,
     activeFilters,
     applyFilter,
     removeFilter,
     sort_Alphabetically,
+    sort_PricePoint,
+    sort_PriceRange,
+    sort_ByField,
     resetFilters,
     setSelectedFilterValue,
     selectedFilterValue,

@@ -21,6 +21,9 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     currentFilter,
     activeFilters,
     sort_Alphabetically,
+    sort_PricePoint,
+    sort_PriceRange,
+    sort_ByField,
     resetFilters,
   } = useFilters();
 
@@ -251,6 +254,9 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
           <SideBarFilterMenu
             activeFilters={activeFilters}
             sort_Alphabetically={sort_Alphabetically}
+            sort_PricePoint={sort_PricePoint}
+            sort_PriceRange={sort_PriceRange}
+            sort_ByField={sort_ByField}
           />
 
           {/* Product grid */}

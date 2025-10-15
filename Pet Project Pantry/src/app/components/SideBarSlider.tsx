@@ -33,6 +33,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
     const filteredProducts = priceArray.filter(
       (priceArray) => priceArray >= newRange[0] && priceArray <= newRange[1]
     );
+    console.log("filteredProducts: ", filteredProducts);
     if (onPriceRangeChange) {
       onPriceRangeChange(filteredProducts);
     }

@@ -21,17 +21,40 @@ interface SideBarFilterMenuProps {
     } | null
   ) => void;
   sort_Alphabetically: (order: string) => void;
+  sort_PricePoint: (order: string) => void;
+  sort_PriceRange: (order: number[]) => void;
+  sort_ByField: <K extends keyof Product>(field: K, value: Product[K]) => void;
 }
 
 const SideBarFilterMenu = ({
   activeFilters,
   sort_Alphabetically,
+  sort_PricePoint,
+  sort_PriceRange,
+  sort_ByField,
 }: SideBarFilterMenuProps) => {
   console.log("activeFilters: ", activeFilters);
-  const handleSort = (sortingRule: string) => {
+
+  const handleAlphabeticalFilter = (sortingRule: string) => {
     console.log("handleSort sortingRule: ", sortingRule);
     sort_Alphabetically(sortingRule);
   };
+
+  const handlePricePointFilter = (priceRule: any) => {
+    console.log("handlePriceFilter: ", priceRule);
+    sort_PricePoint(priceRule);
+  };
+
+  const handlePriceRangeFilter = (priceRule: any) => {
+    console.log("handlePriceRangeFilter: ", priceRule);
+    sort_PriceRange(priceRule);
+  };
+
+  const handleFieldFilter = (field: any, rule: any) => {
+    console.log("handleFieldFilter: " + field + " rule: " + rule);
+    sort_ByField(field, rule);
+  };
+
   return (
     <>
       {activeFilters && (
@@ -39,14 +62,16 @@ const SideBarFilterMenu = ({
           <div className="w-64 flex-shrink-0">
             <div className="bg-white rounded-lg shadow-md p-4 text-black">
               <SideBarList
-                filterName={"Animal"}
+                filterName={"animal"}
                 activeFilters={activeFilters}
                 copyList={activeFilters.filtered_animals}
+                filterChange={handleFieldFilter}
               />
               <SideBarList
-                filterName={"Brands"}
+                filterName={"brand"}
                 activeFilters={activeFilters}
                 copyList={activeFilters.filtered_brands}
+                filterChange={handleFieldFilter}
               />
               {activeFilters.filtered_names.length > 1 && (
                 <>
@@ -62,7 +87,7 @@ const SideBarFilterMenu = ({
                         <button
                           className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
                           onClick={() => {
-                            handleSort("asc");
+                            handleAlphabeticalFilter("asc");
                           }}
                         >
                           {"A to Z"}
@@ -72,7 +97,7 @@ const SideBarFilterMenu = ({
                         <button
                           className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
                           onClick={() => {
-                            handleSort("dsc");
+                            handleAlphabeticalFilter("dsc");
                           }}
                         >
                           {"Z to A"}
@@ -96,7 +121,7 @@ const SideBarFilterMenu = ({
                         <button
                           className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
                           onClick={() => {
-                            handleSort("asc");
+                            handlePricePointFilter("low");
                           }}
                         >
                           {"$ to $$$"}
@@ -106,7 +131,7 @@ const SideBarFilterMenu = ({
                         <button
                           className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
                           onClick={() => {
-                            handleSort("dsc");
+                            handlePricePointFilter("high");
                           }}
                         >
                           {"$$$ to $"}
@@ -115,25 +140,16 @@ const SideBarFilterMenu = ({
                     </ul>
                   </div>
                 </>
-              )}{" "}
-              {/*
-              <SideBarList
-                filterName={"Price"}
-                activeFilters={activeFilters}
-                copyList={activeFilters.filtered_prices}
-              /> 
-              */}
-              <PriceRangeSlider priceArray={activeFilters.filtered_prices} />
-              {/*
+              )}
               <PriceRangeSlider
-                products={allProducts}
-                onPriceRangeChange={handlePriceRangeChange}
+                priceArray={activeFilters.filtered_prices}
+                onPriceRangeChange={handlePriceRangeFilter}
               />
-              */}
               <SideBarList
-                filterName={"Sub-Categories"}
+                filterName={"subcategory"}
                 activeFilters={activeFilters}
                 copyList={activeFilters.filtered_subcategories}
+                filterChange={handleFieldFilter}
               />
             </div>
           </div>

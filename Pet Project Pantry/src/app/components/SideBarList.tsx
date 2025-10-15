@@ -1,20 +1,26 @@
 import { capitalizeFirst } from "../context/helperFunctions";
-import { ActiveFilters } from "../types";
+import { ActiveFilters, Product } from "../types";
 
 interface SideBarListProps {
   filterName: string;
   activeFilters: ActiveFilters;
   copyList: string[] | number[] | null;
+  filterChange?: <K extends keyof Product>(field: K, value: Product[K]) => void;
 }
 
 const SideBarList = ({
   filterName,
   activeFilters,
   copyList,
+  filterChange,
 }: SideBarListProps) => {
-  console.log("filterName: " + filterName + "copyList: ", copyList);
   const handleDoubleFilterClick = (searchBy: string | number) => {
     console.log("handleDoubleFilterClick searching by: " + searchBy);
+    console.log("filterName: " + filterName + " | copyList: ", copyList);
+    if (filterChange) {
+      console.log("SENDING DATA");
+      filterChange(filterName as keyof Product, searchBy);
+    }
   };
   return (
     <>
