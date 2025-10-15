@@ -74,31 +74,27 @@ const SideBarFilterMenu = ({
                 copyList={activeFilters.filtered_brands}
                 filterChange={handleFieldFilter}
               />
+              <SideBarToggle<string>
+                filterName="name"
+                activeFilters={activeFilters}
+                copyList={activeFilters.filtered_names}
+                options={[
+                  { label: "A to Z", value: "asc" },
+                  { label: "Z to A", value: "dsc" },
+                ]}
+                onChange={handleAlphabeticalFilter}
+              />
 
-              {activeFilters.filtered_names.length > 1 && (
-                <SideBarToggle
-                  filterName="name"
-                  activeFilters={activeFilters}
-                  copyList={activeFilters.filtered_names}
-                  options={[
-                    { label: "A to Z", value: "asc" },
-                    { label: "Z to A", value: "dsc" },
-                  ]}
-                  onChange={handleAlphabeticalFilter}
-                />
-              )}
-              {activeFilters.filtered_prices.length > 1 && (
-                <SideBarToggle
-                  filterName="price"
-                  activeFilters={activeFilters}
-                  copyList={activeFilters.filtered_prices}
-                  options={[
-                    { label: "$ to $$$", value: "low" },
-                    { label: "$$$ to $", value: "high" },
-                  ]}
-                  onChange={handlePricePointFilter}
-                />
-              )}
+              <SideBarToggle<number>
+                filterName="price"
+                activeFilters={activeFilters}
+                copyList={activeFilters.filtered_prices}
+                options={[
+                  { label: "$ to $$$", value: 1 },
+                  { label: "$$$ to $", value: 2 },
+                ]}
+                onChange={handlePricePointFilter}
+              />
               <SideBarSlider
                 priceArray={activeFilters.filtered_prices}
                 onPriceRangeChange={handlePriceRangeFilter}
@@ -113,103 +109,6 @@ const SideBarFilterMenu = ({
           </div>
         </>
       )}
-      {/*    
-      ///activeFilters is how the selected secondary filter is shown at the top of the bar. 
-      Once something is toggled by the first search, this area is also rendering that specific type of category search. 
-
-       {(activeFilters || Object.keys(availableFilters).length > 0) && (
-        <div className="w-64 flex-shrink-0">
-          <div className="bg-white rounded-lg shadow-md p-4 text-black">
-            {activeFilters && (
-              <div className="mb-6">
-                <h3
-                  className="font-semibold text-lg mb-4 border-b pb-2"
-                  id={`sbfm_h3_${activeFilters.property}`}
-                >
-                  Filter by {activeFilters.property}
-                </h3>
-                <ul className="space-y-2">
-                  <li>
-                    <button
-                      className={`w-full text-left px-3 py-2 rounded text-black ${
-                        selectedFilterValue === null
-                          ? "bg-petflow-blue text-white"
-                          : "hover:bg-gray-100"
-                      }`}
-                      onClick={() => {
-                        onHandlePropertyFilter(activeFilters.property, "all");
-                      }}
-                    >
-                      All
-                    </button>
-                  </li>
-                  {activeFilters.values.map((value, index) => (
-                    <li key={index}>
-                      <button
-                        className={`w-full text-left px-3 py-2 rounded text-black ${
-                          selectedFilterValue === value
-                            ? "bg-petflow-blue text-white"
-                            : "hover:bg-gray-100"
-                        }`}
-                        onClick={() => {
-                          console.log(
-                            "FILTERING BY: " +
-                              activeFilters.property +
-                              " value: " +
-                              value
-                          );
-                          onHandlePropertyFilter(activeFilters.property, value);
-                          ///Will need to fix this
-                        }}
-                      >
-                        {value}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {Object.entries(availableFilters).map(([property, values]) => (
-              <div key={property} className="mb-6">
-                <h3 className="font-semibold text-lg text-black mb-4 border-b pb-2">
-                  Filter by {property}
-                </h3>
-                <ul className="space-y-2">
-                  {values?.map((value, index) => (
-                    <li key={index}>
-                      <button
-                        className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
-                        onClick={() => {
-                          if (onSetActiveFilters) {
-                            onSetActiveFilters({
-                              property: property as keyof Product,
-                              values: Array.from(
-                                new Set(
-                                  filteredProducts.map(
-                                    (p) => p[property as keyof Product]
-                                  )
-                                )
-                              ) as string[],
-                            });
-                          }
-
-                          onHandlePropertyFilter(
-                            property as keyof Product,
-                            value
-                          );
-                        }}
-                      >
-                        {value}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-        */}
     </>
   );
 };

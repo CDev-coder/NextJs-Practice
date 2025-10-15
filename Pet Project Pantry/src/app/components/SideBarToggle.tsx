@@ -1,9 +1,9 @@
 import { capitalizeFirst } from "../context/helperFunctions";
-import { ActiveFilters, Product } from "../types";
+import { ActiveFilters } from "../types";
 
-interface ToggleOption {
+interface ToggleOption<T extends string | number> {
   label: string;
-  value: string | number;
+  value: T;
 }
 
 interface SideBarToggleProps<T extends string | number> {
@@ -11,33 +11,34 @@ interface SideBarToggleProps<T extends string | number> {
   title?: string;
   activeFilters: ActiveFilters;
   copyList: T[] | null;
-  options: { label: string; value: T }[];
+  options: ToggleOption<T>[];
   onChange: (value: T) => void;
 }
 
 const SideBarToggle = <T extends string | number>({
   filterName,
+  title,
   activeFilters,
   copyList,
   options,
   onChange,
 }: SideBarToggleProps<T>) => {
-  const handleClick = (value: T) => onChange(value);
+  const handleClick = (value: T) => {
+    console.log(`Toggling ${filterName} with value: ${value}`);
+    onChange(value);
+  };
 
-  // ✅ Helper: pluralize words naturally
   const pluralize = (word: string): string => {
-    // If it already ends in 's', assume plural (e.g. "toys")
     if (word.toLowerCase().endsWith("s")) return word;
-    // Simple pluralization rule: add 's'
     return word + "s";
   };
 
-  // ✅ Header logic
   const categoryName = activeFilters.category
     ? capitalizeFirst(pluralize(activeFilters.category))
     : "Items";
 
-  const headerText = `Filter ${categoryName} by ${capitalizeFirst(filterName)}`;
+  const headerText =
+    title || `Filter ${categoryName} by ${capitalizeFirst(filterName)}`;
 
   return (
     <>

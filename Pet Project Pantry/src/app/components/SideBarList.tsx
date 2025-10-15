@@ -24,7 +24,7 @@ const SideBarList = ({
   };
   return (
     <>
-      {copyList && copyList?.length > 1 && (
+      {copyList && copyList.length > 1 && (
         <div className="sideBar-list" id={`sideBar-list_${filterName}`}>
           <h3
             className="font-semibold text-lg mb-4 border-b pb-2"
