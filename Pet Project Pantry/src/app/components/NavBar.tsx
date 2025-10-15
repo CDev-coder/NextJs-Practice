@@ -4,6 +4,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "../context/CartContext";
+import CartIcon from "./CartIcon";
 
 interface NavBarProps {
   onHomeClick?: () => void;
@@ -39,13 +40,9 @@ export default function NavBar({ onHomeClick }: NavBarProps) {
         />
       </Link>
       <nav className="flex gap-4 items-center text-black">
-        <Link href="/cart" className="relative">
-          Cart
-          {cartItemCount > 0 && (
-            <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-              {cartItemCount}
-            </span>
-          )}
+        <Link href="/cart" className="flex items-center gap-1">
+          <span className="hidden sm:inline">Cart</span>
+          <CartIcon size={80} />
         </Link>
         <Link href="/account">Account</Link>
       </nav>
