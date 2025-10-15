@@ -65,24 +65,10 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     );
     console.log("HPM handleSubcategorySelect filtered: ", filtered);
     applyFilter(category, animal, subcategory);
-    /*
-    setFilteredProducts(filtered);
-    setCurrentFilter(
-      `${
-        animal.charAt(0).toUpperCase() + animal.slice(1)
-      } ${subcategory} ${category}`
-    );
-    */
+
     // Set up filter options for brands within this subcategory
     const brands = Array.from(new Set(filtered.map((p) => p.brand)));
     console.log("HPM handleSubcategorySelect brands: ", brands);
-    /*
-    setActiveFilters({
-      property: "brand",
-      values: brands,
-    });
-    setSelectedFilterValue(null);
-    */
   };
 
   // Memoize the base products to prevent unnecessary re-renders

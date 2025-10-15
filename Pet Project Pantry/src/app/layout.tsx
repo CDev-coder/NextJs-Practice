@@ -4,6 +4,7 @@ import { FilterProvider } from "./context/FilterContext";
 import NavBarWrapper from "./wrappers/NavBarWrapper";
 import Footer from "./components/Footer";
 import { products } from "./lib/products";
+import { CartProvider } from "./context/CartContext";
 
 export const metadata = {
   title: "Pet Pantry",
@@ -24,9 +25,11 @@ export default function RootLayout({
     <html lang="en">
       <body className="font-sans bg-gray-50 text-gray-900">
         <FilterProvider products={products}>
-          <NavBarWrapper>
-            <main className="min-h-screen p-6">{children}</main>
-          </NavBarWrapper>
+          <CartProvider>
+            <NavBarWrapper>
+              <main className="min-h-screen p-6">{children}</main>
+            </NavBarWrapper>
+          </CartProvider>
           <Footer />
         </FilterProvider>
       </body>
