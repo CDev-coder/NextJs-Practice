@@ -4,7 +4,8 @@
 import { capitalizeFirst } from "../context/helperFunctions";
 import { Product, ActiveFilters } from "../types";
 import SideBarList from "./SideBarList";
-import PriceRangeSlider from "./SideBarSlider";
+import SideBarSlider from "./SideBarSlider";
+import SideBarToggle from "./SideBarToggle";
 
 interface SideBarFilterMenuProps {
   searched_Brand?: string[];
@@ -73,75 +74,32 @@ const SideBarFilterMenu = ({
                 copyList={activeFilters.filtered_brands}
                 filterChange={handleFieldFilter}
               />
+
               {activeFilters.filtered_names.length > 1 && (
-                <>
-                  <h3
-                    className="font-semibold text-lg mb-4 border-b pb-2"
-                    id={`sbfm_h3_Name`}
-                  >
-                    Filter {capitalizeFirst(activeFilters.category)} by Name
-                  </h3>
-                  <div className="mb-6">
-                    <ul className="space-y-2">
-                      <li key={1}>
-                        <button
-                          className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
-                          onClick={() => {
-                            handleAlphabeticalFilter("asc");
-                          }}
-                        >
-                          {"A to Z"}
-                        </button>
-                      </li>
-                      <li key={2}>
-                        <button
-                          className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
-                          onClick={() => {
-                            handleAlphabeticalFilter("dsc");
-                          }}
-                        >
-                          {"Z to A"}
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </>
+                <SideBarToggle
+                  filterName="name"
+                  activeFilters={activeFilters}
+                  copyList={activeFilters.filtered_names}
+                  options={[
+                    { label: "A to Z", value: "asc" },
+                    { label: "Z to A", value: "dsc" },
+                  ]}
+                  onChange={handleAlphabeticalFilter}
+                />
               )}
               {activeFilters.filtered_prices.length > 1 && (
-                <>
-                  <h3
-                    className="font-semibold text-lg mb-4 border-b pb-2"
-                    id={`sbfm_h3_Name`}
-                  >
-                    Filter {capitalizeFirst(activeFilters.category)} by Price
-                  </h3>
-                  <div className="mb-6">
-                    <ul className="space-y-2">
-                      <li key={1}>
-                        <button
-                          className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
-                          onClick={() => {
-                            handlePricePointFilter("low");
-                          }}
-                        >
-                          {"$ to $$$"}
-                        </button>
-                      </li>
-                      <li key={2}>
-                        <button
-                          className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
-                          onClick={() => {
-                            handlePricePointFilter("high");
-                          }}
-                        >
-                          {"$$$ to $"}
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </>
+                <SideBarToggle
+                  filterName="price"
+                  activeFilters={activeFilters}
+                  copyList={activeFilters.filtered_prices}
+                  options={[
+                    { label: "$ to $$$", value: "low" },
+                    { label: "$$$ to $", value: "high" },
+                  ]}
+                  onChange={handlePricePointFilter}
+                />
               )}
-              <PriceRangeSlider
+              <SideBarSlider
                 priceArray={activeFilters.filtered_prices}
                 onPriceRangeChange={handlePriceRangeFilter}
               />

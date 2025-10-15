@@ -5,7 +5,7 @@ export interface Product {
   price: number;
   image: string;
   description: string;
-  animalType: string;
+  animal: string;
   category: string;
   subcategory: string;
   brand: string;

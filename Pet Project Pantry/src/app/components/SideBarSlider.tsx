@@ -7,7 +7,7 @@ interface PriceRangeSliderProps {
   onPriceRangeChange?: (filteredProducts: Product[]) => void;
 }
 
-const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
+const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
   priceArray,
   onPriceRangeChange,
 }) => {
@@ -48,7 +48,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
   };
 
   return (
-    <div className="price-range-slider">
+    <div className="sideBar-price-slider">
       <h3
         className="font-semibold text-lg mb-4 border-b pb-2"
         id={`sbfm_h3_PriceRange`}
@@ -106,4 +106,4 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
   );
 };
 
-export default PriceRangeSlider;
+export default SideBarSlider;

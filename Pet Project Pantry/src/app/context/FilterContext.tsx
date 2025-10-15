@@ -82,7 +82,7 @@ export function FilterProvider({
       if (category !== "all" && product.category !== category) return false;
 
       // Only apply animal filter if it's not "all"
-      if (animal !== "all" && product.animalType !== animal) return false;
+      if (animal !== "all" && product.animal !== animal) return false;
 
       // Only apply subcategory filter if it's not "all"
       if (subcategory !== "all" && product.subcategory !== subcategory)
@@ -102,7 +102,7 @@ export function FilterProvider({
       ...new Set(newFilteredProducts.map((product) => product.brand)),
     ].sort();
     const filtered_animalTypes = [
-      ...new Set(newFilteredProducts.map((product) => product.animalType)),
+      ...new Set(newFilteredProducts.map((product) => product.animal)),
     ].sort();
     const filtered_prices = newFilteredProducts.map((product) => product.price);
     const filtered_names = newFilteredProducts

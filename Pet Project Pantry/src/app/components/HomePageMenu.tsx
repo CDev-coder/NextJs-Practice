@@ -60,7 +60,7 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     const filtered = products.filter(
       (p) =>
         p.category === category &&
-        p.animalType === animal &&
+        p.animal === animal &&
         p.subcategory === normalizedSubcategory
     );
     console.log("HPM handleSubcategorySelect filtered: ", filtered);
