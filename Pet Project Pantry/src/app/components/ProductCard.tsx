@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 export default function ProductCard({ product }: { product: any }) {
+  //Product Card will invoke the products path, leading to a dynamic "page". products\[id]
   return (
     <div className="ProductCardDiv border rounded-lg p-4 shadow hover:shadow-lg transition">
       <Link href={`/products/${product.id}`}>
