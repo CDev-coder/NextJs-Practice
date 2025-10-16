@@ -1,21 +1,27 @@
-import { products } from "@/app/lib/products";
+// app/products/[id]/page.tsx
+import { getProducts } from "@/app/lib/products";
 import Link from "next/link";
 
-export default function ProductPage({ params }: { params: { id: string } }) {
-  const product = products.find((p) => p.id === Number(params.id));
+interface ProductPageProps {
+  params: Promise<{ id: string }>; // ✅ Now we reflect that params is async
+}
 
-  if (!product) {
-    return <div>Product not found</div>;
-  }
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { id } = await params; // Await the promise
 
+  const products = await getProducts();
+  const product = products.find((p) => p.id === Number(id));
+
+  if (!product) return <div>Product not found</div>;
+  console.log(product);
   return (
     <div className="max-w-lg mx-auto">
+      <h1 className="text-2xl font-bold mt-4">{product.name}</h1>
       <img
         src={product.image}
         alt={product.name}
-        className="w-full h-60 object-cover rounded"
+        className="w-full h-full object-cover rounded"
       />
-      <h1 className="text-2xl font-bold mt-4">{product.name}</h1>
       <p className="text-gray-600">${product.price.toFixed(2)}</p>
       <p className="mt-2">{product.description}</p>
 

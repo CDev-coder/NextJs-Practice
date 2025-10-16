@@ -7,8 +7,7 @@ export async function GET() {
         id: 1,
         name: "Dog Food - Dry 1",
         price: 11.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/DogFood_2.png",
         description: "Dog food item for dry needs.",
         animal: "dog",
         category: "food",
@@ -20,8 +19,7 @@ export async function GET() {
         id: 2,
         name: "Dog Food - Dry 2",
         price: 12.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/DogFood_2.png",
         description: "Dog food item for dry needs.",
         animal: "dog",
         category: "food",
@@ -33,8 +31,7 @@ export async function GET() {
         id: 3,
         name: "Dog Food - Dry 3",
         price: 13.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/DogFood_2.png",
         description: "Dog food item for dry needs.",
         animal: "dog",
         category: "food",
@@ -46,8 +43,7 @@ export async function GET() {
         id: 4,
         name: "Dog Food - Wet 1",
         price: 15.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/DogFood_1.png",
         description: "Dog food item for wet needs.",
         animal: "dog",
         category: "food",
@@ -59,8 +55,7 @@ export async function GET() {
         id: 5,
         name: "Dog Food - Wet 2",
         price: 16.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/DogFood_1.png",
         description: "Dog food item for wet needs.",
         animal: "dog",
         category: "food",
@@ -72,8 +67,7 @@ export async function GET() {
         id: 6,
         name: "Dog Food - Wet 3",
         price: 17.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/DogFood_1.png",
         description: "Dog food item for wet needs.",
         animal: "dog",
         category: "food",
@@ -85,8 +79,7 @@ export async function GET() {
         id: 7,
         name: "Dog Food - Grain-Free 1",
         price: 18.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/DogFood_3.png",
         description: "Dog food item for grain-free needs.",
         animal: "dog",
         category: "food",
@@ -98,8 +91,7 @@ export async function GET() {
         id: 8,
         name: "Dog Food - Grain-Free 2",
         price: 20.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/DogFood_3.png",
         description: "Dog food item for grain-free needs.",
         animal: "dog",
         category: "food",
@@ -111,8 +103,7 @@ export async function GET() {
         id: 9,
         name: "Dog Food - Grain-Free 3",
         price: 21.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/DogFood_3.png",
         description: "Dog food item for grain-free needs.",
         animal: "dog",
         category: "food",
@@ -124,8 +115,7 @@ export async function GET() {
         id: 10,
         name: "Dog Food - Puppy 1",
         price: 22.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/DogFood_Puppy.png",
         description: "Dog food item for puppy needs.",
         animal: "dog",
         category: "food",
@@ -137,8 +127,7 @@ export async function GET() {
         id: 11,
         name: "Dog Food - Puppy 2",
         price: 23.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/DogFood_Puppy.png",
         description: "Dog food item for puppy needs.",
         animal: "dog",
         category: "food",
@@ -150,8 +139,7 @@ export async function GET() {
         id: 12,
         name: "Dog Food - Puppy 3",
         price: 25.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/DogFood_Puppy.png",
         description: "Dog food item for puppy needs.",
         animal: "dog",
         category: "food",
@@ -163,8 +151,7 @@ export async function GET() {
         id: 13,
         name: "Dog Food - Senior 1",
         price: 26.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/DogFood_Senior.png",
         description: "Dog food item for senior needs.",
         animal: "dog",
         category: "food",
@@ -176,8 +163,7 @@ export async function GET() {
         id: 14,
         name: "Dog Food - Senior 2",
         price: 27.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/DogFood_Senior.png",
         description: "Dog food item for senior needs.",
         animal: "dog",
         category: "food",
@@ -189,8 +175,7 @@ export async function GET() {
         id: 15,
         name: "Dog Food - Senior 3",
         price: 28.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/DogFood_Senior.png",
         description: "Dog food item for senior needs.",
         animal: "dog",
         category: "food",
@@ -202,8 +187,7 @@ export async function GET() {
         id: 16,
         name: "Cat Food - Dry 1",
         price: 30.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/CatFood_2.png",
         description: "Cat food item for dry needs.",
         animal: "cat",
         category: "food",
@@ -215,8 +199,7 @@ export async function GET() {
         id: 17,
         name: "Cat Food - Dry 2",
         price: 31.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/CatFood_2.png",
         description: "Cat food item for dry needs.",
         animal: "cat",
         category: "food",
@@ -228,8 +211,7 @@ export async function GET() {
         id: 18,
         name: "Cat Food - Dry 3",
         price: 32.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/CatFood_2.png",
         description: "Cat food item for dry needs.",
         animal: "cat",
         category: "food",
@@ -241,8 +223,7 @@ export async function GET() {
         id: 19,
         name: "Cat Food - Wet 1",
         price: 33.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/CatFood_1.png",
         description: "Cat food item for wet needs.",
         animal: "cat",
         category: "food",
@@ -254,8 +235,7 @@ export async function GET() {
         id: 20,
         name: "Cat Food - Wet 2",
         price: 10.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/CatFood_1.png",
         description: "Cat food item for wet needs.",
         animal: "cat",
         category: "food",
@@ -267,8 +247,7 @@ export async function GET() {
         id: 21,
         name: "Cat Food - Wet 3",
         price: 11.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/CatFood_3.png",
         description: "Cat food item for wet needs.",
         animal: "cat",
         category: "food",
@@ -280,8 +259,7 @@ export async function GET() {
         id: 22,
         name: "Cat Food - Grain-Free 1",
         price: 12.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/CatFood_3.png",
         description: "Cat food item for grain-free needs.",
         animal: "cat",
         category: "food",
@@ -293,8 +271,7 @@ export async function GET() {
         id: 23,
         name: "Cat Food - Grain-Free 2",
         price: 13.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/CatFood_3.png",
         description: "Cat food item for grain-free needs.",
         animal: "cat",
         category: "food",
@@ -306,8 +283,7 @@ export async function GET() {
         id: 24,
         name: "Cat Food - Grain-Free 3",
         price: 15.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/CatFood_3.png",
         description: "Cat food item for grain-free needs.",
         animal: "cat",
         category: "food",
@@ -319,8 +295,7 @@ export async function GET() {
         id: 25,
         name: "Cat Food - Kitten 1",
         price: 16.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/CatFood_Kitty.png",
         description: "Cat food item for kitten needs.",
         animal: "cat",
         category: "food",
@@ -332,8 +307,7 @@ export async function GET() {
         id: 26,
         name: "Cat Food - Kitten 2",
         price: 17.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/CatFood_Kitty.png",
         description: "Cat food item for kitten needs.",
         animal: "cat",
         category: "food",
@@ -345,8 +319,7 @@ export async function GET() {
         id: 27,
         name: "Cat Food - Kitten 3",
         price: 18.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/CatFood_Kitty.png",
         description: "Cat food item for kitten needs.",
         animal: "cat",
         category: "food",
@@ -358,8 +331,7 @@ export async function GET() {
         id: 28,
         name: "Cat Food - Senior 1",
         price: 20.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/CatFood_Senior.png",
         description: "Cat food item for senior needs.",
         animal: "cat",
         category: "food",
@@ -371,8 +343,7 @@ export async function GET() {
         id: 29,
         name: "Cat Food - Senior 2",
         price: 21.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/CatFood_Senior.png",
         description: "Cat food item for senior needs.",
         animal: "cat",
         category: "food",
@@ -384,8 +355,7 @@ export async function GET() {
         id: 30,
         name: "Cat Food - Senior 3",
         price: 22.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/CatFood_Senior.png",
         description: "Cat food item for senior needs.",
         animal: "cat",
         category: "food",
@@ -397,8 +367,7 @@ export async function GET() {
         id: 31,
         name: "Bird Food - Seeds 1",
         price: 23.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/BirdFood_1.png",
         description: "Bird food item for seeds needs.",
         animal: "bird",
         category: "food",
@@ -410,8 +379,7 @@ export async function GET() {
         id: 32,
         name: "Bird Food - Seeds 2",
         price: 25.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/BirdFood_1.png",
         description: "Bird food item for seeds needs.",
         animal: "bird",
         category: "food",
@@ -423,8 +391,7 @@ export async function GET() {
         id: 33,
         name: "Bird Food - Seeds 3",
         price: 26.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/BirdFood_1.png",
         description: "Bird food item for seeds needs.",
         animal: "bird",
         category: "food",
@@ -436,8 +403,7 @@ export async function GET() {
         id: 34,
         name: "Bird Food - Pellets 1",
         price: 27.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/BirdFood_2.png",
         description: "Bird food item for pellets needs.",
         animal: "bird",
         category: "food",
@@ -449,8 +415,7 @@ export async function GET() {
         id: 35,
         name: "Bird Food - Pellets 2",
         price: 28.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/BirdFood_2.png",
         description: "Bird food item for pellets needs.",
         animal: "bird",
         category: "food",
@@ -462,8 +427,7 @@ export async function GET() {
         id: 36,
         name: "Bird Food - Pellets 3",
         price: 30.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/BirdFood_2.png",
         description: "Bird food item for pellets needs.",
         animal: "bird",
         category: "food",
@@ -475,8 +439,7 @@ export async function GET() {
         id: 37,
         name: "Bird Food - Treat Mixes 1",
         price: 31.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/BirdFood_3.png",
         description: "Bird food item for treat mixes needs.",
         animal: "bird",
         category: "food",
@@ -488,8 +451,7 @@ export async function GET() {
         id: 38,
         name: "Bird Food - Treat Mixes 2",
         price: 32.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/BirdFood_3.png",
         description: "Bird food item for treat mixes needs.",
         animal: "bird",
         category: "food",
@@ -501,8 +463,7 @@ export async function GET() {
         id: 39,
         name: "Bird Food - Treat Mixes 3",
         price: 33.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/BirdFood_3.png",
         description: "Bird food item for treat mixes needs.",
         animal: "bird",
         category: "food",
@@ -514,8 +475,7 @@ export async function GET() {
         id: 40,
         name: "Bird Food - Nutritional Supplements 1",
         price: 10.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/BirdFood_4.png",
         description: "Bird food item for nutritional supplements needs.",
         animal: "bird",
         category: "food",
@@ -527,8 +487,7 @@ export async function GET() {
         id: 41,
         name: "Bird Food - Nutritional Supplements 2",
         price: 11.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/BirdFood_4.png",
         description: "Bird food item for nutritional supplements needs.",
         animal: "bird",
         category: "food",
@@ -540,8 +499,7 @@ export async function GET() {
         id: 42,
         name: "Bird Food - Nutritional Supplements 3",
         price: 12.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/food/BirdFood_4.png",
         description: "Bird food item for nutritional supplements needs.",
         animal: "bird",
         category: "food",

@@ -4,25 +4,19 @@ import { useCart } from "../context/CartContext";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useEffect, useState } from "react";
+import CartCard from "../components/CartCard";
 
 // --- CartItem Component ---
-const CartItem = React.memo(
-  ({ item, onRemove }: { item: any; onRemove: (SKU: string) => void }) => {
-    return (
-      <li className="flex justify-between items-center mb-2">
-        <span>
-          {item.name} x {item.quantity}
-        </span>
-        <button
-          className="text-red-500 hover:text-red-700"
-          onClick={() => onRemove(item.SKU)}
-        >
-          Remove
-        </button>
-      </li>
-    );
-  }
-);
+const CartItem = React.memo(({ item }: { item: any }) => {
+  return (
+    <li className="flex justify-between items-center mb-2">
+      <CartCard key={item.id} product={item} />
+      {/*       <span>
+        {item.name} x {item.quantity}
+      </span>*/}
+    </li>
+  );
+});
 
 // --- CartSummary Component ---
 const CartSummary = ({ cart }: { cart: any[] }) => {
@@ -66,7 +60,7 @@ interface CartPageProps {
 }
 
 export default function CartPage({ userId }: CartPageProps) {
-  const { cart, clearCart, removeItem, syncCartWithServer } = useCart();
+  const { cart, clearCart, syncCartWithServer } = useCart();
   const router = useRouter();
   const [savedCart, setSavedCart] = useState(cart);
 
@@ -93,7 +87,7 @@ export default function CartPage({ userId }: CartPageProps) {
         <>
           <ul>
             {savedCart.map((item) => (
-              <CartItem key={item.id} item={item} onRemove={removeItem} />
+              <CartItem key={item.id} item={item} />
             ))}
           </ul>
           <CartSummary cart={savedCart} />

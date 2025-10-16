@@ -85,13 +85,6 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
           }}
         />
       </div>
-
-      <div className="price-labels">
-        <span>{formatPrice(absoluteMin)}</span>
-        {" - "}
-        <span>{formatPrice(absoluteMax)}</span>
-      </div>
-
       <div className="selected-range">
         <p>
           Selected range: {formatPrice(range[0])} - {formatPrice(range[1])}

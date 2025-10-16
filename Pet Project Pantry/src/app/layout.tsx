@@ -3,7 +3,7 @@ import "./globals.css";
 import { FilterProvider } from "./context/FilterContext";
 import NavBarWrapper from "./wrappers/NavBarWrapper";
 import Footer from "./components/Footer";
-import { products } from "./lib/products";
+import { getProducts } from "./lib/products";
 import { CartProvider } from "./context/CartContext";
 
 export const metadata = {
@@ -16,11 +16,12 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const products = await getProducts();
   return (
     <html lang="en">
       <body className="font-sans bg-gray-50 text-gray-900">

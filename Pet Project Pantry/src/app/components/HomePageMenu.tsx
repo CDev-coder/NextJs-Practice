@@ -33,19 +33,7 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     subcategory: keyof Product | string
   ) => {
     console.log("HomePageMenu handleCategorySelect - category: " + category);
-    //const filtered = products.filter((p) => p.category === category);
-
     applyFilter(category, animal, subcategory);
-
-    // Set up filter options for brands within this category
-    /*
-    const brands = Array.from(new Set(filtered.map((p) => p.brand)));
-    setActiveFilters({
-      property: "brand",
-      values: brands,
-    });
-    setSelectedFilterValue(null);
-    */
   };
 
   const handleSubcategorySelect = (
@@ -216,13 +204,6 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
                   )}
                 </>
               )}
-              {/*
-                {selectedFilterValue && (
-                <span className="text-gray-600 mr-1">
-                  / {selectedFilterValue}
-                </span>
-              )}
-                */}
             </span>
 
             <button
@@ -236,7 +217,6 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
 
         <div className="flex gap-8">
           {/* Side navigation for filters */}
-
           <SideBarFilterMenu
             activeFilters={activeFilters}
             sort_Alphabetically={sort_Alphabetically}
