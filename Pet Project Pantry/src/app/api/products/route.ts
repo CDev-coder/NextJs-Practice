@@ -511,8 +511,7 @@ export async function GET() {
         id: 43,
         name: "Dog Accessories - Collars 1",
         price: 13.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog accessories item for collars needs.",
         animal: "dog",
         category: "accessories",
@@ -524,8 +523,7 @@ export async function GET() {
         id: 44,
         name: "Dog Accessories - Collars 2",
         price: 15.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog accessories item for collars needs.",
         animal: "dog",
         category: "accessories",
@@ -537,8 +535,7 @@ export async function GET() {
         id: 45,
         name: "Dog Accessories - Collars 3",
         price: 16.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog accessories item for collars needs.",
         animal: "dog",
         category: "accessories",
@@ -550,8 +547,7 @@ export async function GET() {
         id: 46,
         name: "Dog Accessories - Leashes 1",
         price: 17.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog accessories item for leashes needs.",
         animal: "dog",
         category: "accessories",
@@ -563,8 +559,7 @@ export async function GET() {
         id: 47,
         name: "Dog Accessories - Leashes 2",
         price: 18.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog accessories item for leashes needs.",
         animal: "dog",
         category: "accessories",
@@ -576,8 +571,7 @@ export async function GET() {
         id: 48,
         name: "Dog Accessories - Leashes 3",
         price: 20.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog accessories item for leashes needs.",
         animal: "dog",
         category: "accessories",
@@ -589,8 +583,7 @@ export async function GET() {
         id: 49,
         name: "Dog Accessories - Harnesses 1",
         price: 21.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog accessories item for harnesses needs.",
         animal: "dog",
         category: "accessories",
@@ -602,8 +595,7 @@ export async function GET() {
         id: 50,
         name: "Dog Accessories - Harnesses 2",
         price: 22.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog accessories item for harnesses needs.",
         animal: "dog",
         category: "accessories",
@@ -615,8 +607,7 @@ export async function GET() {
         id: 51,
         name: "Dog Accessories - Harnesses 3",
         price: 23.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog accessories item for harnesses needs.",
         animal: "dog",
         category: "accessories",
@@ -628,8 +619,7 @@ export async function GET() {
         id: 52,
         name: "Dog Accessories - Bowls 1",
         price: 25.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog accessories item for bowls needs.",
         animal: "dog",
         category: "accessories",
@@ -641,8 +631,7 @@ export async function GET() {
         id: 53,
         name: "Dog Accessories - Bowls 2",
         price: 26.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog accessories item for bowls needs.",
         animal: "dog",
         category: "accessories",
@@ -654,8 +643,7 @@ export async function GET() {
         id: 54,
         name: "Dog Accessories - Bowls 3",
         price: 27.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog accessories item for bowls needs.",
         animal: "dog",
         category: "accessories",
@@ -667,8 +655,7 @@ export async function GET() {
         id: 55,
         name: "Dog Accessories - Beds 1",
         price: 28.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog accessories item for beds needs.",
         animal: "dog",
         category: "accessories",
@@ -680,8 +667,7 @@ export async function GET() {
         id: 56,
         name: "Dog Accessories - Beds 2",
         price: 30.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog accessories item for beds needs.",
         animal: "dog",
         category: "accessories",
@@ -693,8 +679,7 @@ export async function GET() {
         id: 57,
         name: "Dog Accessories - Beds 3",
         price: 31.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog accessories item for beds needs.",
         animal: "dog",
         category: "accessories",
@@ -706,8 +691,7 @@ export async function GET() {
         id: 58,
         name: "Cat Accessories - Collars 1",
         price: 32.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat accessories item for collars needs.",
         animal: "cat",
         category: "accessories",
@@ -719,8 +703,7 @@ export async function GET() {
         id: 59,
         name: "Cat Accessories - Collars 2",
         price: 33.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat accessories item for collars needs.",
         animal: "cat",
         category: "accessories",
@@ -732,8 +715,7 @@ export async function GET() {
         id: 60,
         name: "Cat Accessories - Collars 3",
         price: 10.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat accessories item for collars needs.",
         animal: "cat",
         category: "accessories",
@@ -745,8 +727,7 @@ export async function GET() {
         id: 61,
         name: "Cat Accessories - Scratching Posts 1",
         price: 11.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat accessories item for scratching posts needs.",
         animal: "cat",
         category: "accessories",
@@ -758,8 +739,7 @@ export async function GET() {
         id: 62,
         name: "Cat Accessories - Scratching Posts 2",
         price: 12.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat accessories item for scratching posts needs.",
         animal: "cat",
         category: "accessories",
@@ -771,8 +751,7 @@ export async function GET() {
         id: 63,
         name: "Cat Accessories - Scratching Posts 3",
         price: 13.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat accessories item for scratching posts needs.",
         animal: "cat",
         category: "accessories",
@@ -784,8 +763,7 @@ export async function GET() {
         id: 64,
         name: "Cat Accessories - Litter Boxes 1",
         price: 15.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat accessories item for litter boxes needs.",
         animal: "cat",
         category: "accessories",
@@ -797,8 +775,7 @@ export async function GET() {
         id: 65,
         name: "Cat Accessories - Litter Boxes 2",
         price: 16.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat accessories item for litter boxes needs.",
         animal: "cat",
         category: "accessories",
@@ -810,8 +787,7 @@ export async function GET() {
         id: 66,
         name: "Cat Accessories - Litter Boxes 3",
         price: 17.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat accessories item for litter boxes needs.",
         animal: "cat",
         category: "accessories",
@@ -823,8 +799,7 @@ export async function GET() {
         id: 67,
         name: "Cat Accessories - Bowls 1",
         price: 18.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat accessories item for bowls needs.",
         animal: "cat",
         category: "accessories",
@@ -836,8 +811,7 @@ export async function GET() {
         id: 68,
         name: "Cat Accessories - Bowls 2",
         price: 20.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat accessories item for bowls needs.",
         animal: "cat",
         category: "accessories",
@@ -849,8 +823,7 @@ export async function GET() {
         id: 69,
         name: "Cat Accessories - Bowls 3",
         price: 21.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat accessories item for bowls needs.",
         animal: "cat",
         category: "accessories",
@@ -862,8 +835,7 @@ export async function GET() {
         id: 70,
         name: "Cat Accessories - Beds 1",
         price: 22.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat accessories item for beds needs.",
         animal: "cat",
         category: "accessories",
@@ -875,8 +847,7 @@ export async function GET() {
         id: 71,
         name: "Cat Accessories - Beds 2",
         price: 23.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat accessories item for beds needs.",
         animal: "cat",
         category: "accessories",
@@ -888,8 +859,7 @@ export async function GET() {
         id: 72,
         name: "Cat Accessories - Beds 3",
         price: 25.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat accessories item for beds needs.",
         animal: "cat",
         category: "accessories",
@@ -901,8 +871,7 @@ export async function GET() {
         id: 73,
         name: "Bird Accessories - Cages 1",
         price: 26.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird accessories item for cages needs.",
         animal: "bird",
         category: "accessories",
@@ -914,8 +883,7 @@ export async function GET() {
         id: 74,
         name: "Bird Accessories - Cages 2",
         price: 27.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird accessories item for cages needs.",
         animal: "bird",
         category: "accessories",
@@ -927,8 +895,7 @@ export async function GET() {
         id: 75,
         name: "Bird Accessories - Cages 3",
         price: 28.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird accessories item for cages needs.",
         animal: "bird",
         category: "accessories",
@@ -940,8 +907,7 @@ export async function GET() {
         id: 76,
         name: "Bird Accessories - Perches 1",
         price: 30.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird accessories item for perches needs.",
         animal: "bird",
         category: "accessories",
@@ -953,8 +919,7 @@ export async function GET() {
         id: 77,
         name: "Bird Accessories - Perches 2",
         price: 31.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird accessories item for perches needs.",
         animal: "bird",
         category: "accessories",
@@ -966,8 +931,7 @@ export async function GET() {
         id: 78,
         name: "Bird Accessories - Perches 3",
         price: 32.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird accessories item for perches needs.",
         animal: "bird",
         category: "accessories",
@@ -979,8 +943,7 @@ export async function GET() {
         id: 79,
         name: "Bird Accessories - Feeders 1",
         price: 33.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird accessories item for feeders needs.",
         animal: "bird",
         category: "accessories",
@@ -992,8 +955,7 @@ export async function GET() {
         id: 80,
         name: "Bird Accessories - Feeders 2",
         price: 10.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird accessories item for feeders needs.",
         animal: "bird",
         category: "accessories",
@@ -1005,8 +967,7 @@ export async function GET() {
         id: 81,
         name: "Bird Accessories - Feeders 3",
         price: 11.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird accessories item for feeders needs.",
         animal: "bird",
         category: "accessories",
@@ -1018,8 +979,7 @@ export async function GET() {
         id: 82,
         name: "Bird Accessories - Nesting Boxes 1",
         price: 12.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird accessories item for nesting boxes needs.",
         animal: "bird",
         category: "accessories",
@@ -1031,8 +991,7 @@ export async function GET() {
         id: 83,
         name: "Bird Accessories - Nesting Boxes 2",
         price: 13.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird accessories item for nesting boxes needs.",
         animal: "bird",
         category: "accessories",
@@ -1044,8 +1003,7 @@ export async function GET() {
         id: 84,
         name: "Bird Accessories - Nesting Boxes 3",
         price: 15.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird accessories item for nesting boxes needs.",
         animal: "bird",
         category: "accessories",
@@ -1057,8 +1015,7 @@ export async function GET() {
         id: 85,
         name: "Bird Accessories - Play Gyms 1",
         price: 16.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird accessories item for play gyms needs.",
         animal: "bird",
         category: "accessories",
@@ -1070,8 +1027,7 @@ export async function GET() {
         id: 86,
         name: "Bird Accessories - Play Gyms 2",
         price: 17.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird accessories item for play gyms needs.",
         animal: "bird",
         category: "accessories",
@@ -1083,8 +1039,7 @@ export async function GET() {
         id: 87,
         name: "Bird Accessories - Play Gyms 3",
         price: 18.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird accessories item for play gyms needs.",
         animal: "bird",
         category: "accessories",
@@ -1096,8 +1051,7 @@ export async function GET() {
         id: 88,
         name: "Dog Treats - Training 1",
         price: 20.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog treats item for training needs.",
         animal: "dog",
         category: "treats",
@@ -1109,8 +1063,7 @@ export async function GET() {
         id: 89,
         name: "Dog Treats - Training 2",
         price: 21.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog treats item for training needs.",
         animal: "dog",
         category: "treats",
@@ -1122,8 +1075,7 @@ export async function GET() {
         id: 90,
         name: "Dog Treats - Training 3",
         price: 22.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog treats item for training needs.",
         animal: "dog",
         category: "treats",
@@ -1135,8 +1087,7 @@ export async function GET() {
         id: 91,
         name: "Dog Treats - Dental 1",
         price: 23.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog treats item for dental needs.",
         animal: "dog",
         category: "treats",
@@ -1148,8 +1099,7 @@ export async function GET() {
         id: 92,
         name: "Dog Treats - Dental 2",
         price: 25.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog treats item for dental needs.",
         animal: "dog",
         category: "treats",
@@ -1161,8 +1111,7 @@ export async function GET() {
         id: 93,
         name: "Dog Treats - Dental 3",
         price: 26.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog treats item for dental needs.",
         animal: "dog",
         category: "treats",
@@ -1174,8 +1123,7 @@ export async function GET() {
         id: 94,
         name: "Dog Treats - Natural 1",
         price: 27.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog treats item for natural needs.",
         animal: "dog",
         category: "treats",
@@ -1187,8 +1135,7 @@ export async function GET() {
         id: 95,
         name: "Dog Treats - Natural 2",
         price: 28.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog treats item for natural needs.",
         animal: "dog",
         category: "treats",
@@ -1200,8 +1147,7 @@ export async function GET() {
         id: 96,
         name: "Dog Treats - Natural 3",
         price: 30.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog treats item for natural needs.",
         animal: "dog",
         category: "treats",
@@ -1213,8 +1159,7 @@ export async function GET() {
         id: 97,
         name: "Dog Treats - Chews 1",
         price: 31.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog treats item for chews needs.",
         animal: "dog",
         category: "treats",
@@ -1226,8 +1171,7 @@ export async function GET() {
         id: 98,
         name: "Dog Treats - Chews 2",
         price: 32.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog treats item for chews needs.",
         animal: "dog",
         category: "treats",
@@ -1239,8 +1183,7 @@ export async function GET() {
         id: 99,
         name: "Dog Treats - Chews 3",
         price: 33.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog treats item for chews needs.",
         animal: "dog",
         category: "treats",
@@ -1252,8 +1195,7 @@ export async function GET() {
         id: 100,
         name: "Dog Treats - Biscuits 1",
         price: 10.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog treats item for biscuits needs.",
         animal: "dog",
         category: "treats",
@@ -1265,8 +1207,7 @@ export async function GET() {
         id: 101,
         name: "Dog Treats - Biscuits 2",
         price: 11.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog treats item for biscuits needs.",
         animal: "dog",
         category: "treats",
@@ -1278,8 +1219,7 @@ export async function GET() {
         id: 102,
         name: "Dog Treats - Biscuits 3",
         price: 12.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog treats item for biscuits needs.",
         animal: "dog",
         category: "treats",
@@ -1291,8 +1231,7 @@ export async function GET() {
         id: 103,
         name: "Cat Treats - Crunchy 1",
         price: 13.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat treats item for crunchy needs.",
         animal: "cat",
         category: "treats",
@@ -1304,8 +1243,7 @@ export async function GET() {
         id: 104,
         name: "Cat Treats - Crunchy 2",
         price: 15.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat treats item for crunchy needs.",
         animal: "cat",
         category: "treats",
@@ -1317,8 +1255,7 @@ export async function GET() {
         id: 105,
         name: "Cat Treats - Crunchy 3",
         price: 16.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat treats item for crunchy needs.",
         animal: "cat",
         category: "treats",
@@ -1330,8 +1267,7 @@ export async function GET() {
         id: 106,
         name: "Cat Treats - Soft 1",
         price: 17.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat treats item for soft needs.",
         animal: "cat",
         category: "treats",
@@ -1343,8 +1279,7 @@ export async function GET() {
         id: 107,
         name: "Cat Treats - Soft 2",
         price: 18.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat treats item for soft needs.",
         animal: "cat",
         category: "treats",
@@ -1356,8 +1291,7 @@ export async function GET() {
         id: 108,
         name: "Cat Treats - Soft 3",
         price: 20.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat treats item for soft needs.",
         animal: "cat",
         category: "treats",
@@ -1369,8 +1303,7 @@ export async function GET() {
         id: 109,
         name: "Cat Treats - Dental 1",
         price: 21.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat treats item for dental needs.",
         animal: "cat",
         category: "treats",
@@ -1382,8 +1315,7 @@ export async function GET() {
         id: 110,
         name: "Cat Treats - Dental 2",
         price: 22.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat treats item for dental needs.",
         animal: "cat",
         category: "treats",
@@ -1395,8 +1327,7 @@ export async function GET() {
         id: 111,
         name: "Cat Treats - Dental 3",
         price: 23.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat treats item for dental needs.",
         animal: "cat",
         category: "treats",
@@ -1408,8 +1339,7 @@ export async function GET() {
         id: 112,
         name: "Cat Treats - Catnip 1",
         price: 25.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat treats item for catnip needs.",
         animal: "cat",
         category: "treats",
@@ -1421,8 +1351,7 @@ export async function GET() {
         id: 113,
         name: "Cat Treats - Catnip 2",
         price: 26.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat treats item for catnip needs.",
         animal: "cat",
         category: "treats",
@@ -1434,8 +1363,7 @@ export async function GET() {
         id: 114,
         name: "Cat Treats - Catnip 3",
         price: 27.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat treats item for catnip needs.",
         animal: "cat",
         category: "treats",
@@ -1447,8 +1375,7 @@ export async function GET() {
         id: 115,
         name: "Cat Treats - Freeze-Dried 1",
         price: 28.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat treats item for freeze-dried needs.",
         animal: "cat",
         category: "treats",
@@ -1460,8 +1387,7 @@ export async function GET() {
         id: 116,
         name: "Cat Treats - Freeze-Dried 2",
         price: 30.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat treats item for freeze-dried needs.",
         animal: "cat",
         category: "treats",
@@ -1473,8 +1399,7 @@ export async function GET() {
         id: 117,
         name: "Cat Treats - Freeze-Dried 3",
         price: 31.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat treats item for freeze-dried needs.",
         animal: "cat",
         category: "treats",
@@ -1486,8 +1411,7 @@ export async function GET() {
         id: 118,
         name: "Bird Treats - Sticks 1",
         price: 32.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird treats item for sticks needs.",
         animal: "bird",
         category: "treats",
@@ -1499,8 +1423,7 @@ export async function GET() {
         id: 119,
         name: "Bird Treats - Sticks 2",
         price: 33.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird treats item for sticks needs.",
         animal: "bird",
         category: "treats",
@@ -1512,8 +1435,7 @@ export async function GET() {
         id: 120,
         name: "Bird Treats - Sticks 3",
         price: 10.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird treats item for sticks needs.",
         animal: "bird",
         category: "treats",
@@ -1525,8 +1447,7 @@ export async function GET() {
         id: 121,
         name: "Bird Treats - Fruit 1",
         price: 11.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird treats item for fruit needs.",
         animal: "bird",
         category: "treats",
@@ -1538,8 +1459,7 @@ export async function GET() {
         id: 122,
         name: "Bird Treats - Fruit 2",
         price: 12.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird treats item for fruit needs.",
         animal: "bird",
         category: "treats",
@@ -1551,8 +1471,7 @@ export async function GET() {
         id: 123,
         name: "Bird Treats - Fruit 3",
         price: 13.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird treats item for fruit needs.",
         animal: "bird",
         category: "treats",
@@ -1564,8 +1483,7 @@ export async function GET() {
         id: 124,
         name: "Bird Treats - Seed Balls 1",
         price: 15.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird treats item for seed balls needs.",
         animal: "bird",
         category: "treats",
@@ -1577,8 +1495,7 @@ export async function GET() {
         id: 125,
         name: "Bird Treats - Seed Balls 2",
         price: 16.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird treats item for seed balls needs.",
         animal: "bird",
         category: "treats",
@@ -1590,8 +1507,7 @@ export async function GET() {
         id: 126,
         name: "Bird Treats - Seed Balls 3",
         price: 17.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird treats item for seed balls needs.",
         animal: "bird",
         category: "treats",
@@ -1603,8 +1519,7 @@ export async function GET() {
         id: 127,
         name: "Bird Treats - Millet Sprays 1",
         price: 18.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird treats item for millet sprays needs.",
         animal: "bird",
         category: "treats",
@@ -1616,8 +1531,7 @@ export async function GET() {
         id: 128,
         name: "Bird Treats - Millet Sprays 2",
         price: 20.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird treats item for millet sprays needs.",
         animal: "bird",
         category: "treats",
@@ -1629,8 +1543,7 @@ export async function GET() {
         id: 129,
         name: "Bird Treats - Millet Sprays 3",
         price: 21.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird treats item for millet sprays needs.",
         animal: "bird",
         category: "treats",
@@ -1642,8 +1555,7 @@ export async function GET() {
         id: 130,
         name: "Bird Treats - Nutritional 1",
         price: 22.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird treats item for nutritional needs.",
         animal: "bird",
         category: "treats",
@@ -1655,8 +1567,7 @@ export async function GET() {
         id: 131,
         name: "Bird Treats - Nutritional 2",
         price: 23.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird treats item for nutritional needs.",
         animal: "bird",
         category: "treats",
@@ -1668,8 +1579,7 @@ export async function GET() {
         id: 132,
         name: "Bird Treats - Nutritional 3",
         price: 25.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird treats item for nutritional needs.",
         animal: "bird",
         category: "treats",
@@ -1681,8 +1591,7 @@ export async function GET() {
         id: 133,
         name: "Dog Toys - Chew 1",
         price: 26.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog toys item for chew needs.",
         animal: "dog",
         category: "toys",
@@ -1694,8 +1603,7 @@ export async function GET() {
         id: 134,
         name: "Dog Toys - Chew 2",
         price: 27.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog toys item for chew needs.",
         animal: "dog",
         category: "toys",
@@ -1707,8 +1615,7 @@ export async function GET() {
         id: 135,
         name: "Dog Toys - Chew 3",
         price: 28.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog toys item for chew needs.",
         animal: "dog",
         category: "toys",
@@ -1720,8 +1627,7 @@ export async function GET() {
         id: 136,
         name: "Dog Toys - Plush 1",
         price: 30.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog toys item for plush needs.",
         animal: "dog",
         category: "toys",
@@ -1733,8 +1639,7 @@ export async function GET() {
         id: 137,
         name: "Dog Toys - Plush 2",
         price: 31.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog toys item for plush needs.",
         animal: "dog",
         category: "toys",
@@ -1746,8 +1651,7 @@ export async function GET() {
         id: 138,
         name: "Dog Toys - Plush 3",
         price: 32.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog toys item for plush needs.",
         animal: "dog",
         category: "toys",
@@ -1759,8 +1663,7 @@ export async function GET() {
         id: 139,
         name: "Dog Toys - Interactive 1",
         price: 33.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog toys item for interactive needs.",
         animal: "dog",
         category: "toys",
@@ -1772,8 +1675,7 @@ export async function GET() {
         id: 140,
         name: "Dog Toys - Interactive 2",
         price: 10.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog toys item for interactive needs.",
         animal: "dog",
         category: "toys",
@@ -1785,8 +1687,7 @@ export async function GET() {
         id: 141,
         name: "Dog Toys - Interactive 3",
         price: 11.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog toys item for interactive needs.",
         animal: "dog",
         category: "toys",
@@ -1798,8 +1699,7 @@ export async function GET() {
         id: 142,
         name: "Dog Toys - Fetch 1",
         price: 12.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog toys item for fetch needs.",
         animal: "dog",
         category: "toys",
@@ -1811,8 +1711,7 @@ export async function GET() {
         id: 143,
         name: "Dog Toys - Fetch 2",
         price: 13.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog toys item for fetch needs.",
         animal: "dog",
         category: "toys",
@@ -1824,8 +1723,7 @@ export async function GET() {
         id: 144,
         name: "Dog Toys - Fetch 3",
         price: 15.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog toys item for fetch needs.",
         animal: "dog",
         category: "toys",
@@ -1837,8 +1735,7 @@ export async function GET() {
         id: 145,
         name: "Dog Toys - Rope 1",
         price: 16.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog toys item for rope needs.",
         animal: "dog",
         category: "toys",
@@ -1850,8 +1747,7 @@ export async function GET() {
         id: 146,
         name: "Dog Toys - Rope 2",
         price: 17.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog toys item for rope needs.",
         animal: "dog",
         category: "toys",
@@ -1863,8 +1759,7 @@ export async function GET() {
         id: 147,
         name: "Dog Toys - Rope 3",
         price: 18.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Dog toys item for rope needs.",
         animal: "dog",
         category: "toys",
@@ -1876,8 +1771,7 @@ export async function GET() {
         id: 148,
         name: "Cat Toys - Interactive 1",
         price: 20.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat toys item for interactive needs.",
         animal: "cat",
         category: "toys",
@@ -1889,8 +1783,7 @@ export async function GET() {
         id: 149,
         name: "Cat Toys - Interactive 2",
         price: 21.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat toys item for interactive needs.",
         animal: "cat",
         category: "toys",
@@ -1902,8 +1795,7 @@ export async function GET() {
         id: 150,
         name: "Cat Toys - Interactive 3",
         price: 22.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat toys item for interactive needs.",
         animal: "cat",
         category: "toys",
@@ -1915,8 +1807,7 @@ export async function GET() {
         id: 151,
         name: "Cat Toys - Feather 1",
         price: 23.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat toys item for feather needs.",
         animal: "cat",
         category: "toys",
@@ -1928,8 +1819,7 @@ export async function GET() {
         id: 152,
         name: "Cat Toys - Feather 2",
         price: 25.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat toys item for feather needs.",
         animal: "cat",
         category: "toys",
@@ -1941,8 +1831,7 @@ export async function GET() {
         id: 153,
         name: "Cat Toys - Feather 3",
         price: 26.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat toys item for feather needs.",
         animal: "cat",
         category: "toys",
@@ -1954,8 +1843,7 @@ export async function GET() {
         id: 154,
         name: "Cat Toys - Balls 1",
         price: 27.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat toys item for balls needs.",
         animal: "cat",
         category: "toys",
@@ -1967,8 +1855,7 @@ export async function GET() {
         id: 155,
         name: "Cat Toys - Balls 2",
         price: 28.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat toys item for balls needs.",
         animal: "cat",
         category: "toys",
@@ -1980,8 +1867,7 @@ export async function GET() {
         id: 156,
         name: "Cat Toys - Balls 3",
         price: 30.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat toys item for balls needs.",
         animal: "cat",
         category: "toys",
@@ -1993,8 +1879,7 @@ export async function GET() {
         id: 157,
         name: "Cat Toys - Catnip 1",
         price: 31.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat toys item for catnip needs.",
         animal: "cat",
         category: "toys",
@@ -2006,8 +1891,7 @@ export async function GET() {
         id: 158,
         name: "Cat Toys - Catnip 2",
         price: 32.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat toys item for catnip needs.",
         animal: "cat",
         category: "toys",
@@ -2019,8 +1903,7 @@ export async function GET() {
         id: 159,
         name: "Cat Toys - Catnip 3",
         price: 33.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat toys item for catnip needs.",
         animal: "cat",
         category: "toys",
@@ -2032,8 +1915,7 @@ export async function GET() {
         id: 160,
         name: "Cat Toys - Tunnels 1",
         price: 10.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat toys item for tunnels needs.",
         animal: "cat",
         category: "toys",
@@ -2045,8 +1927,7 @@ export async function GET() {
         id: 161,
         name: "Cat Toys - Tunnels 2",
         price: 11.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat toys item for tunnels needs.",
         animal: "cat",
         category: "toys",
@@ -2058,8 +1939,7 @@ export async function GET() {
         id: 162,
         name: "Cat Toys - Tunnels 3",
         price: 12.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Cat toys item for tunnels needs.",
         animal: "cat",
         category: "toys",
@@ -2071,8 +1951,7 @@ export async function GET() {
         id: 163,
         name: "Bird Toys - Mirrors 1",
         price: 13.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird toys item for mirrors needs.",
         animal: "bird",
         category: "toys",
@@ -2084,8 +1963,7 @@ export async function GET() {
         id: 164,
         name: "Bird Toys - Mirrors 2",
         price: 15.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird toys item for mirrors needs.",
         animal: "bird",
         category: "toys",
@@ -2097,8 +1975,7 @@ export async function GET() {
         id: 165,
         name: "Bird Toys - Mirrors 3",
         price: 16.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird toys item for mirrors needs.",
         animal: "bird",
         category: "toys",
@@ -2110,8 +1987,7 @@ export async function GET() {
         id: 166,
         name: "Bird Toys - Bells 1",
         price: 17.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird toys item for bells needs.",
         animal: "bird",
         category: "toys",
@@ -2123,8 +1999,7 @@ export async function GET() {
         id: 167,
         name: "Bird Toys - Bells 2",
         price: 18.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird toys item for bells needs.",
         animal: "bird",
         category: "toys",
@@ -2136,8 +2011,7 @@ export async function GET() {
         id: 168,
         name: "Bird Toys - Bells 3",
         price: 20.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird toys item for bells needs.",
         animal: "bird",
         category: "toys",
@@ -2149,8 +2023,7 @@ export async function GET() {
         id: 169,
         name: "Bird Toys - Swings 1",
         price: 21.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird toys item for swings needs.",
         animal: "bird",
         category: "toys",
@@ -2162,8 +2035,7 @@ export async function GET() {
         id: 170,
         name: "Bird Toys - Swings 2",
         price: 22.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird toys item for swings needs.",
         animal: "bird",
         category: "toys",
@@ -2175,8 +2047,7 @@ export async function GET() {
         id: 171,
         name: "Bird Toys - Swings 3",
         price: 23.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird toys item for swings needs.",
         animal: "bird",
         category: "toys",
@@ -2188,8 +2059,7 @@ export async function GET() {
         id: 172,
         name: "Bird Toys - Foraging 1",
         price: 25.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird toys item for foraging needs.",
         animal: "bird",
         category: "toys",
@@ -2201,8 +2071,7 @@ export async function GET() {
         id: 173,
         name: "Bird Toys - Foraging 2",
         price: 26.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird toys item for foraging needs.",
         animal: "bird",
         category: "toys",
@@ -2214,8 +2083,7 @@ export async function GET() {
         id: 174,
         name: "Bird Toys - Foraging 3",
         price: 27.5,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird toys item for foraging needs.",
         animal: "bird",
         category: "toys",
@@ -2227,8 +2095,7 @@ export async function GET() {
         id: 175,
         name: "Bird Toys - Wooden 1",
         price: 28.75,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird toys item for wooden needs.",
         animal: "bird",
         category: "toys",
@@ -2240,8 +2107,7 @@ export async function GET() {
         id: 176,
         name: "Bird Toys - Wooden 2",
         price: 30.0,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird toys item for wooden needs.",
         animal: "bird",
         category: "toys",
@@ -2253,8 +2119,7 @@ export async function GET() {
         id: 177,
         name: "Bird Toys - Wooden 3",
         price: 31.25,
-        image:
-          "https://images.unsplash.com/photo-1604908177225-6c03e2ca1dba?w=300",
+        image: "/products/empty.png",
         description: "Bird toys item for wooden needs.",
         animal: "bird",
         category: "toys",
