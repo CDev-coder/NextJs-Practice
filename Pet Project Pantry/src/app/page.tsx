@@ -8,7 +8,7 @@ export default function HomePage() {
 
   if (loading) return <p className="p-6 text-center">Loading products...</p>;
   return (
-    <div className="HomePage">
+    <div className="HomePage bg-[var(--background)]">
       <HomePageMenu products={products} />
     </div>
   );

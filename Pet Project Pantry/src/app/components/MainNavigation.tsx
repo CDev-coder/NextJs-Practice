@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { Product } from "../types";
 import { normalizeSubcategory } from "../context/normalizer";
+import { useStickyNav } from "@/hooks/useStickyNav";
 
 // Define TypeScript interfaces for the props
 interface MenuItem {
@@ -47,7 +48,7 @@ const MainNavigation = ({
   currentFilter,
 }: MainNavigationProps) => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-
+  const isSticky = useStickyNav(50);
   // Menu structure with proper typing
   const menuItems: Record<string, MenuItem> = {
     food: {
@@ -152,18 +153,22 @@ const MainNavigation = ({
   };
 
   return (
-    <nav className="bg-petflow-blue text-white font-semibold">
+    <nav
+      className={`bg-petflow-blue text-white font-semibold bg-[var(--accent-2)] ${
+        isSticky ? "sticky top-0 z-50 shadow-md" : "relative"
+      }`}
+    >
       <div className="container mx-auto">
         <ul className="flex justify-center space-x-8">
           {Object.entries(menuItems).map(([key, item]) => (
             <li
               key={key}
-              className="relative py-4"
+              className="relative py-4  text-black hover:text-white"
               onMouseEnter={() => handleCategoryHover(key)}
               onMouseLeave={handleCategoryLeave}
             >
               <button
-                className="px-3 py-2 hover:bg-blue-700 rounded transition-colors"
+                className="px-3 py-2 hover:bg-[var(--accent-2-text)] rounded transition-colors"
                 onClick={() => handleCategoryClick("all", key)}
               >
                 {item.name}
@@ -176,7 +181,7 @@ const MainNavigation = ({
                     {/* Dogs column */}
                     <div>
                       <h3
-                        className="text-lg font-bold text-petflow-blue mb-3 border-b pb-2"
+                        className="dropdown-header"
                         onClick={() => handleCategoryClick("dog", key)}
                       >
                         Dogs
@@ -185,7 +190,7 @@ const MainNavigation = ({
                         {item.subcategories.dog.map((subcat, index) => (
                           <li key={index}>
                             <button
-                              className="text-gray-700 hover:text-petflow-blue text-left"
+                              className="dropdown-btn"
                               onClick={() =>
                                 handleSubcategoryClick(key, "dog", subcat)
                               }
@@ -200,7 +205,7 @@ const MainNavigation = ({
                     {/* Cats column */}
                     <div>
                       <h3
-                        className="text-lg font-bold text-petflow-blue mb-3 border-b pb-2"
+                        className="dropdown-header"
                         onClick={() => handleCategoryClick("cat", key)}
                       >
                         Cats
@@ -209,7 +214,7 @@ const MainNavigation = ({
                         {item.subcategories.cat.map((subcat, index) => (
                           <li key={index}>
                             <button
-                              className="text-gray-700 hover:text-petflow-blue text-left"
+                              className="dropdown-btn"
                               onClick={() =>
                                 handleSubcategoryClick(key, "cat", subcat)
                               }
@@ -224,7 +229,7 @@ const MainNavigation = ({
                     {/* Birds column */}
                     <div>
                       <h3
-                        className="text-lg font-bold text-petflow-blue mb-3 border-b pb-2"
+                        className="dropdown-header"
                         onClick={() => handleCategoryClick("bird", key)}
                       >
                         Birds
@@ -233,7 +238,7 @@ const MainNavigation = ({
                         {item.subcategories.bird.map((subcat, index) => (
                           <li key={index}>
                             <button
-                              className="text-gray-700 hover:text-petflow-blue text-left"
+                              className="dropdown-btn"
                               onClick={() =>
                                 handleSubcategoryClick(key, "bird", subcat)
                               }
