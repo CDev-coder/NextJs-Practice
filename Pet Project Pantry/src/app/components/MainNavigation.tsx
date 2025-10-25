@@ -154,7 +154,7 @@ const MainNavigation = ({
 
   return (
     <nav
-      className={`bg-petflow-blue text-white font-semibold bg-[var(--accent-2)] ${
+      className={`bg-(--accent-2) font-semibold ${
         isSticky ? "sticky top-0 z-50 shadow-md" : "relative"
       }`}
     >
@@ -168,7 +168,7 @@ const MainNavigation = ({
               onMouseLeave={handleCategoryLeave}
             >
               <button
-                className="px-3 py-2 hover:bg-[var(--accent-2-text)] rounded transition-colors"
+                className="px-3 py-2 hover:text-white hover:bg-(--accent-3) rounded transition-colors"
                 onClick={() => handleCategoryClick("all", key)}
               >
                 {item.name}
