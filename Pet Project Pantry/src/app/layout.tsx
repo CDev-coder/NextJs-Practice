@@ -24,7 +24,7 @@ export default async function RootLayout({
   const products = await getProducts();
   return (
     <html lang="en">
-      <body className="font-sans text-gray-900 bg-(--background)">
+      <body className="font-sans text-gray-900 bg-[var(--background)]">
         <FilterProvider products={products}>
           <CartProvider>
             <NavBarWrapper>
