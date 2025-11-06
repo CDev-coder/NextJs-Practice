@@ -42,26 +42,31 @@ const SideBarFilterMenu = ({
   const handleAlphabeticalFilter = (sortingRule: string) => {
     console.log("handleSort sortingRule: ", sortingRule);
     sort_Alphabetically(sortingRule);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handlePricePointFilter = (priceRule: any) => {
     console.log("handlePriceFilter: ", priceRule);
     sort_PricePoint(priceRule);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handlePriceRangeFilter = (priceRule: any) => {
     console.log("handlePriceRangeFilter: ", priceRule);
     sort_PriceRange(priceRule);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleFieldFilter = (field: any, rule: any) => {
     console.log("handleFieldFilter: " + field + " rule: " + rule);
     sort_ByField(field, rule);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleRatingClick = (rating: number) => {
     console.log("Filter items with rating:", rating);
     sort_Ratings(rating);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Slider from "@mui/material/Slider";
 import { Product } from "../types";
 
@@ -18,6 +18,9 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
   const absoluteMin = Math.min(...prices);
   const absoluteMax = Math.max(...prices);
 
+  // Ref to store timeout for debounce
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
+
   // State for current range
   const [range, setRange] = useState<number[]>([absoluteMin, absoluteMax]);
 
@@ -27,18 +30,36 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
   }, [absoluteMin, absoluteMax]);
 
   // Handle slider change
-  const handleRangeChange = (event: Event, newValue: number | number[]) => {
+  const handleRangeChange = (
+    event: Event | React.SyntheticEvent,
+    newValue: number | number[]
+  ) => {
     const newRange = newValue as number[];
     setRange(newRange);
+    // Only update the visual display — no filtering or scrolling yet
+  };
 
-    // Filter products based on the new range
-    const filteredProducts = priceArray.filter(
-      (priceArray) => priceArray >= newRange[0] && priceArray <= newRange[1]
-    );
-    console.log("filteredProducts: ", filteredProducts);
-    if (onPriceRangeChange) {
-      onPriceRangeChange(filteredProducts);
-    }
+  const handleRangeCommit = (
+    event: Event | React.SyntheticEvent,
+    newValue: number | number[]
+  ) => {
+    const newRange = newValue as number[];
+
+    // Clear any pending debounce timer
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
+    // Start a new debounce timer
+    debounceRef.current = setTimeout(() => {
+      const filteredProducts = priceArray.filter(
+        (price) => price >= newRange[0] && price <= newRange[1]
+      );
+
+      if (onPriceRangeChange) {
+        onPriceRangeChange(filteredProducts);
+      }
+
+      //window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 300); // Adjust delay (300ms is typical)
   };
 
   // Format price for display
@@ -63,10 +84,7 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
         <Slider
           value={range}
           onChange={handleRangeChange}
-          onChangeCommitted={(event, newValue) => {
-            // This fires when user stops sliding (for better performance)
-            console.log("Final selection:", newValue);
-          }}
+          onChangeCommitted={handleRangeCommit}
           valueLabelDisplay="auto"
           valueLabelFormat={formatPrice}
           min={absoluteMin}
