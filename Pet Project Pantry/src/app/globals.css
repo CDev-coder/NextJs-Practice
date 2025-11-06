@@ -40,3 +40,7 @@
 .ProductCardDiv {
   max-height: 400px;
 }
+
+button {
+  cursor: pointer;
+}
