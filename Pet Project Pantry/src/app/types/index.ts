@@ -10,6 +10,8 @@ export interface Product {
   subcategory: string;
   brand: string;
   SKU: string;
+  rating: number;
+  salesVolume: number;
 }
 
 export interface ActiveFilters {
@@ -18,6 +20,8 @@ export interface ActiveFilters {
   subcategory: string;
   results: Product[];
   filtered_prices: number[];
+  filtered_ratings: number[];
+  filtered_sales: number[];
   filtered_brands: string[];
   filtered_subcategories: string[];
   filtered_animals: string[];

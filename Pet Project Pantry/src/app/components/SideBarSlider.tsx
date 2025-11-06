@@ -5,11 +5,13 @@ import { Product } from "../types";
 interface PriceRangeSliderProps {
   priceArray: any[];
   onPriceRangeChange?: (filteredProducts: Product[]) => void;
+  increments: number;
 }
 
 const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
   priceArray,
   onPriceRangeChange,
+  increments = 1,
 }) => {
   // Get all prices and calculate min/max
   const prices = priceArray.map((prices) => prices);
@@ -57,7 +59,7 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
       </h3>
       <h3>Price Range</h3>
 
-      <div className="slider-container">
+      <div className="slider-container mb-6">
         <Slider
           value={range}
           onChange={handleRangeChange}
@@ -69,7 +71,7 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
           valueLabelFormat={formatPrice}
           min={absoluteMin}
           max={absoluteMax}
-          step={1}
+          step={increments}
           sx={{
             color: "#3f51b5", // Custom color
             height: 8,
@@ -84,16 +86,16 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
             },
           }}
         />
-      </div>
-      <div className="selected-range">
-        <p>
-          Selected range: {formatPrice(range[0])} - {formatPrice(range[1])}
-        </p>
-        <p>
-          Showing{" "}
-          {priceArray.filter((p) => p >= range[0] && p <= range[1]).length}{" "}
-          products
-        </p>
+        <div className="selected-range-details">
+          <p>
+            Selected range: {formatPrice(range[0])} - {formatPrice(range[1])}
+          </p>
+          <p>
+            Showing{" "}
+            {priceArray.filter((p) => p >= range[0] && p <= range[1]).length}{" "}
+            products
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -22,6 +22,7 @@ interface FilterContextType {
   sort_Alphabetically: (order: string) => void;
   sort_PricePoint: (order: string) => void;
   sort_PriceRange: (order: number[]) => void;
+  sort_Ratings: (order: number) => void;
   sort_ByField: <K extends keyof Product>(field: K, value: Product[K]) => void;
   setSelectedFilterValue: (value: string | null) => void;
   selectedFilterValue: string | null;
@@ -105,6 +106,12 @@ export function FilterProvider({
       ...new Set(newFilteredProducts.map((product) => product.animal)),
     ].sort();
     const filtered_prices = newFilteredProducts.map((product) => product.price);
+    const filtered_ratings = newFilteredProducts.map(
+      (product) => product.rating
+    );
+    const filtered_sales = newFilteredProducts.map(
+      (product) => product.salesVolume
+    );
     const filtered_names = newFilteredProducts
       .map((product) => product.name)
       .sort();
@@ -122,6 +129,8 @@ export function FilterProvider({
       subcategory,
       results: newFilteredProducts,
       filtered_prices: filtered_prices,
+      filtered_ratings: filtered_ratings,
+      filtered_sales: filtered_sales,
       filtered_brands: filtered_brands,
       filtered_subcategories: filtered_subcategoryFitlered,
       filtered_animals: filtered_animalTypes,
@@ -163,7 +172,7 @@ export function FilterProvider({
   };
 
   const sort_PriceRange = (order: number[]) => {
-    console.log("sort_Price");
+    console.log("sort_PriceRange");
     console.log("filteredProducts: ", filteredProducts);
     console.log("Price Order: ", order);
     const filterProductsByPrices = (
@@ -175,6 +184,19 @@ export function FilterProvider({
     };
     const sortedProducts = filterProductsByPrices(filteredProducts, order);
     setDisplayProducts(sortedProducts);
+  };
+
+  const sort_Ratings = (order: number) => {
+    console.log("sort_Ratings");
+    console.log("filteredProducts: ", filteredProducts);
+    console.log("Rating Order: ", order);
+    if (order == null) return;
+
+    const filtered = filteredProducts.filter(
+      (product) => product.rating === order
+    );
+
+    setDisplayProducts(filtered);
   };
 
   const sort_ByField = <K extends keyof Product>(
@@ -222,6 +244,7 @@ export function FilterProvider({
     sort_Alphabetically,
     sort_PricePoint,
     sort_PriceRange,
+    sort_Ratings,
     sort_ByField,
     resetFilters,
     setSelectedFilterValue,

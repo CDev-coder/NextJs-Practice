@@ -4,6 +4,7 @@
 import { capitalizeFirst } from "../context/helperFunctions";
 import { Product, ActiveFilters } from "../types";
 import SideBarList from "./SideBarList";
+import SideBarRatings from "./SideBarRatings";
 import SideBarSlider from "./SideBarSlider";
 import SideBarToggle from "./SideBarToggle";
 
@@ -24,6 +25,7 @@ interface SideBarFilterMenuProps {
   sort_Alphabetically: (order: string) => void;
   sort_PricePoint: (order: string) => void;
   sort_PriceRange: (order: number[]) => void;
+  sort_Ratings: (order: number) => void;
   sort_ByField: <K extends keyof Product>(field: K, value: Product[K]) => void;
 }
 
@@ -33,6 +35,7 @@ const SideBarFilterMenu = ({
   sort_PricePoint,
   sort_PriceRange,
   sort_ByField,
+  sort_Ratings,
 }: SideBarFilterMenuProps) => {
   console.log("activeFilters: ", activeFilters);
 
@@ -54,6 +57,11 @@ const SideBarFilterMenu = ({
   const handleFieldFilter = (field: any, rule: any) => {
     console.log("handleFieldFilter: " + field + " rule: " + rule);
     sort_ByField(field, rule);
+  };
+
+  const handleRatingClick = (rating: number) => {
+    console.log("Filter items with rating:", rating);
+    sort_Ratings(rating);
   };
 
   return (
@@ -98,6 +106,13 @@ const SideBarFilterMenu = ({
               <SideBarSlider
                 priceArray={activeFilters.filtered_prices}
                 onPriceRangeChange={handlePriceRangeFilter}
+                increments={1}
+              />
+              <SideBarRatings
+                ratings={activeFilters.filtered_ratings}
+                size={20}
+                color="#FF9900"
+                onRatingClick={handleRatingClick}
               />
               <SideBarList
                 filterName={"subcategory"}

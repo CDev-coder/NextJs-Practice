@@ -23,6 +23,7 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     sort_Alphabetically,
     sort_PricePoint,
     sort_PriceRange,
+    sort_Ratings,
     sort_ByField,
     resetFilters,
   } = useFilters();
@@ -223,6 +224,7 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
             sort_PricePoint={sort_PricePoint}
             sort_PriceRange={sort_PriceRange}
             sort_ByField={sort_ByField}
+            sort_Ratings={sort_Ratings}
           />
 
           {/* Product grid */}
