@@ -1,4 +1,5 @@
 // app/products/[id]/page.tsx
+import AddToCartButton from "@/app/components/AddToCartButton";
 import { getProducts } from "@/app/lib/products";
 import Link from "next/link";
 
@@ -25,9 +26,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <p className="text-gray-600">${product.price.toFixed(2)}</p>
       <p className="mt-2">{product.description}</p>
 
-      <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-        Add to Cart
-      </button>
+      <AddToCartButton product={product} />
 
       <div className="mt-4">
         <Link href="/">← Back to products</Link>

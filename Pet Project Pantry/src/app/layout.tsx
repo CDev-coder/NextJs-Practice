@@ -28,7 +28,7 @@ export default async function RootLayout({
         <FilterProvider products={products}>
           <CartProvider>
             <NavBarWrapper>
-              <main className="min-h-screen p-6">{children}</main>
+              <main className="min-h-screen">{children}</main>
             </NavBarWrapper>
           </CartProvider>
           <Footer />

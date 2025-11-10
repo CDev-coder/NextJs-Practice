@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { useCart } from "../context/CartContext";
+import AddToCartButton from "./AddToCartButton";
 
 export default function ProductCard({ product }: { product: any }) {
-  const { addItem } = useCart();
   //Product Card will invoke the products path, leading to a dynamic "page". products\[id]
   return (
     <div className="ProductCardDiv border rounded-lg p-4 shadow hover:shadow-lg transition">
@@ -19,12 +18,7 @@ export default function ProductCard({ product }: { product: any }) {
           </span>
         </div>
       </Link>
-      <button
-        className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        onClick={() => addItem(product)}
-      >
-        Add to Cart
-      </button>
+      <AddToCartButton product={product} />
     </div>
   );
 }
