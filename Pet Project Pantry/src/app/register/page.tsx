@@ -2,56 +2,52 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { login } from "@/app/login/auth";
+import { register } from "../login/auth";
 import { useCart } from "@/app/context/CartContext";
-import { useUser } from "@/app/context/UserContext";
 
-export default function LoginPage() {
+export default function RegisterPage() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
   const { mergeCartOnLogin } = useCart();
-  const { setUser } = useUser();
 
-  // Get redirect query (optional)
-  const searchParams = new URLSearchParams(window.location.search);
-  const redirect = searchParams.get("redirect") || "/";
-
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    setLoading(true);
 
     try {
-      const user = await login(email, password);
-      if (!user?.id) throw new Error("Login failed");
+      const user = await register(name, email, password);
 
-      // Update global user state
-      setUser(user);
-
-      // Merge guest cart into user cart
+      // Merge guest cart into server/dev cart
       await mergeCartOnLogin(user.id);
 
-      // Redirect back to intended page
+      // Redirect to intended page (or home)
+      const searchParams = new URLSearchParams(window.location.search);
+      const redirect = searchParams.get("redirect") || "/";
       router.push(redirect);
     } catch (err) {
-      setError("Invalid email or password");
-    } finally {
-      setLoading(false);
+      setError("Failed to register. Email may already exist.");
     }
   };
 
   return (
     <form
-      onSubmit={handleLogin}
+      onSubmit={handleRegister}
       className="max-w-sm mx-auto p-6 border rounded-lg shadow bg-white"
     >
-      <h1 className="text-xl font-bold mb-4">Login</h1>
+      <h1 className="text-xl font-bold mb-4">Create Account</h1>
       {error && <p className="text-red-500 mb-2">{error}</p>}
-
+      <input
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="w-full p-2 mb-2 border rounded"
+        required
+      />
       <input
         type="email"
         placeholder="Email"
@@ -68,17 +64,11 @@ export default function LoginPage() {
         className="w-full p-2 mb-2 border rounded"
         required
       />
-
       <button
         type="submit"
-        disabled={loading}
-        className={`w-full py-2 rounded ${
-          loading
-            ? "bg-gray-300 text-gray-700 cursor-not-allowed"
-            : "bg-blue-500 text-white hover:bg-blue-600"
-        }`}
+        className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600"
       >
-        {loading ? "Logging in..." : "Login"}
+        Register
       </button>
     </form>
   );

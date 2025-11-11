@@ -5,6 +5,7 @@ import NavBarWrapper from "./wrappers/NavBarWrapper";
 import Footer from "./components/Footer";
 import { getProducts } from "./lib/products";
 import { CartProvider } from "./context/CartContext";
+import { UserProvider } from "./context/UserContext";
 
 export const metadata = {
   title: "Pet Pantry",
@@ -26,11 +27,13 @@ export default async function RootLayout({
     <html lang="en">
       <body className="font-sans text-gray-900 bg-(--background)">
         <FilterProvider products={products}>
-          <CartProvider>
-            <NavBarWrapper>
-              <main className="min-h-screen">{children}</main>
-            </NavBarWrapper>
-          </CartProvider>
+          <UserProvider>
+            <CartProvider>
+              <NavBarWrapper>
+                <main className="min-h-screen">{children}</main>
+              </NavBarWrapper>
+            </CartProvider>
+          </UserProvider>
           <Footer />
         </FilterProvider>
       </body>

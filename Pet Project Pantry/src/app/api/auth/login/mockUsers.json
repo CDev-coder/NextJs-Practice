@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1",
+    "name": "John Developer",
+    "email": "john@petstore.dev",
+    "password": "test123"
+  },
+  {
+    "id": "2",
+    "name": "Jane Developer",
+    "email": "jane@petstore.dev",
+    "password": "test123"
+  }
+]

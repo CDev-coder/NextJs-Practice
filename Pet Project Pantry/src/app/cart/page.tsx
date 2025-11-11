@@ -1,29 +1,24 @@
 "use client";
 
-import { useCart } from "../context/CartContext";
+import { useCart } from "@/app/context/CartContext";
+import { useUser } from "@/app/context/UserContext";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import CartCard from "../components/CartCard";
-import { useFilters } from "../context/FilterContext";
-import { getCurrentUser } from "../login/auth";
+import { useFilters } from "@/app/context/FilterContext";
+import CartCard from "@/app/components/CartCard";
+import React from "react";
 
 export default function CartPage() {
-  const { cart, clearCart } = useCart();
+  const { cart, clearCart, mergeCartOnLogin } = useCart();
+  const { user } = useUser();
   const router = useRouter();
-  const [savedCart, setSavedCart] = useState(cart);
-  const [user, setUser] = useState<{ id: string; name: string } | null>(null);
   const { resetFilters } = useFilters();
 
-  useEffect(() => setSavedCart(cart), [cart]);
-
-  // Check if user is logged in (client-side)
-  useEffect(() => {
-    async function fetchUser() {
-      const currentUser = await getCurrentUser();
-      setUser(currentUser);
+  // Merge cart automatically when user logs in
+  React.useEffect(() => {
+    if (user) {
+      mergeCartOnLogin(user.id);
     }
-    fetchUser();
-  }, []);
+  }, [user, mergeCartOnLogin]);
 
   const handleHomeClick = () => {
     resetFilters();
@@ -32,26 +27,21 @@ export default function CartPage() {
 
   const handleCheckout = () => {
     if (!user) {
-      // Redirect guest to login with redirect back to cart
       router.push("/login?redirect=/cart");
       return;
     }
-    // Proceed to real checkout flow (payment, shipping, etc.)
     router.push("/checkout");
   };
 
-  const totalQuantity = savedCart.reduce((sum, i) => sum + i.quantity, 0);
-  const totalPrice = savedCart.reduce(
-    (sum, i) => sum + i.price * i.quantity,
-    0
-  );
+  const totalQuantity = cart.reduce((sum, i) => sum + i.quantity, 0);
+  const totalPrice = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow rounded-lg">
       <h1 className="text-2xl font-bold mb-4 text-blue-600">Shopping Cart</h1>
 
-      {savedCart.length === 0 ? (
-        <div className="flex justify-between items-center gap-3">
+      {cart.length === 0 ? (
+        <div className="flex flex-col items-center gap-3">
           <p className="text-sm text-gray-500">
             Your cart is empty. Start shopping!
           </p>
@@ -59,19 +49,19 @@ export default function CartPage() {
             onClick={handleHomeClick}
             className="bg-gray-200 text-black px-4 py-2 rounded hover:bg-gray-300"
           >
-            Back
+            Browse Products
           </button>
         </div>
       ) : (
         <>
           {/* Cart Items */}
           <div className="divide-y divide-gray-200">
-            {savedCart.map((item) => (
+            {cart.map((item) => (
               <CartCard key={item.id} product={item} />
             ))}
           </div>
 
-          {/* Clear Cart Button */}
+          {/* Clear Cart */}
           <div className="flex justify-end mt-4">
             <button
               onClick={() => clearCart()}
@@ -99,9 +89,14 @@ export default function CartPage() {
               >
                 Back
               </button>
+
               <button
                 onClick={handleCheckout}
-                className="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700"
+                className={`px-6 py-2 rounded-lg font-semibold ${
+                  user
+                    ? "bg-blue-600 text-white hover:bg-blue-700"
+                    : "bg-gray-300 text-gray-700 cursor-not-allowed"
+                }`}
               >
                 {user ? "Checkout" : "Sign in to Checkout"}
               </button>
@@ -109,12 +104,12 @@ export default function CartPage() {
 
             {!user && (
               <p className="text-sm text-gray-500 mt-2">
-                You need an account to complete checkout. You can{" "}
+                You need an account to complete checkout.{" "}
                 <button
                   onClick={() => router.push("/login?redirect=/cart")}
                   className="text-blue-600 underline"
                 >
-                  sign in
+                  Sign in
                 </button>{" "}
                 or create a new account.
               </p>
