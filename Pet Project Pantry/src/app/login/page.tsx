@@ -1,15 +1,42 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useCart } from "@/app/context/CartContext";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const { mergeCartOnLogin } = useCart();
+  const redirectTo = searchParams.get("redirect") || "/";
 
-  function handleLogin(e: React.FormEvent) {
+  async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
-    alert(`Logging in with ${email}`);
-    // Later: use auth provider (NextAuth.js, Clerk, Supabase, etc.)
+
+    try {
+      // Mock login API call
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!res.ok) throw new Error("Invalid login");
+
+      const user = await res.json();
+      const userId = user.id;
+
+      // Merge guest cart with server cart
+      await mergeCartOnLogin(userId);
+
+      // Redirect to original page (or account)
+      router.push(redirectTo);
+    } catch (err) {
+      console.error(err);
+      alert("Login failed. Check your credentials.");
+    }
   }
 
   return (

@@ -4,13 +4,41 @@ import { useCart } from "../context/CartContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import CartCard from "../components/CartCard";
+import { useFilters } from "../context/FilterContext";
+import { getCurrentUser } from "../login/auth";
 
 export default function CartPage() {
   const { cart, clearCart } = useCart();
   const router = useRouter();
   const [savedCart, setSavedCart] = useState(cart);
+  const [user, setUser] = useState<{ id: string; name: string } | null>(null);
+  const { resetFilters } = useFilters();
 
   useEffect(() => setSavedCart(cart), [cart]);
+
+  // Check if user is logged in (client-side)
+  useEffect(() => {
+    async function fetchUser() {
+      const currentUser = await getCurrentUser();
+      setUser(currentUser);
+    }
+    fetchUser();
+  }, []);
+
+  const handleHomeClick = () => {
+    resetFilters();
+    router.push("/");
+  };
+
+  const handleCheckout = () => {
+    if (!user) {
+      // Redirect guest to login with redirect back to cart
+      router.push("/login?redirect=/cart");
+      return;
+    }
+    // Proceed to real checkout flow (payment, shipping, etc.)
+    router.push("/checkout");
+  };
 
   const totalQuantity = savedCart.reduce((sum, i) => sum + i.quantity, 0);
   const totalPrice = savedCart.reduce(
@@ -28,7 +56,7 @@ export default function CartPage() {
             Your cart is empty. Start shopping!
           </p>
           <button
-            onClick={() => router.back()}
+            onClick={handleHomeClick}
             className="bg-gray-200 text-black px-4 py-2 rounded hover:bg-gray-300"
           >
             Back
@@ -43,7 +71,7 @@ export default function CartPage() {
             ))}
           </div>
 
-          {/* Clear Cart Button (less prominent) */}
+          {/* Clear Cart Button */}
           <div className="flex justify-end mt-4">
             <button
               onClick={() => clearCart()}
@@ -72,12 +100,25 @@ export default function CartPage() {
                 Back
               </button>
               <button
-                onClick={() => alert("Proceeding to checkout...")}
+                onClick={handleCheckout}
                 className="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700"
               >
-                Checkout
+                {user ? "Checkout" : "Sign in to Checkout"}
               </button>
             </div>
+
+            {!user && (
+              <p className="text-sm text-gray-500 mt-2">
+                You need an account to complete checkout. You can{" "}
+                <button
+                  onClick={() => router.push("/login?redirect=/cart")}
+                  className="text-blue-600 underline"
+                >
+                  sign in
+                </button>{" "}
+                or create a new account.
+              </p>
+            )}
           </div>
         </>
       )}
