@@ -1,20 +1,23 @@
-// app/account/page.tsx
-import { redirect } from "next/navigation";
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
-import { getCurrentUser } from "../login/auth";
+import { useUser } from "@/app/context/UserContext";
 
-export default async function AccountPage() {
-  const user = await getCurrentUser(); // fetch logged-in user
-  if (!user) redirect("/login?redirect=/account"); // redirect if not logged in
-
-  return <AccountPageClient user={user} />;
-}
-
-// Client component to use CartContext
-const AccountPageClient: React.FC<{
-  user: { id: string; name: string; email: string };
-}> = ({ user }) => {
+export default function AccountPage() {
+  const { user } = useUser();
+  const router = useRouter();
   const { cart, totalPrice } = useCart();
+
+  // Redirect guest users
+  useEffect(() => {
+    if (!user) {
+      router.push("/login?redirect=/account");
+    }
+  }, [user, router]);
+
+  if (!user) return <p>Redirecting to login...</p>;
 
   return (
     <section className="max-w-3xl mx-auto p-4">
@@ -43,4 +46,4 @@ const AccountPageClient: React.FC<{
       )}
     </section>
   );
-};
+}

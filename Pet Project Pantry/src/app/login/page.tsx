@@ -26,16 +26,14 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const user = await login(email, password);
+      const user = await login({ email, password });
       if (!user?.id) throw new Error("Login failed");
 
-      // Update global user state
       setUser(user);
-
-      // Merge guest cart into user cart
       await mergeCartOnLogin(user.id);
 
-      // Redirect back to intended page
+      const searchParams = new URLSearchParams(window.location.search);
+      const redirect = searchParams.get("redirect") || "/";
       router.push(redirect);
     } catch (err) {
       setError("Invalid email or password");

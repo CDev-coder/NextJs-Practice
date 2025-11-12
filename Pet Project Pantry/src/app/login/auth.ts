@@ -15,8 +15,13 @@ export async function getCurrentUser(): Promise<User | null> {
   }
 }
 
+export interface LoginData {
+  email: string;
+  password: string;
+}
+
 // Call login API
-export async function login(email: string, password: string) {
+export async function login({ email, password }: LoginData) {
   const res = await fetch("/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -29,7 +34,14 @@ export async function login(email: string, password: string) {
 }
 
 // Call register API
-export async function register(name: string, email: string, password: string) {
+export interface RegisterData {
+  name: string;
+  email: string;
+  password: string;
+}
+
+// Call register API
+export async function register({ name, email, password }: RegisterData) {
   const res = await fetch("/api/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
