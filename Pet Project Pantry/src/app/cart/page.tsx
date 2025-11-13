@@ -1,10 +1,10 @@
 "use client";
 
-import { useCart } from "@/app/context/CartContext";
-import { useUser } from "@/app/context/UserContext";
+import { useCart } from "@context/CartContext";
+import { useUser } from "@context/UserContext";
+import { useFilters } from "@context/FilterContext";
 import { useRouter } from "next/navigation";
-import { useFilters } from "@/app/context/FilterContext";
-import CartCard from "@/app/components/CartCard";
+import CartCard from "@components/CartCard";
 import React from "react";
 
 export default function CartPage() {

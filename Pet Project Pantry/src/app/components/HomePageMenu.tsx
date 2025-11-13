@@ -1,10 +1,10 @@
 import MainNavigation from "./MainNavigation";
-import { useFilters } from "../context/FilterContext";
+import { useFilters } from "@context/FilterContext";
 import { ActiveFilters, Product } from "../types";
 import HomePageShowcase from "./HomePageShowcase";
 import HomePageGrid from "./HomePageGrid";
 import { useEffect, useMemo } from "react";
-import { normalizeSubcategory } from "../context/normalizer";
+import { normalizeSubcategory } from "@context/normalizer";
 
 interface HomePageMenuProps {
   products: Product[];
