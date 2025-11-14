@@ -1,22 +1,13 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import CartIcon from "./CartIcon";
 import SearchBar from "./SearchBar";
-import { useCart } from "@context/CartContext";
 
 interface NavBarProps {
   onHomeClick?: () => void;
-  onSearch?: (query: string) => void; // ✅ new prop
 }
 
-export default function NavBar({ onHomeClick, onSearch }: NavBarProps) {
-  const { cart } = useCart();
-
-  // Calculate total items in cart
-  const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-
+export default function NavBar({ onHomeClick }: NavBarProps) {
   const handleHomeClick = (e: React.MouseEvent) => {
     if (onHomeClick) {
       e.preventDefault();
@@ -44,7 +35,7 @@ export default function NavBar({ onHomeClick, onSearch }: NavBarProps) {
 
       {/* Middle: Search bar */}
       <div className="flex-1 flex justify-center w-full sm:w-auto">
-        <SearchBar onSearch={onSearch || (() => {})} />
+        <SearchBar />
       </div>
 
       {/* Right: Cart / Account */}
@@ -52,11 +43,6 @@ export default function NavBar({ onHomeClick, onSearch }: NavBarProps) {
         <Link href="/cart" className="flex items-center gap-1 relative">
           <span className="hidden sm:inline">Cart</span>
           <CartIcon size={80} />
-          {cartItemCount > 0 && (
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2">
-              {cartItemCount}
-            </span>
-          )}
         </Link>
         <Link href="/account">Account</Link>
       </nav>
