@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Product } from "../types";
 import { normalizeSubcategory } from "../context/normalizer";
 import { useStickyNav } from "@/hooks/useStickyNav";
+import { useFilters } from "../context/FilterContext";
 
 // Define TypeScript interfaces for the props
 interface MenuItem {
@@ -49,6 +50,7 @@ const MainNavigation = ({
 }: MainNavigationProps) => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const isSticky = useStickyNav(50);
+  const { setFallbackMessage } = useFilters();
   // Menu structure with proper typing
   const menuItems: Record<string, MenuItem> = {
     food: {
@@ -98,6 +100,7 @@ const MainNavigation = ({
     animal: string,
     subcategory: keyof Product | string
   ) => {
+    setFallbackMessage(null);
     console.log(
       "MAINNAV handleSubcategoryClick: " + category,
       animal,
@@ -133,6 +136,7 @@ const MainNavigation = ({
         " key| " +
         copyKey
     );
+    setFallbackMessage(null);
     if (onCategorySelect) {
       onCategorySelect(copyKey, category, "all");
 

@@ -27,6 +27,8 @@ interface FilterContextType {
   searched_Animal: string[];
   searched_Names: string[];
   searched_Prices: string[];
+  setFallbackMessage: (msg: string | null) => void;
+  fallbackMessage: string | null;
 }
 
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
@@ -59,6 +61,9 @@ export function FilterProvider({
   const [searched_Animal, setSearchedAnimal] = useState<string[]>([]);
   const [searched_Names, setSearchedNames] = useState<string[]>([]);
   const [searched_Prices, setSearchedPrices] = useState<string[]>([]);
+
+  ///Fall back message
+  const [fallbackMessage, setFallbackMessage] = useState<string | null>(null);
 
   // Helper to update the searched_* arrays
   const updateSearchOptions = (productsToUse: Product[]) => {
@@ -150,6 +155,8 @@ export function FilterProvider({
 
   const value: FilterContextType = {
     filteredProducts: displayProducts,
+    setFallbackMessage,
+    fallbackMessage,
     baseProducts,
     currentFilter,
     activeFilters,

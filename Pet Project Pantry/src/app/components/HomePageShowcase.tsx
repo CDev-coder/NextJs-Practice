@@ -26,7 +26,7 @@ const HomePageShowcase = ({ products }: HomePageShowcaseProps) => {
   }, [products]);
 
   return (
-    <div className="container mx-auto px-4 py-10 space-y-12">
+    <div className="showcase container mx-auto px-4 py-10 space-y-12">
       <section aria-labelledby="featured-deals-title">
         <h2 className="text-2xl font-semibold mb-4">Featured Deals</h2>
         <motion.div

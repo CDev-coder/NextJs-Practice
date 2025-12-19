@@ -1,5 +1,7 @@
 // app/products/[id]/page.tsx
 import AddToCartButton from "@/app/components/AddToCartButton";
+import ProductBreadcrumb from "@/app/components/ProductBreadCrumb";
+import SimilarItems from "@/app/components/SimilarItems";
 import { getProducts } from "@/app/lib/products";
 import Link from "next/link";
 
@@ -16,21 +18,34 @@ export default async function ProductPage({ params }: ProductPageProps) {
   if (!product) return <div>Product not found</div>;
   console.log(product);
   return (
-    <div className="max-w-lg mx-auto">
-      <h1 className="text-2xl font-bold mt-4">{product.name}</h1>
-      <img
-        src={product.image}
-        alt={product.name}
-        className="w-full h-full object-cover rounded"
-      />
-      <p className="text-gray-600">${product.price.toFixed(2)}</p>
-      <p className="mt-2">{product.description}</p>
+    <div className="max-w-5xl mx-auto px-4 py-8">
+      <ProductBreadcrumb product={product} />
+      <Link href="/" className="text-sm text-gray-500 hover:text-black">
+        ← Back to products
+      </Link>
 
-      <AddToCartButton product={product} />
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="bg-white rounded-lg shadow-sm p-4">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full aspect-square object-contain rounded"
+          />
+        </div>
 
-      <div className="mt-4">
-        <Link href="/">← Back to products</Link>
+        <div className="flex flex-col gap-4">
+          <h1 className="text-3xl font-bold">{product.name}</h1>
+
+          <p className="text-2xl font-semibold text-green-700">
+            ${product.price.toFixed(2)}
+          </p>
+
+          <p className="text-gray-700 leading-relaxed">{product.description}</p>
+
+          <AddToCartButton product={product} />
+        </div>
       </div>
+      <SimilarItems category={product.category} currentProductId={product.id} />
     </div>
   );
 }

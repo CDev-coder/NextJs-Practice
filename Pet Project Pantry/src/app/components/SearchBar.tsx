@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useFilters } from "@context/FilterContext";
+import { useRouter, usePathname } from "next/navigation";
 
 interface SearchBarProps {
   placeholder?: string;
@@ -16,8 +17,13 @@ interface SuggestionItem {
 export default function SearchBar({
   placeholder = "Search products...",
 }: SearchBarProps) {
-  const { baseProducts, applyFilter, resetFilters, setDisplayProducts } =
-    useFilters();
+  const {
+    baseProducts,
+    applyFilter,
+    resetFilters,
+    setDisplayProducts,
+    setFallbackMessage,
+  } = useFilters();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState<SuggestionItem[]>([]);
@@ -27,6 +33,9 @@ export default function SearchBar({
 
   const containerRef = useRef<HTMLDivElement>(null);
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  const router = useRouter();
+  const pathname = usePathname();
 
   // -------------------------
   // Hide suggestion menu on outside click
@@ -159,18 +168,41 @@ export default function SearchBar({
   const handleSearch = (item?: string | SuggestionItem) => {
     console.log("handleSearch-----------");
     console.log("item: ", item);
+    setFallbackMessage(null);
     setShowSuggestions(false);
-    const term =
-      typeof item === "string"
-        ? item.trim().toLowerCase()
-        : item?.value.trim().toLowerCase() ?? searchTerm.trim().toLowerCase();
-    console.log("term: ", term);
+
+    // -------------------------
+    // Determine the search term
+    // -------------------------
+    const rawTerm = item
+      ? typeof item === "string"
+        ? item.trim()
+        : item.value.trim()
+      : searchTerm.trim();
+
+    const term = rawTerm.toLowerCase();
+    console.log("Search term: ", term);
+
     if (!term) {
       resetFilters();
       return;
     }
 
     let matchedProducts: typeof baseProducts = [];
+
+    // -------------------------
+    // Promote free-text to suggestion if exact match exists
+    // -------------------------
+    if (!item && term && suggestions.length > 0) {
+      const matchedSuggestion = suggestions.find(
+        (s) => s.value.toLowerCase() === term
+      );
+      if (matchedSuggestion) {
+        item = matchedSuggestion;
+        console.log("Promoted to suggestion:", item);
+      }
+    }
+
     // -------------------------
     // Suggestion clicked
     // -------------------------
@@ -206,11 +238,11 @@ export default function SearchBar({
           break;
       }
     } else {
+      console.log("MANUALLY SEARCH");
       // -------------------------
-      // Free-text fuzzy search
+      // Free-text fuzzy search when no suggestion matched
       // -------------------------
       const scoredProducts = baseProducts.map((p) => {
-        // calculate score for name, brand, animal, category, subcategory
         const nameScore = getScore(p.name, term);
         const brandScore = getScore(p.brand, term);
         const animalScore = getScore(p.animal, term);
@@ -221,22 +253,37 @@ export default function SearchBar({
           brandScore * 2 +
           animalScore * 2 +
           categoryScore +
-          subcategoryScore; // weighted
+          subcategoryScore;
         return { product: p, score: totalScore };
       });
-
-      // sort by highest score
-      const matchedProducts = scoredProducts
+      console.log("scoredProducts: ", scoredProducts);
+      matchedProducts = scoredProducts
         .filter((p) => p.score > 0)
         .sort((a, b) => b.score - a.score)
         .map((p) => p.product);
+      console.log("matchedProducts: ", matchedProducts);
+      // -------------------------
+      // Fallback if nothing matched exactly
+      // -------------------------
+      if (matchedProducts.length === 0) {
+        const topMatches = scoredProducts
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 4) // show 4 “best guess” items
+          .map((p) => p.product);
 
-      // show all as fallback if nothing matched
-      setDisplayProducts(
-        matchedProducts.length > 0 ? matchedProducts : baseProducts
-      );
+        setFallbackMessage(
+          `Can't find "${rawTerm}", but here are a few items that might match:`
+        );
+
+        setDisplayProducts(topMatches);
+      } else {
+        setFallbackMessage(null); // clear fallback message if there are exact matches
+        setDisplayProducts(matchedProducts);
+      }
     }
-
+    if (pathname !== "/") {
+      router.push("/");
+    }
     setShowSuggestions(false);
   };
 
@@ -300,6 +347,8 @@ export default function SearchBar({
             if (e.key === "Enter") {
               e.preventDefault();
               handleSearch(); // always use current searchTerm
+            } else {
+              handleKeyDown;
             }
           }}
         />
@@ -314,7 +363,7 @@ export default function SearchBar({
       </div>
 
       {showSuggestions && suggestions.length > 0 && (
-        <ul className="absolute bg-white border rounded-md shadow-lg mt-1 w-full z-50 max-h-64 overflow-auto">
+        <ul className="suggestionsUL absolute bg-white border rounded-md shadow-lg mt-1 w-full z-50 max-h-64 overflow-auto">
           {suggestions.map((s, index) => (
             <li
               key={index}

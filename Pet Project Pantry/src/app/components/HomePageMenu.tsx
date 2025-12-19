@@ -5,6 +5,7 @@ import HomePageShowcase from "./HomePageShowcase";
 import HomePageGrid from "./HomePageGrid";
 import { useEffect, useMemo } from "react";
 import { normalizeSubcategory } from "@context/normalizer";
+import { useSearchParams } from "next/navigation";
 
 interface HomePageMenuProps {
   products: Product[];
@@ -39,6 +40,8 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     applyFilter(category, animal, normalizedSubcategory);
   };
 
+  const searchParams = useSearchParams();
+
   const baseFilteredProducts = useMemo(() => products, [products]);
 
   const handleFilterClick = (
@@ -62,6 +65,23 @@ const HomePageMenu = ({ products }: HomePageMenuProps) => {
     (activeFilters.category === "all" &&
       activeFilters.animal === "all" &&
       activeFilters.subcategory === "all");
+
+  useEffect(() => {
+    const category = searchParams.get("category") ?? "all";
+    const animal = searchParams.get("animal") ?? "all";
+    const subcategory = searchParams.get("subcategory") ?? "all";
+
+    const normalizedSubcategory =
+      subcategory !== "all" ? normalizeSubcategory(subcategory) : "all";
+
+    if (
+      category !== "all" ||
+      animal !== "all" ||
+      normalizedSubcategory !== "all"
+    ) {
+      applyFilter(category, animal, normalizedSubcategory);
+    }
+  }, []);
 
   return (
     <div className="HomePageMenu_mainDiv">

@@ -5,6 +5,7 @@ import ProductCard from "./ProductCard";
 import SideBarFilterMenu from "./SideBarFilterMenu";
 import { capitalizeFirst } from "../context/helperFunctions";
 import { ActiveFilters, Product } from "../types";
+import { useFilters } from "../context/FilterContext";
 
 interface HomePageGridProps {
   activeFilters: ActiveFilters;
@@ -32,10 +33,11 @@ const HomePageGrid = ({
   clearFilters,
   handleFilterClick,
 }: HomePageGridProps) => {
+  const { fallbackMessage } = useFilters();
   return (
     <>
       {/* Filter Display Header */}
-      <div className="flex justify-between items-center mb-6 filterDisplay_Div">
+      <div className="HomePageGrid flex justify-between items-center mb-6 filterDisplay_Div">
         <div className="flex items-center">
           <span className="text-gray-600 mr-4">
             Showing: {activeFilters == null && "All Products"}
@@ -86,7 +88,7 @@ const HomePageGrid = ({
         </div>
       </div>
 
-      <div className="flex gap-8 sideNavigationMenu_Div">
+      <div className="productDisplay_Div flex gap-8">
         {/* Sidebar Filters */}
         <SideBarFilterMenu
           activeFilters={activeFilters}
@@ -96,16 +98,22 @@ const HomePageGrid = ({
           sort_ByField={sort_ByField}
           sort_Ratings={sort_Ratings}
         />
-
-        {/* Product Grid */}
-        <div
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ${
-            activeFilters ? "flex-1" : "w-full"
-          }`}
-        >
-          {filteredProducts.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
+        <div className="productGrid_Div flex-1 flex flex-col gap-4">
+          {fallbackMessage && (
+            <div className="productGridMessage_Div">
+              <p className="text-gray-600 italic mb-4">{fallbackMessage}</p>
+            </div>
+          )}
+          {/* Product Grid */}
+          <div
+            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ${
+              activeFilters ? "flex-1" : "w-full"
+            }`}
+          >
+            {filteredProducts.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
         </div>
       </div>
 
