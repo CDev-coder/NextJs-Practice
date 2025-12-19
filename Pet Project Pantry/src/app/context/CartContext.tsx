@@ -23,7 +23,9 @@ interface CartContextType {
   sessionId: string;
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+export const CartContext = createContext<CartContextType | undefined>(
+  undefined
+);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
