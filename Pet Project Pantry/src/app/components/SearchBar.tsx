@@ -14,9 +14,16 @@ interface SuggestionItem {
   score: number;
 }
 
-export default function SearchBar({
+const SearchBar = ({
   placeholder = "Search products...",
-}: SearchBarProps) {
+  onSuggestionSelect,
+}: SearchBarProps & {
+  onSuggestionSelect?: (
+    category: string,
+    animal: string,
+    subcategory: string
+  ) => void;
+}) => {
   const {
     baseProducts,
     applyFilter,
@@ -210,12 +217,19 @@ export default function SearchBar({
       switch (item.type) {
         case "category":
           applyFilter(item.value.toLowerCase(), "all", "all");
+          router.push(`/shop/${encodeURIComponent(item.value.toLowerCase())}`);
           break;
         case "animal":
           applyFilter(selectedCategory, item.value.toLowerCase(), "all");
+          router.push(
+            `/shop/all/${encodeURIComponent(item.value.toLowerCase())}`
+          );
           break;
         case "subcategory":
           applyFilter(selectedCategory, "all", item.value.toLowerCase());
+          router.push(
+            `/shop/all/all/${encodeURIComponent(item.value.toLowerCase())}`
+          );
           break;
         case "brand":
           matchedProducts =
@@ -234,7 +248,10 @@ export default function SearchBar({
           matchedProducts = baseProducts.filter(
             (p) => p.name.toLowerCase() === item.value.toLowerCase()
           );
-          setDisplayProducts(matchedProducts);
+          // Navigate to product details instead of setting displayProducts
+          if (matchedProducts.length > 0) {
+            router.push(`/products/${matchedProducts[0].id}`);
+          }
           break;
       }
     } else {
@@ -274,15 +291,21 @@ export default function SearchBar({
         setFallbackMessage(
           `Can't find "${rawTerm}", but here are a few items that might match:`
         );
-
-        setDisplayProducts(topMatches);
+        console.log("SUGGESTION MATCHES");
+        // Navigate to the first top match's product details instead of setting displayProducts
+        if (topMatches.length > 0) {
+          router.push(`/shop/${topMatches[0].category}`);
+        } else {
+          setDisplayProducts([]); // Fallback if no matches at all
+        }
       } else {
-        setFallbackMessage(null); // clear fallback message if there are exact matches
-        setDisplayProducts(matchedProducts);
+        console.log("EXACT MATCHES");
+        // Navigate to the first matched product's details
+        //router.push(`/products/${matchedProducts[0].id}`);
+        router.push(
+          `/shop/${matchedProducts[0].category}/${matchedProducts[0].animal}/${matchedProducts[0].subcategory}`
+        );
       }
-    }
-    if (pathname !== "/") {
-      router.push("/");
     }
     setShowSuggestions(false);
   };
@@ -316,6 +339,18 @@ export default function SearchBar({
       }
       e.preventDefault();
     }
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    // Assuming suggestion has category, animal, subcategory
+    const { category, animal, subcategory } = suggestion;
+    if (onSuggestionSelect) onSuggestionSelect(category, animal, subcategory);
+    // Navigate to the new shop route (category first)
+    router.push(
+      `/shop/${encodeURIComponent(category)}/${encodeURIComponent(
+        animal
+      )}/${encodeURIComponent(subcategory || "all")}`
+    );
   };
 
   return (
@@ -382,4 +417,6 @@ export default function SearchBar({
       )}
     </div>
   );
-}
+};
+
+export default SearchBar;

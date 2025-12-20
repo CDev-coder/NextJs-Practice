@@ -5,49 +5,48 @@ import Link from "next/link";
 import { Product } from "@/app/types";
 import { capitalizeFirst } from "@/app/context/helperFunctions";
 import { useFilters } from "@/app/context/FilterContext";
+import { useRouter } from "next/navigation";
 
 interface ProductBreadcrumbProps {
   product: Product;
 }
 
 export default function ProductBreadcrumb({ product }: ProductBreadcrumbProps) {
-  const { applyFilter, activeFilters } = useFilters();
+  const { applyFilter } = useFilters();
+  const router = useRouter();
+
   return (
     <nav className="text-sm text-gray-600 mb-4">
       <Link href="/" className="hover:text-black">
         All Products
       </Link>
       <span className="mx-1">/</span>
-      {/* CATEGORY */}
-
-      <span
-        onClick={() => {
-          console.log(
-            "CATEGORY CLICK CATE: " +
-              product.category +
-              " Animal: " +
-              product.animal +
-              " subcategory: " +
-              product.subcategory
-          );
-          applyFilter(product.category, product.animal, product.subcategory);
-        }}
-        className="cursor-pointer text-blue-500"
+      {/* CATEGORY: apply filter and navigate to shop route */}
+      <Link
+        href={`/shop/${encodeURIComponent(product.category)}`}
+        className="hover:text-black"
       >
         {capitalizeFirst(product.category)}
-      </span>
-
+      </Link>
       <span className="mx-1">/</span>
       <Link
-        href={`/?category=${product.category.toLowerCase()}&animal=${product.animal.toLowerCase()}`}
-        className="hover:text-black"
+        href={`/shop/${encodeURIComponent(
+          product.category
+        )}/${encodeURIComponent(product.animal)}`}
       >
         {capitalizeFirst(product.animal)}
       </Link>
       <span className="mx-1">/</span>
       <Link
-        href={`/?category=${product.category.toLowerCase()}&animal=${product.animal.toLowerCase()}&subcategory=${product.subcategory.toLowerCase()}`}
+        href={`/shop/${encodeURIComponent(
+          product.category
+        )}/${encodeURIComponent(product.animal)}/${encodeURIComponent(
+          product.subcategory
+        )}`}
         className="hover:text-black"
+        onClick={() =>
+          applyFilter(product.category, product.animal, product.subcategory)
+        }
       >
         {capitalizeFirst(product.subcategory)}
       </Link>

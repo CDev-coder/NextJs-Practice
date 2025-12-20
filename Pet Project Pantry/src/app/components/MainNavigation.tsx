@@ -1,6 +1,7 @@
 // components/MainNavigation.jsx
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Product } from "../types";
 import { normalizeSubcategory } from "../context/normalizer";
@@ -43,11 +44,9 @@ interface MainNavigationProps {
 const MainNavigation = ({
   onCategorySelect,
   onSubcategorySelect,
-  onSetActiveFilters,
-  onHandlePropertyFilter,
-  onHandleDetailedPropertyFilter,
   currentFilter,
-}: MainNavigationProps) => {
+}) => {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const isSticky = useStickyNav(50);
   const { setFallbackMessage } = useFilters();
@@ -100,33 +99,15 @@ const MainNavigation = ({
     animal: string,
     subcategory: keyof Product | string
   ) => {
-    setFallbackMessage(null);
-    console.log(
-      "MAINNAV handleSubcategoryClick: " + category,
-      animal,
-      subcategory
+    const normalizedSubcategory = normalizeSubcategory(String(subcategory));
+    if (onSubcategorySelect)
+      onSubcategorySelect(String(category), animal, normalizedSubcategory);
+    // Navigate to the new shop route
+    router.push(
+      `/shop/${encodeURIComponent(category)}/${encodeURIComponent(
+        animal
+      )}/${encodeURIComponent(normalizedSubcategory)}`
     );
-    if (onSubcategorySelect) {
-      // Normalize the subcategory to match product data format
-      const normalizedSubcategory = normalizeSubcategory(subcategory);
-      console.log("normalizedSubcategory: " + normalizedSubcategory);
-      onSubcategorySelect(category, animal, normalizedSubcategory);
-
-      // Also trigger the sidebar filter mechanism
-      if (
-        onSetActiveFilters &&
-        onHandlePropertyFilter &&
-        onHandleDetailedPropertyFilter
-      ) {
-        // Set active filters for the sidebar
-        onSetActiveFilters({
-          property: "subcategory",
-          values: [normalizedSubcategory],
-        });
-        // Apply the filter
-        onHandleDetailedPropertyFilter(category, normalizedSubcategory, animal);
-      }
-    }
   };
 
   const handleCategoryClick = (category: string, copyKey: string) => {

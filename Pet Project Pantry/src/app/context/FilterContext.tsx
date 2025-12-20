@@ -165,7 +165,7 @@ export function FilterProvider({
     resetFilters,
     setDisplayProducts,
     sort_Alphabetically: (order: string) => {
-      const sorted = [...displayProducts].sort((a, b) =>
+      const sorted = [...filteredProducts].sort((a, b) =>
         order === "asc"
           ? a.name.localeCompare(b.name)
           : b.name.localeCompare(a.name)
@@ -173,7 +173,7 @@ export function FilterProvider({
       setDisplayProducts(sorted);
     },
     sort_PricePoint: (order: string) => {
-      const sorted = [...displayProducts].sort((a, b) =>
+      const sorted = [...filteredProducts].sort((a, b) =>
         order === "low"
           ? (a.price || 0) - (b.price || 0)
           : (b.price || 0) - (a.price || 0)
@@ -182,13 +182,13 @@ export function FilterProvider({
     },
     sort_PriceRange: (order: number[]) => {
       const priceSet = new Set(order);
-      setDisplayProducts(displayProducts.filter((p) => priceSet.has(p.price)));
+      setDisplayProducts(filteredProducts.filter((p) => priceSet.has(p.price)));
     },
-    sort_Ratings: (rating: number) => {
-      setDisplayProducts(displayProducts.filter((p) => p.rating === rating));
+    sort_Ratings: (order: number) => {
+      setDisplayProducts(filteredProducts.filter((p) => p.rating === order));
     },
     sort_ByField: <K extends keyof Product>(field: K, value: Product[K]) => {
-      setDisplayProducts(displayProducts.filter((p) => p[field] === value));
+      setDisplayProducts(filteredProducts.filter((p) => p[field] === value));
     },
     setSelectedFilterValue,
     selectedFilterValue,
