@@ -5,14 +5,12 @@ import { useEffect } from "react";
 import HomePageMenu from "@/app/components/HomePageMenu";
 import { useFilters } from "@/app/context/FilterContext";
 import { normalizeSubcategory } from "@/app/context/normalizer";
-import { Product } from "@/app/types";
 
 interface Props {
-  products: Product[];
   params: { animal: string; category: string; subcategory: string };
 }
 
-export default function ShopClient({ products, params }: Props) {
+export default function ShopClient({ params }: Props) {
   const { applyFilter } = useFilters();
 
   useEffect(() => {
@@ -22,5 +20,5 @@ export default function ShopClient({ products, params }: Props) {
     applyFilter(category, animal, normalizedSubcategory);
   }, [params, applyFilter]); // Removed applyFilter if it's stable; add back if needed
 
-  return <HomePageMenu products={products} />;
+  return <HomePageMenu />;
 }

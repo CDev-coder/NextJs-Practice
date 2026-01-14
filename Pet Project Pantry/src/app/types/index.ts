@@ -8,10 +8,12 @@ export interface Product {
   animal: string;
   category: string;
   subcategory: string;
+  subcategorySlug?: string;
   brand: string;
   SKU: string;
   rating: number;
   salesVolume: number;
+  slug?: string;
 }
 
 export interface ActiveFilters {

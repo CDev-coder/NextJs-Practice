@@ -7,6 +7,7 @@ import { Product } from "../types";
 import { normalizeSubcategory } from "../context/normalizer";
 import { useStickyNav } from "@/hooks/useStickyNav";
 import { useFilters } from "../context/FilterContext";
+import { slugify } from "../context/helperFunctions";
 
 // Define TypeScript interfaces for the props
 interface MenuItem {
@@ -104,9 +105,9 @@ const MainNavigation = ({
       onSubcategorySelect(String(category), animal, normalizedSubcategory);
     // Navigate to the new shop route
     router.push(
-      `/shop/${encodeURIComponent(category)}/${encodeURIComponent(
-        animal
-      )}/${encodeURIComponent(normalizedSubcategory)}`
+      `/shop/${slugify(String(category))}/${slugify(animal)}/${slugify(
+        normalizedSubcategory
+      )}`
     );
   };
 

@@ -1,5 +1,4 @@
 // filepath: src/app/shop/[animal]/[category]/page.tsx
-import { getProducts } from "@/app/lib/products";
 import ShopClient from "./ShopClient";
 
 interface Props {
@@ -7,12 +6,6 @@ interface Props {
 }
 
 export default async function ShopPage({ params }: Props) {
-  const { animal, category } = await params; // Await params here
-  const products = await getProducts();
-  return (
-    <ShopClient
-      products={products}
-      params={{ ...params, subcategory: "all" }}
-    />
-  );
+  const resolvedParams = await params;
+  return <ShopClient params={{ ...resolvedParams, subcategory: "all" }} />;
 }

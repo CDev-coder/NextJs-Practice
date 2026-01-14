@@ -22,27 +22,16 @@ export default function ProductBreadcrumb({ product }: ProductBreadcrumbProps) {
       </Link>
       <span className="mx-1">/</span>
       {/* CATEGORY: apply filter and navigate to shop route */}
-      <Link
-        href={`/shop/${encodeURIComponent(product.category)}`}
-        className="hover:text-black"
-      >
+      <Link href={`/shop/${product.category}`} className="hover:text-black">
         {capitalizeFirst(product.category)}
       </Link>
       <span className="mx-1">/</span>
-      <Link
-        href={`/shop/${encodeURIComponent(
-          product.category
-        )}/${encodeURIComponent(product.animal)}`}
-      >
+      <Link href={`/shop/${product.category}/${product.animal}`}>
         {capitalizeFirst(product.animal)}
       </Link>
       <span className="mx-1">/</span>
       <Link
-        href={`/shop/${encodeURIComponent(
-          product.category
-        )}/${encodeURIComponent(product.animal)}/${encodeURIComponent(
-          product.subcategory
-        )}`}
+        href={`/shop/${product.category}/${product.animal}/${product.subcategorySlug}`}
         className="hover:text-black"
         onClick={() =>
           applyFilter(product.category, product.animal, product.subcategory)

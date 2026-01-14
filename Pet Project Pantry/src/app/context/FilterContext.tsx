@@ -8,7 +8,7 @@ import React, {
   useCallback,
 } from "react";
 import { Product, ActiveFilters } from "../types";
-import { capitalizeFirst } from "./helperFunctions";
+import { capitalizeFirst, slugify } from "./helperFunctions";
 
 interface FilterContextType {
   filteredProducts: Product[];
@@ -90,9 +90,14 @@ export function FilterProvider({
     ) => {
       // Always filter from baseProducts
       const newFilteredProducts = baseProducts.filter((product) => {
-        if (category !== "all" && product.category !== category) return false;
-        if (animal !== "all" && product.animal !== animal) return false;
-        if (subcategory !== "all" && product.subcategory !== subcategory)
+        if (category !== "all" && slugify(product.category) !== category)
+          return false;
+        if (animal !== "all" && slugify(product.animal) !== animal)
+          return false;
+        if (
+          subcategory !== "all" &&
+          slugify(product.subcategory) !== subcategory
+        )
           return false;
         if (brand && product.brand !== brand) return false;
         return true;

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useFilters } from "@context/FilterContext";
 import { useRouter, usePathname } from "next/navigation";
+import { slugify } from "@context/helperFunctions";
 
 interface SearchBarProps {
   placeholder?: string;
@@ -217,19 +218,15 @@ const SearchBar = ({
       switch (item.type) {
         case "category":
           applyFilter(item.value.toLowerCase(), "all", "all");
-          router.push(`/shop/${encodeURIComponent(item.value.toLowerCase())}`);
+          router.push(`/shop/${slugify(item.value)}`);
           break;
         case "animal":
           applyFilter(selectedCategory, item.value.toLowerCase(), "all");
-          router.push(
-            `/shop/all/${encodeURIComponent(item.value.toLowerCase())}`
-          );
+          router.push(`/shop/all/${slugify(item.value)}`);
           break;
         case "subcategory":
           applyFilter(selectedCategory, "all", item.value.toLowerCase());
-          router.push(
-            `/shop/all/all/${encodeURIComponent(item.value.toLowerCase())}`
-          );
+          router.push(`/shop/all/all/${slugify(item.value)}`);
           break;
         case "brand":
           matchedProducts =
@@ -347,9 +344,9 @@ const SearchBar = ({
     if (onSuggestionSelect) onSuggestionSelect(category, animal, subcategory);
     // Navigate to the new shop route (category first)
     router.push(
-      `/shop/${encodeURIComponent(category)}/${encodeURIComponent(
-        animal
-      )}/${encodeURIComponent(subcategory || "all")}`
+      `/shop/${slugify(category)}/${slugify(animal)}/${slugify(
+        subcategory || "all"
+      )}`
     );
   };
 

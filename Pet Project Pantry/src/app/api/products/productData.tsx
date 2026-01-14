@@ -1,5 +1,3 @@
-import { slugify } from "@/app/context/helperFunctions";
-
 const productData = [
   {
     id: 1,

@@ -14,7 +14,9 @@ export const normalizeSubcategory = (subcategory: string): string => {
 
   // Convert to lowercase and replace spaces with hyphens
   const normalized = subcategory.toLowerCase();
-  //console.log("normalized: " + normalized);
+  // Try to match slugified version back to keys if keys use spaces (e.g. treat-mixes-2 -> treat mixes 2)
+  const deslugged = normalized.replace(/-/g, " ");
+
   // Return mapped value if exists, otherwise return subcategory
-  return mappings[normalized] || subcategory;
+  return mappings[normalized] || mappings[deslugged] || subcategory;
 };
