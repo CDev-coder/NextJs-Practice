@@ -1,6 +1,7 @@
-//import { products } from "./lib/products";
+// src/app/page.tsx
 "use client";
-import HomePageMenu from "./components/HomePageMenu";
+
+import HomePageShowcase from "./components/HomePageShowcase";
 import { useProducts } from "@/hooks/useProducts";
 export default function HomePage() {
   ///Discover by Collection
@@ -9,7 +10,7 @@ export default function HomePage() {
   if (loading) return <p className="p-6 text-center">Loading products...</p>;
   return (
     <div className="HomePage bg-(--background)">
-      <HomePageMenu products={products} />
+      <HomePageShowcase products={products} />
     </div>
   );
 }

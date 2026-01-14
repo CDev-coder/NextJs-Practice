@@ -4,6 +4,7 @@ import ProductBreadcrumb from "@/app/components/ProductBreadCrumb";
 import SimilarItems from "@/app/components/SimilarItems";
 import { getProducts } from "@/app/lib/products";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ProductPageProps {
   params: Promise<{ id: string }>; // ✅ Now we reflect that params is async
@@ -26,10 +27,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="bg-white rounded-lg shadow-sm p-4">
-          <img
+          <Image
             src={product.image}
             alt={product.name}
-            className="w-full aspect-square object-contain rounded"
+            className="w-full rounded"
+            width={500}
+            height={500}
           />
         </div>
 
