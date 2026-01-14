@@ -20,7 +20,7 @@ export default function ShopClient({ products, params }: Props) {
     const normalizedSubcategory =
       subcategory !== "all" ? normalizeSubcategory(subcategory) : "all";
     applyFilter(category, animal, normalizedSubcategory);
-  }, [params.animal, params.category, params.subcategory]); // Removed applyFilter if it's stable; add back if needed
+  }, [params, applyFilter]); // Removed applyFilter if it's stable; add back if needed
 
   return <HomePageMenu products={products} />;
 }

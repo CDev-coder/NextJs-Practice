@@ -1,7 +1,6 @@
 // components/SideBarFilterMenu.tsx
 "use client";
 
-import { capitalizeFirst } from "../context/helperFunctions";
 import { Product, ActiveFilters } from "../types";
 import SideBarList from "./SideBarList";
 import SideBarRatings from "./SideBarRatings";
@@ -45,19 +44,22 @@ const SideBarFilterMenu = ({
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handlePricePointFilter = (priceRule: any) => {
+  const handlePricePointFilter = (priceRule: number) => {
     console.log("handlePriceFilter: ", priceRule);
     sort_PricePoint(priceRule);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handlePriceRangeFilter = (priceRule: any) => {
+  const handlePriceRangeFilter = (priceRule: number[]) => {
     console.log("handlePriceRangeFilter: ", priceRule);
     sort_PriceRange(priceRule);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleFieldFilter = (field: any, rule: any) => {
+  const handleFieldFilter = (
+    field: keyof Product,
+    rule: Product[keyof Product]
+  ) => {
     console.log("handleFieldFilter: " + field + " rule: " + rule);
     sort_ByField(field, rule);
     window.scrollTo({ top: 0, behavior: "smooth" });

@@ -1,6 +1,12 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useCallback,
+} from "react";
 import { Product, ActiveFilters } from "../types";
 import { capitalizeFirst } from "./helperFunctions";
 
@@ -75,69 +81,72 @@ export function FilterProvider({
     );
   };
 
-  const applyFilter = (
-    category: string = "all",
-    animal: string = "all",
-    subcategory: string = "all",
-    brand?: string // optional for future expansion
-  ) => {
-    // Always filter from baseProducts
-    const newFilteredProducts = baseProducts.filter((product) => {
-      if (category !== "all" && product.category !== category) return false;
-      if (animal !== "all" && product.animal !== animal) return false;
-      if (subcategory !== "all" && product.subcategory !== subcategory)
-        return false;
-      if (brand && product.brand !== brand) return false;
-      return true;
-    });
+  const applyFilter = useCallback(
+    (
+      category: string = "all",
+      animal: string = "all",
+      subcategory: string = "all",
+      brand?: string // optional for future expansion
+    ) => {
+      // Always filter from baseProducts
+      const newFilteredProducts = baseProducts.filter((product) => {
+        if (category !== "all" && product.category !== category) return false;
+        if (animal !== "all" && product.animal !== animal) return false;
+        if (subcategory !== "all" && product.subcategory !== subcategory)
+          return false;
+        if (brand && product.brand !== brand) return false;
+        return true;
+      });
 
-    // Update state
-    setFilteredProducts(newFilteredProducts);
-    setDisplayProducts(newFilteredProducts);
-    setCurrentCatetory(category);
-    setCurrentAnimal(animal);
-    setCurrentSubcategory(subcategory);
-    setSelectedFilterValue(subcategory);
+      // Update state
+      setFilteredProducts(newFilteredProducts);
+      setDisplayProducts(newFilteredProducts);
+      setCurrentCatetory(category);
+      setCurrentAnimal(animal);
+      setCurrentSubcategory(subcategory);
+      setSelectedFilterValue(subcategory);
 
-    // Update suggestion/search arrays
-    setSearchedBrand([...new Set(newFilteredProducts.map((p) => p.brand))]);
-    setSearchedAnimal([...new Set(newFilteredProducts.map((p) => p.animal))]);
-    setSearchedNames([...new Set(newFilteredProducts.map((p) => p.name))]);
-    setSearchedPrices([
-      ...new Set(newFilteredProducts.map((p) => String(p.price))),
-    ]);
+      // Update suggestion/search arrays
+      setSearchedBrand([...new Set(newFilteredProducts.map((p) => p.brand))]);
+      setSearchedAnimal([...new Set(newFilteredProducts.map((p) => p.animal))]);
+      setSearchedNames([...new Set(newFilteredProducts.map((p) => p.name))]);
+      setSearchedPrices([
+        ...new Set(newFilteredProducts.map((p) => String(p.price))),
+      ]);
 
-    const filtered_brands = [
-      ...new Set(newFilteredProducts.map((p) => p.brand)),
-    ].sort();
-    const filtered_animals = [
-      ...new Set(newFilteredProducts.map((p) => p.animal)),
-    ].sort();
-    const filtered_subcategories = [
-      ...new Set(newFilteredProducts.map((p) => p.subcategory)),
-    ].sort();
-    const filtered_names = [
-      ...new Set(newFilteredProducts.map((p) => p.name)),
-    ].sort();
+      const filtered_brands = [
+        ...new Set(newFilteredProducts.map((p) => p.brand)),
+      ].sort();
+      const filtered_animals = [
+        ...new Set(newFilteredProducts.map((p) => p.animal)),
+      ].sort();
+      const filtered_subcategories = [
+        ...new Set(newFilteredProducts.map((p) => p.subcategory)),
+      ].sort();
+      const filtered_names = [
+        ...new Set(newFilteredProducts.map((p) => p.name)),
+      ].sort();
 
-    setCurrentFilter(
-      `${capitalizeFirst(category)} / ${capitalizeFirst(animal)}`
-    );
+      setCurrentFilter(
+        `${capitalizeFirst(category)} / ${capitalizeFirst(animal)}`
+      );
 
-    setActiveFilters({
-      category,
-      animal,
-      subcategory,
-      results: newFilteredProducts,
-      filtered_prices: newFilteredProducts.map((p) => p.price),
-      filtered_ratings: newFilteredProducts.map((p) => p.rating),
-      filtered_sales: newFilteredProducts.map((p) => p.salesVolume),
-      filtered_brands,
-      filtered_subcategories,
-      filtered_animals,
-      filtered_names,
-    });
-  };
+      setActiveFilters({
+        category,
+        animal,
+        subcategory,
+        results: newFilteredProducts,
+        filtered_prices: newFilteredProducts.map((p) => p.price),
+        filtered_ratings: newFilteredProducts.map((p) => p.rating),
+        filtered_sales: newFilteredProducts.map((p) => p.salesVolume),
+        filtered_brands,
+        filtered_subcategories,
+        filtered_animals,
+        filtered_names,
+      });
+    },
+    [baseProducts]
+  );
 
   const resetFilters = () => {
     setFilteredProducts(baseProducts);

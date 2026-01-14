@@ -12,14 +12,26 @@ interface HomePageShowcaseProps {
 
 const HomePageShowcase = ({ products }: HomePageShowcaseProps) => {
   // Demo selections (replace with API logic later)
+  // Improved selections using existing data
   const featuredDeals = useMemo(
-    () => products.filter((p) => p.price && p.price > 20).slice(0, 6),
+    () =>
+      products
+        .filter((p) => p.rating >= 4.5 && p.salesVolume > 100) // High rating + popular
+        .sort((a, b) => b.salesVolume - a.salesVolume) // Sort by popularity
+        .slice(0, 6),
     [products]
   );
+
   const budgetFriendly = useMemo(
-    () => products.filter((p) => p.price < 20).slice(0, 6),
+    () =>
+      products
+        .filter((p) => p.price < 15 && p.rating >= 3.5) // Low price + decent rating
+        .sort((a, b) => a.price - b.price) // Sort by lowest price
+        .slice(0, 6),
     [products]
   );
+
+  // exploreCategories remains the same (uses categories from products)
   const exploreCategories = useMemo(() => {
     const categories = Array.from(new Set(products.map((p) => p.category)));
     return categories.slice(0, 6);

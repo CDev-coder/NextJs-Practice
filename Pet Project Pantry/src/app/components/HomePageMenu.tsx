@@ -5,11 +5,7 @@ import HomePageGrid from "./HomePageGrid";
 import { useEffect } from "react";
 import { normalizeSubcategory } from "@context/normalizer";
 
-interface HomePageMenuProps {
-  products: Product[];
-}
-
-const HomePageMenu = ({ products }: HomePageMenuProps) => {
+const HomePageMenu = () => {
   const {
     applyFilter,
     filteredProducts,
