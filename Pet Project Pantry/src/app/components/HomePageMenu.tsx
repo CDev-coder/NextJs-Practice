@@ -1,15 +1,13 @@
 import MainNavigation from "./MainNavigation";
 import { useFilters } from "@context/FilterContext";
-import { ActiveFilters, Product } from "../types";
+import { ActiveFilters } from "../types";
 import HomePageGrid from "./HomePageGrid";
 import { useEffect } from "react";
-import { normalizeSubcategory } from "@context/normalizer";
 
 const HomePageMenu = () => {
   const {
     applyFilter,
     filteredProducts,
-    currentFilter,
     activeFilters,
     sort_Alphabetically,
     sort_PricePoint,
@@ -17,29 +15,10 @@ const HomePageMenu = () => {
     sort_Ratings,
     sort_ByField,
     resetFilters,
-    displayProducts,
   } = useFilters();
 
-  const handleCategorySelect = (
-    category: keyof Product | string,
-    animal: string,
-    subcategory: keyof Product | string
-  ) => applyFilter(category, animal, subcategory);
-
-  const handleSubcategorySelect = (
-    category: string,
-    animal: string,
-    subcategory: string
-  ) => {
-    const normalizedSubcategory = normalizeSubcategory(subcategory);
-    applyFilter(category, animal, normalizedSubcategory);
-  };
-
   // Use displayProducts if set (from search), else filteredProducts
-  const productsToShow =
-    displayProducts && displayProducts.length > 0
-      ? displayProducts
-      : filteredProducts;
+  const productsToShow = filteredProducts;
 
   const handleFilterClick = (
     copyCurrentFilter: ActiveFilters,
@@ -59,11 +38,7 @@ const HomePageMenu = () => {
 
   return (
     <div className="HomePageMenu_mainDiv">
-      <MainNavigation
-        onCategorySelect={handleCategorySelect}
-        onSubcategorySelect={handleSubcategorySelect}
-        currentFilter={currentFilter}
-      />
+      <MainNavigation />
       <div className="HomePageMenu_containerDiv container mx-auto px-4 py-8">
         <HomePageGrid
           activeFilters={activeFilters}

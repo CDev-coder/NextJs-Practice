@@ -8,7 +8,7 @@ import { ActiveFilters, Product } from "../types";
 import { useFilters } from "../context/FilterContext";
 
 interface HomePageGridProps {
-  activeFilters: ActiveFilters;
+  activeFilters: ActiveFilters | null;
   filteredProducts: Product[];
   sort_Alphabetically: (order: string) => void;
   sort_PricePoint: (order: string) => void;

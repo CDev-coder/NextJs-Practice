@@ -4,7 +4,7 @@
 import { useEffect } from "react";
 import HomePageMenu from "@/app/components/HomePageMenu";
 import { useFilters } from "@/app/context/FilterContext";
-import { normalizeSubcategory } from "@/app/context/normalizer";
+import { normalizeSubcategory } from "@/app/context/helperFunctions";
 
 interface Props {
   params: { animal: string; category: string; subcategory: string };

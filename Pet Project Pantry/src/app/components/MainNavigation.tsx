@@ -4,10 +4,9 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Product } from "../types";
-import { normalizeSubcategory } from "../context/normalizer";
 import { useStickyNav } from "@/hooks/useStickyNav";
 import { useFilters } from "../context/FilterContext";
-import { slugify } from "../context/helperFunctions";
+import { slugify, normalizeSubcategory } from "../context/helperFunctions";
 
 // Define TypeScript interfaces for the props
 interface MenuItem {
@@ -19,34 +18,7 @@ interface MenuItem {
   };
 }
 
-interface MainNavigationProps {
-  onCategorySelect?: (
-    category: string,
-    animal: string,
-    subcategory: string
-  ) => void;
-  onSubcategorySelect?: (
-    category: string,
-    animal: string,
-    subcategory: string
-  ) => void;
-  onSetActiveFilters?: (
-    filters: { property: keyof Product; values: string[] } | null
-  ) => void;
-  onHandlePropertyFilter?: (property: keyof Product, value: string) => void;
-  onHandleDetailedPropertyFilter?: (
-    property: keyof Product | string,
-    subproperty: keyof Product | string,
-    animal: string
-  ) => void;
-  currentFilter: string;
-}
-
-const MainNavigation = ({
-  onCategorySelect,
-  onSubcategorySelect,
-  currentFilter,
-}) => {
+const MainNavigation = () => {
   const router = useRouter();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const isSticky = useStickyNav(50);
@@ -101,8 +73,6 @@ const MainNavigation = ({
     subcategory: keyof Product | string
   ) => {
     const normalizedSubcategory = normalizeSubcategory(String(subcategory));
-    if (onSubcategorySelect)
-      onSubcategorySelect(String(category), animal, normalizedSubcategory);
     // Navigate to the new shop route
     router.push(
       `/shop/${slugify(String(category))}/${slugify(animal)}/${slugify(
@@ -111,31 +81,15 @@ const MainNavigation = ({
     );
   };
 
-  const handleCategoryClick = (category: string, copyKey: string) => {
+  const handleCategoryClick = (animal: string, category: string) => {
     console.log(
-      "MainNavigation handleCategoryClick category: " +
-        category +
-        " key| " +
-        copyKey
+      "MainNavigation handleCategoryClick animal: " +
+        animal +
+        " category: " +
+        category
     );
     setFallbackMessage(null);
-    if (onCategorySelect) {
-      onCategorySelect(copyKey, category, "all");
-
-      // Also trigger the sidebar filter mechanism
-      /*
-      if (onSetActiveFilters && onHandlePropertyFilter) {
-        // Set active filters for the sidebar
-        onSetActiveFilters({
-          property: "category",
-          values: [category],
-        });
-
-        // Apply the filter
-        onHandlePropertyFilter("category", category);
-      }
-      */
-    }
+    router.push(`/shop/${slugify(category)}/${slugify(animal)}/all`);
   };
 
   return (
