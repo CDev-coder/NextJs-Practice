@@ -10,7 +10,6 @@ interface SideBarToggleProps<T extends string | number> {
   filterName: string;
   title?: string;
   activeFilters: ActiveFilters;
-  copyList: T[] | null;
   options: ToggleOption<T>[];
   onChange: (value: T) => void;
 }
@@ -19,10 +18,11 @@ const SideBarToggle = <T extends string | number>({
   filterName,
   title,
   activeFilters,
-  copyList,
   options,
   onChange,
 }: SideBarToggleProps<T>) => {
+  const copyList = activeFilters[filterName as keyof ActiveFilters] as T[];
+
   const handleClick = (value: T) => {
     console.log(`Toggling ${filterName} with value: ${value}`);
     onChange(value);

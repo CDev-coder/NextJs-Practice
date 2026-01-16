@@ -22,7 +22,7 @@ interface SideBarFilterMenuProps {
     } | null
   ) => void;
   sort_Alphabetically: (order: string) => void;
-  sort_PricePoint: (order: string) => void;
+  sort_PricePoint: (order: string | number) => void;
   sort_PriceRange: (order: number[]) => void;
   sort_Ratings: (order: number) => void;
   sort_ByField: <K extends keyof Product>(field: K, value: Product[K]) => void;
@@ -44,7 +44,7 @@ const SideBarFilterMenu = ({
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handlePricePointFilter = (priceRule: number) => {
+  const handlePricePointFilter = (priceRule: string | number) => {
     console.log("handlePriceFilter: ", priceRule);
     sort_PricePoint(priceRule);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -79,20 +79,19 @@ const SideBarFilterMenu = ({
             <div className="bg-white rounded-lg shadow-md p-4 text-black">
               <SideBarList
                 filterName={"animal"}
+                filterby={"filtered_animals"}
                 activeFilters={activeFilters}
-                copyList={activeFilters.filtered_animals}
                 filterChange={handleFieldFilter}
               />
               <SideBarList
                 filterName={"brand"}
+                filterby={"filtered_brands"}
                 activeFilters={activeFilters}
-                copyList={activeFilters.filtered_brands}
                 filterChange={handleFieldFilter}
               />
               <SideBarToggle<string>
                 filterName="name"
                 activeFilters={activeFilters}
-                copyList={activeFilters.filtered_names}
                 options={[
                   { label: "A to Z", value: "asc" },
                   { label: "Z to A", value: "dsc" },
@@ -103,7 +102,6 @@ const SideBarFilterMenu = ({
               <SideBarToggle<number>
                 filterName="price"
                 activeFilters={activeFilters}
-                copyList={activeFilters.filtered_prices}
                 options={[
                   { label: "$ to $$$", value: 1 },
                   { label: "$$$ to $", value: 2 },
@@ -111,20 +109,20 @@ const SideBarFilterMenu = ({
                 onChange={handlePricePointFilter}
               />
               <SideBarSlider
-                priceArray={activeFilters.filtered_prices}
+                activeFilters={activeFilters}
                 onPriceRangeChange={handlePriceRangeFilter}
                 increments={1}
               />
               <SideBarRatings
-                ratings={activeFilters.filtered_ratings}
+                activeFilters={activeFilters}
                 size={20}
                 color="#FF9900"
                 onRatingClick={handleRatingClick}
               />
               <SideBarList
                 filterName={"subcategory"}
+                filterby={"filtered_subcategories"}
                 activeFilters={activeFilters}
-                copyList={activeFilters.filtered_subcategories}
                 filterChange={handleFieldFilter}
               />
             </div>

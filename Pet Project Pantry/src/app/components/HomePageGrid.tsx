@@ -11,7 +11,7 @@ interface HomePageGridProps {
   activeFilters: ActiveFilters | null;
   filteredProducts: Product[];
   sort_Alphabetically: (order: string) => void;
-  sort_PricePoint: (order: string) => void;
+  sort_PricePoint: (order: string | number) => void;
   sort_PriceRange: (order: number[]) => void;
   sort_Ratings: (order: number) => void;
   sort_ByField: <K extends keyof Product>(field: K, value: Product[K]) => void;

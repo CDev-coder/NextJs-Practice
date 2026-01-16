@@ -1,7 +1,8 @@
 import React from "react";
+import { ActiveFilters } from "../types";
 
 interface GroupedReviewStarsProps {
-  ratings: number[]; // array of item ratings (can be decimals like 4.5)
+  activeFilters: ActiveFilters;
   maxRating?: number; // default 5
   size?: number;
   color?: string;
@@ -9,12 +10,14 @@ interface GroupedReviewStarsProps {
 }
 
 const SideBarRatings: React.FC<GroupedReviewStarsProps> = ({
-  ratings,
+  activeFilters,
   maxRating = 5,
   size = 24,
   color = "#FFA41C",
   onRatingClick,
 }) => {
+  const ratings = activeFilters.filtered_ratings; // array of item ratings (can be decimals like 4.5)
+
   // Round ratings to nearest 0.5 for grouping
   const roundedRatings = ratings.map((r) => Math.round(r * 2) / 2);
 

@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import Slider from "@mui/material/Slider";
-import { Product } from "../types";
+import { ActiveFilters } from "../types";
 
 interface PriceRangeSliderProps {
-  priceArray: any[];
-  onPriceRangeChange?: (filteredProducts: Product[]) => void;
+  activeFilters: ActiveFilters;
+  onPriceRangeChange?: (filteredProducts: number[]) => void;
   increments: number;
 }
 
 const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
-  priceArray,
+  activeFilters,
   onPriceRangeChange,
   increments = 1,
 }) => {
   // Get all prices and calculate min/max
-  const prices = priceArray.map((prices) => prices);
+  const prices = activeFilters.filtered_prices.map((prices) => prices);
   const absoluteMin = Math.min(...prices);
   const absoluteMax = Math.max(...prices);
 
@@ -50,7 +50,7 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
 
     // Start a new debounce timer
     debounceRef.current = setTimeout(() => {
-      const filteredProducts = priceArray.filter(
+      const filteredProducts = activeFilters.filtered_prices.filter(
         (price) => price >= newRange[0] && price <= newRange[1]
       );
 
@@ -110,7 +110,11 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
           </p>
           <p>
             Showing{" "}
-            {priceArray.filter((p) => p >= range[0] && p <= range[1]).length}{" "}
+            {
+              activeFilters.filtered_prices.filter(
+                (p) => p >= range[0] && p <= range[1]
+              ).length
+            }{" "}
             products
           </p>
         </div>

@@ -19,7 +19,7 @@ interface FilterContextType {
   removeFilter: () => void;
   resetFilters: () => void;
   sort_Alphabetically: (order: string) => void;
-  sort_PricePoint: (order: string) => void;
+  sort_PricePoint: (order: string | number) => void;
   sort_PriceRange: (order: number[]) => void;
   sort_Ratings: (order: number) => void;
   sort_ByField: <K extends keyof Product>(field: K, value: Product[K]) => void;
@@ -186,7 +186,7 @@ export function FilterProvider({
       );
       setDisplayProducts(sorted);
     },
-    sort_PricePoint: (order: string) => {
+    sort_PricePoint: (order: string | number) => {
       const sorted = [...filteredProducts].sort((a, b) =>
         order === "low"
           ? (a.price || 0) - (b.price || 0)
