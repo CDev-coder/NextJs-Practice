@@ -3,6 +3,7 @@ import PaymentSection from "./PaymentSection";
 import ReviewItemsSection from "./ReviewItemsSection";
 import ShippingSection from "./ShippingSection";
 import { CartItem } from "@/app/context/CartContext";
+import PurchaseSection from "./PurchaseSection";
 
 interface CheckoutStepsProps {
   user: User;
@@ -15,6 +16,7 @@ const CheckoutSteps = ({ user, cart }: CheckoutStepsProps) => {
       <ShippingSection user={user} />
       <PaymentSection user={user} />
       <ReviewItemsSection cart={cart} />
+      <PurchaseSection cart={cart} />
     </div>
   );
 };

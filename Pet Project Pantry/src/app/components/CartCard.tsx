@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useCart } from "../context/CartContext";
+import { CartItem, useCart } from "../context/CartContext";
 
-export default function CartCard({ product }: { product: any }) {
+export default function CartCard({ product }: { product: CartItem }) {
   const { removeItem } = useCart();
 
   const handleRemove = (e: React.MouseEvent) => {
