@@ -3,12 +3,50 @@
     "id": "1",
     "name": "John Developer",
     "email": "john@petstore.dev",
-    "password": "test123"
+    "password": "test123",
+    "address": {
+      "street": "123 Main St",
+      "city": "Anytown",
+      "state": "CA",
+      "zip": "12345"
+    },
+    "paymentMethod": {
+      "creditcard": {
+        "name": "John Developer",
+        "number": "4111111111111111",
+        "expiry": "12/25",
+        "cvv": "123"
+      },
+      "paypal": { "email": "john@petstore.dev" },
+      "giftCard": {
+        "balance": 50.0,
+        "currency": "USD"
+      }
+    }
   },
   {
     "id": "2",
     "name": "Jane Developer",
     "email": "jane@petstore.dev",
-    "password": "test123"
+    "password": "test123",
+    "address": {
+      "street": "123 Main St",
+      "city": "Anytown",
+      "state": "CA",
+      "zip": "12345"
+    },
+    "paymentMethod": {
+      "creditcard": {
+        "name": "jane Developer",
+        "number": "4111111111111111",
+        "expiry": "12/25",
+        "cvv": "123"
+      },
+      "paypal": { "email": "jane@petstore.dev" },
+      "giftCard": {
+        "balance": 50.0,
+        "currency": "USD"
+      }
+    }
   }
 ]

@@ -5,8 +5,17 @@ const sessions: Record<string, string> = {};
 
 export async function GET(req: NextRequest) {
   const token = req.cookies.get("dev-token")?.value;
-  if (!token || !sessions[token]) return NextResponse.json(null);
+  if (!token || !sessions[token]) {
+    return NextResponse.json(null);
+  }
 
   const user = mockUsers.find((u) => u.id === sessions[token]);
-  return NextResponse.json(user || null);
+  if (!user) return NextResponse.json(null);
+
+  return NextResponse.json({
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    address: user.address ?? null,
+  });
 }

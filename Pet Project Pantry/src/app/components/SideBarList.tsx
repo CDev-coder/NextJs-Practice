@@ -4,7 +4,7 @@ import { ActiveFilters, Product } from "../types";
 interface SideBarListProps {
   filterName: string;
   filterby?: string;
-  activeFilters: ActiveFilters;
+  activeFilters?: ActiveFilters | null;
   filterChange?: <K extends keyof Product>(field: K, value: Product[K]) => void;
 }
 
@@ -14,7 +14,12 @@ const SideBarList = ({
   activeFilters,
   filterChange,
 }: SideBarListProps) => {
-  const rawValue = activeFilters[filterby as keyof ActiveFilters];
+  if (!activeFilters) {
+    return null; // Or handle the null case appropriately, e.g., return an empty div
+  }
+  const rawValue = activeFilters
+    ? activeFilters[filterby as keyof ActiveFilters]
+    : undefined;
 
   const copyList: Array<string | number> = Array.isArray(rawValue)
     ? rawValue.filter(
@@ -22,14 +27,14 @@ const SideBarList = ({
           typeof v === "string" || typeof v === "number"
       )
     : [];
-  console.log("SIDEBARLIST - rawValue: ", rawValue);
-  console.log("SIDEBARLIST - copyList: ", copyList);
+  //console.log("SIDEBARLIST - rawValue: ", rawValue);
+  //console.log("SIDEBARLIST - copyList: ", copyList);
 
   const handleDoubleFilterClick = (searchBy: string | number) => {
-    console.log("handleDoubleFilterClick searching by: " + searchBy);
-    console.log("filterName: " + filterName + " | copyList: ", copyList);
+    //console.log("handleDoubleFilterClick searching by: " + searchBy);
+    //console.log("filterName: " + filterName + " | copyList: ", copyList);
     if (filterChange) {
-      console.log("SENDING DATA");
+      //console.log("SENDING DATA");
       filterChange(filterName as keyof Product, searchBy);
     }
   };
@@ -41,7 +46,8 @@ const SideBarList = ({
             className="font-semibold text-lg mb-4 border-b pb-2"
             id={`sbfm_h3_${filterName}`}
           >
-            Filter {capitalizeFirst(activeFilters.category)} by {filterName}
+            Filter {capitalizeFirst(activeFilters?.category || "")} by{" "}
+            {filterName}
           </h3>
 
           <div key={filterName} className="mb-6">

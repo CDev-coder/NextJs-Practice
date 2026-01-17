@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   const { email, password } = await req.json();
 
   const user = mockUsers.find(
-    (u) => u.email === email && u.password === password
+    (u) => u.email === email && u.password === password,
   );
 
   if (!user) {
@@ -23,6 +23,8 @@ export async function POST(req: NextRequest) {
     id: user.id,
     name: user.name,
     email: user.email,
+    address: user.address ?? null,
+    paymentmethod: user.paymentMethod ?? null,
   });
   // Store token in a cookie (dev-only)
   res.cookies.set("dev-token", token, { path: "/" });

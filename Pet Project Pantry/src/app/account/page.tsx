@@ -18,7 +18,7 @@ export default function AccountPage() {
   }, [user, router]);
 
   if (!user) return <p>Redirecting to login...</p>;
-
+  console.log("AccountPage user:", user);
   return (
     <section className="max-w-3xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Welcome, {user.name}</h1>
@@ -26,6 +26,10 @@ export default function AccountPage() {
       <ul className="mb-6 list-disc ml-5">
         <li>Email: {user.email}</li>
         <li>User ID: {user.id}</li>
+        <li>
+          User Address:{" "}
+          {user.address ? user.address.street : "No address provided"}
+        </li>
       </ul>
 
       <h2 className="text-xl font-semibold mb-2">Your Cart</h2>

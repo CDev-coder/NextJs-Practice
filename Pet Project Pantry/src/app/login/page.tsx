@@ -17,8 +17,8 @@ export default function LoginPage() {
   const { setUser } = useUser();
 
   // Get redirect query (optional)
-  const searchParams = new URLSearchParams(window.location.search);
-  const redirect = searchParams.get("redirect") || "/";
+  //const searchParams = new URLSearchParams(window.location.search);
+  //const redirect = searchParams.get("redirect") || "/";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,41 +43,43 @@ export default function LoginPage() {
   };
 
   return (
-    <form
-      onSubmit={handleLogin}
-      className="max-w-sm mx-auto p-6 border rounded-lg shadow bg-white"
-    >
-      <h1 className="text-xl font-bold mb-4">Login</h1>
-      {error && <p className="text-red-500 mb-2">{error}</p>}
-
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="w-full p-2 mb-2 border rounded"
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="w-full p-2 mb-2 border rounded"
-        required
-      />
-
-      <button
-        type="submit"
-        disabled={loading}
-        className={`w-full py-2 rounded ${
-          loading
-            ? "bg-gray-300 text-gray-700 cursor-not-allowed"
-            : "bg-blue-500 text-white hover:bg-blue-600"
-        }`}
+    <div className="loginFormDiv pt-2">
+      <form
+        onSubmit={handleLogin}
+        className="max-w-sm mx-auto p-6 border rounded-lg shadow bg-white"
       >
-        {loading ? "Logging in..." : "Login"}
-      </button>
-    </form>
+        <h1 className="text-xl font-bold mb-4">Login</h1>
+        {error && <p className="text-red-500 mb-2">{error}</p>}
+
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full p-2 mb-2 border rounded"
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full p-2 mb-2 border rounded"
+          required
+        />
+
+        <button
+          type="submit"
+          disabled={loading}
+          className={`w-full py-2 rounded ${
+            loading
+              ? "bg-gray-300 text-gray-700 cursor-not-allowed"
+              : "bg-blue-500 text-white hover:bg-blue-600"
+          }`}
+        >
+          {loading ? "Logging in..." : "Login"}
+        </button>
+      </form>
+    </div>
   );
 }

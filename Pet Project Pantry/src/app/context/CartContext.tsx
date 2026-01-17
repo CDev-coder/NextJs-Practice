@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Product } from "../types";
 
-interface CartItem extends Product {
+export interface CartItem extends Product {
   quantity: number;
 }
 
@@ -24,7 +24,7 @@ interface CartContextType {
 }
 
 export const CartContext = createContext<CartContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -74,7 +74,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
         return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
-            : item
+            : item,
         );
       }
       return [...prev, { ...product, quantity: 1 }];
@@ -89,7 +89,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const totalPrice = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
+    0,
   );
 
   // Sync cart with server

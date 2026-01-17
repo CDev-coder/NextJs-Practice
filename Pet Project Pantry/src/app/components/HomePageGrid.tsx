@@ -3,7 +3,7 @@
 
 import ProductCard from "./ProductCard";
 import SideBarFilterMenu from "./SideBarFilterMenu";
-import { capitalizeFirst } from "../context/helperFunctions";
+import { capitalizeFirst, deslugify } from "../context/helperFunctions";
 import { ActiveFilters, Product } from "../types";
 import { useFilters } from "../context/FilterContext";
 
@@ -39,7 +39,7 @@ const HomePageGrid = ({
       {/* Filter Display Header */}
       <div className="HomePageGrid flex justify-between items-center mb-6 filterDisplay_Div">
         <div className="flex items-center">
-          <span className="text-gray-600 mr-4">
+          <span className="miniBreadCrumbSpan text-gray-600 mr-4">
             Showing: {activeFilters == null && "All Products"}
             {activeFilters && (
               <>
@@ -71,7 +71,7 @@ const HomePageGrid = ({
                         handleFilterClick(activeFilters, "subcategory")
                       }
                     >
-                      {capitalizeFirst(activeFilters.subcategory)}
+                      {capitalizeFirst(deslugify(activeFilters.subcategory))}
                     </span>
                   </>
                 )}
