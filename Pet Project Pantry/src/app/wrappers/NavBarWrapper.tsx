@@ -2,7 +2,7 @@
 "use client";
 
 import { ReactNode, useState } from "react";
-import NavBar from "../shared_components/HomePage/NavBar";
+import NavBar from "../shared_components/Header/NavBar";
 import { useFilters } from "../context/FilterContext";
 import { useRouter } from "next/navigation";
 

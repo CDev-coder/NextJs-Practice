@@ -1,7 +1,7 @@
 // components/HomePageGrid.tsx
 "use client";
 
-import ProductCard from "../ProductCard";
+import ProductCard from "../Product/ProductCard";
 import SideBarFilterMenu from "../SideBar/SideBarFilterMenu";
 import { capitalizeFirst, deslugify } from "../../context/helperFunctions";
 import { ActiveFilters, Product } from "../../types";

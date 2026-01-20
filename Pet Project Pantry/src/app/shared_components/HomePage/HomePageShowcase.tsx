@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import ProductCard from "../ProductCard";
+import ProductCard from "../Product/ProductCard";
 import { Product } from "../../types";
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import MainNavigation from "./MainNavigation";
+import MainNavigation from "../Header/MainNavigation";
 import { capitalizeFirst } from "../../context/helperFunctions";
-import ProductModal from "../ProductModal";
+import ProductModal from "../Product/ProductModal";
 import AddToCartButton from "../Cart/AddToCartButton";
 
 interface HomePageShowcaseProps {

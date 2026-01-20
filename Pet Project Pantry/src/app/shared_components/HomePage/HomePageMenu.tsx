@@ -1,4 +1,4 @@
-import MainNavigation from "./MainNavigation";
+import MainNavigation from "../Header/MainNavigation";
 import { useFilters } from "@context/FilterContext";
 import { ActiveFilters } from "../../types";
 import HomePageGrid from "./HomePageGrid";

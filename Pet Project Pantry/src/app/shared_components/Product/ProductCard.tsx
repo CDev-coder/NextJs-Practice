@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import AddToCartButton from "./Cart/AddToCartButton";
-import { Product } from "../types";
+import AddToCartButton from "../Cart/AddToCartButton";
+import { Product } from "../../types";
 
 interface ProductCardProps {
   product: Product;

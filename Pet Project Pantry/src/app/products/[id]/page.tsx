@@ -1,7 +1,7 @@
 // app/products/[id]/page.tsx
 import AddToCartButton from "@/app/shared_components/Cart/AddToCartButton";
-import ProductBreadcrumb from "@/app/shared_components/ProductBreadCrumb";
-import SimilarItems from "@/app/shared_components/SimilarItems";
+import ProductBreadcrumb from "@/app/shared_components/Product/ProductBreadCrumb";
+import SimilarItems from "@/app/shared_components/Product/SimilarItems";
 import { getProducts } from "@/app/lib/products";
 import Link from "next/link";
 import Image from "next/image";

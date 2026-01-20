@@ -60,7 +60,7 @@ export default function ProductModal({
       >
         <div className="flex flex-col gap-4">{children}</div>
 
-        {/* Footer: Close left, secondaryButton right */}
+        {/* Footer Section: Close left, secondaryButton right */}
         {(secondaryButton || true) && (
           <div className="mt-4 flex justify-between">
             {secondaryButton && <div>{secondaryButton}</div>}
