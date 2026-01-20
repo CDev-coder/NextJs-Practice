@@ -1,39 +1,40 @@
-// components/HomePageShowcase.tsx
 "use client";
 
 import { motion } from "framer-motion";
 import ProductCard from "./ProductCard";
 import { Product } from "../types";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import Image from "next/image";
 import MainNavigation from "./MainNavigation";
 import { capitalizeFirst } from "../context/helperFunctions";
+import ProductModal from "./ProductModal";
+import AddToCartButton from "./AddToCartButton";
 
 interface HomePageShowcaseProps {
   products: Product[];
 }
 
 const HomePageShowcase = ({ products }: HomePageShowcaseProps) => {
-  // Demo selections (replace with API logic later)
-  // Improved selections using existing data
+  const [activeProduct, setActiveProduct] = useState<Product | null>(null);
+
   const featuredDeals = useMemo(
     () =>
       products
-        .filter((p) => p.rating >= 4.5 && p.salesVolume > 100) // High rating + popular
-        .sort((a, b) => b.salesVolume - a.salesVolume) // Sort by popularity
+        .filter((p) => p.rating >= 4.5 && p.salesVolume > 100)
+        .sort((a, b) => b.salesVolume - a.salesVolume)
         .slice(0, 6),
-    [products]
+    [products],
   );
 
   const budgetFriendly = useMemo(
     () =>
       products
-        .filter((p) => p.price < 15 && p.rating >= 3.5) // Low price + decent rating
-        .sort((a, b) => a.price - b.price) // Sort by lowest price
+        .filter((p) => p.price < 15 && p.rating >= 3.5)
+        .sort((a, b) => a.price - b.price)
         .slice(0, 6),
-    [products]
+    [products],
   );
 
-  // exploreCategories remains the same (uses categories from products)
   const exploreCategories = useMemo(() => {
     const categories = Array.from(new Set(products.map((p) => p.category)));
     return categories.slice(0, 6);
@@ -43,6 +44,7 @@ const HomePageShowcase = ({ products }: HomePageShowcaseProps) => {
     <div className="HomePageShowcase_mainDiv">
       <MainNavigation />
       <div className="HomePageShowcase_containerDiv mx-auto px-4 py-10 space-y-12">
+        {/* Featured Deals */}
         <section aria-labelledby="featured-deals-title">
           <h2 className="text-2xl font-semibold mb-4">Featured Deals</h2>
           <motion.div
@@ -57,25 +59,26 @@ const HomePageShowcase = ({ products }: HomePageShowcaseProps) => {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
-                <ProductCard product={p} />
+                <ProductCard
+                  product={p}
+                  onInfoClick={() => setActiveProduct(p)}
+                  infoButton={true}
+                />
               </motion.div>
             ))}
           </motion.div>
         </section>
+
         {/* Explore by Category */}
         <section aria-labelledby="category-title">
           <h2 id="category-title" className="text-2xl font-semibold mb-4">
             Explore by Category
           </h2>
-
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {exploreCategories.map((category, i) => {
-              // Filter all products that match this category
               const productsInCategory = products.filter(
-                (p) => p.category.toLowerCase() === category.toLowerCase()
+                (p) => p.category.toLowerCase() === category.toLowerCase(),
               );
-
-              // Pick one random product
               const randomProduct =
                 productsInCategory[
                   Math.floor(Math.random() * productsInCategory.length)
@@ -87,14 +90,15 @@ const HomePageShowcase = ({ products }: HomePageShowcaseProps) => {
                   whileHover={{ scale: 1.05 }}
                   className="bg-gray-100 rounded-xl shadow-md cursor-pointer hover:bg-blue-100 transition p-2 flex flex-col"
                 >
-                  {/* Category Title */}
                   <div className="text-center text-lg font-medium mb-2">
                     {capitalizeFirst(category)}
                   </div>
-
-                  {/* Random Product (if found) */}
                   {randomProduct ? (
-                    <ProductCard product={randomProduct} />
+                    <ProductCard
+                      product={randomProduct}
+                      infoButton={true}
+                      onInfoClick={() => setActiveProduct(randomProduct)}
+                    />
                   ) : (
                     <div className="text-center text-gray-500 text-sm">
                       No items found
@@ -106,7 +110,7 @@ const HomePageShowcase = ({ products }: HomePageShowcaseProps) => {
           </div>
         </section>
 
-        {/*Budget Friendly Picks */}
+        {/* Budget-Friendly Picks */}
         <section aria-labelledby="budget-title">
           <h2 className="text-2xl font-semibold mb-4">Budget-Friendly Picks</h2>
           <motion.div
@@ -122,12 +126,44 @@ const HomePageShowcase = ({ products }: HomePageShowcaseProps) => {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <ProductCard product={p} />
+                <ProductCard
+                  product={p}
+                  onInfoClick={() => setActiveProduct(p)}
+                  infoButton={true}
+                />
               </motion.div>
             ))}
           </motion.div>
         </section>
       </div>
+
+      {/* Single modal for all products */}
+      {activeProduct && (
+        <ProductModal
+          isOpen={!!activeProduct}
+          onClose={() => setActiveProduct(null)}
+          secondaryButton={<AddToCartButton product={activeProduct} />}
+        >
+          <h2 className="text-xl font-semibold text-gray-900">
+            {activeProduct.name}
+          </h2>
+          <div className="relative h-48 w-full overflow-hidden rounded-lg">
+            <Image
+              src={activeProduct.image}
+              alt={activeProduct.name}
+              width={200}
+              height={80}
+              className="w-full h-40 object-cover rounded"
+            />
+          </div>
+          <p className="text-sm leading-relaxed text-gray-600">
+            {activeProduct.description}
+          </p>
+          <p className="text-lg font-medium text-green-700">
+            ${activeProduct.price.toFixed(2)}
+          </p>
+        </ProductModal>
+      )}
     </div>
   );
 };
