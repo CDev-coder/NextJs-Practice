@@ -1,6 +1,6 @@
 import MainNavigation from "./MainNavigation";
 import { useFilters } from "@context/FilterContext";
-import { ActiveFilters } from "../types";
+import { ActiveFilters } from "../../types";
 import HomePageGrid from "./HomePageGrid";
 import { useEffect } from "react";
 
@@ -22,7 +22,7 @@ const HomePageMenu = () => {
 
   const handleFilterClick = (
     copyCurrentFilter: ActiveFilters,
-    searchBy: string
+    searchBy: string,
   ) => {
     if (searchBy === "category")
       applyFilter(copyCurrentFilter.category, "all", "all");

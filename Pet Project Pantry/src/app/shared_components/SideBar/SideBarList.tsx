@@ -1,5 +1,5 @@
-import { capitalizeFirst } from "../context/helperFunctions";
-import { ActiveFilters, Product } from "../types";
+import { capitalizeFirst } from "../../context/helperFunctions";
+import { ActiveFilters, Product } from "../../types";
 
 interface SideBarListProps {
   filterName: string;
@@ -24,7 +24,7 @@ const SideBarList = ({
   const copyList: Array<string | number> = Array.isArray(rawValue)
     ? rawValue.filter(
         (v): v is string | number =>
-          typeof v === "string" || typeof v === "number"
+          typeof v === "string" || typeof v === "number",
       )
     : [];
   //console.log("SIDEBARLIST - rawValue: ", rawValue);

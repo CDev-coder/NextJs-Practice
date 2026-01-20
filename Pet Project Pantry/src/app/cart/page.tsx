@@ -4,7 +4,7 @@ import { useCart } from "@context/CartContext";
 import { useUser } from "@context/UserContext";
 import { useFilters } from "@context/FilterContext";
 import { useRouter } from "next/navigation";
-import CartCard from "@components/CartCard";
+import CartCard from "@/app/shared_components/Cart/CartCard";
 import React from "react";
 
 export default function CartPage() {

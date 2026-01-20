@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect } from "react";
-import HomePageMenu from "@/app/components/HomePageMenu";
+import HomePageMenu from "@/app/shared_components/HomePage/HomePageMenu";
 import { useFilters } from "@/app/context/FilterContext";
 import { normalizeSubcategory } from "@/app/context/helperFunctions";
 

@@ -1,7 +1,7 @@
 // components/SideBarFilterMenu.tsx
 "use client";
 
-import { Product, ActiveFilters } from "../types";
+import { Product, ActiveFilters } from "../../types";
 import SideBarList from "./SideBarList";
 import SideBarRatings from "./SideBarRatings";
 import SideBarSlider from "./SideBarSlider";
@@ -19,7 +19,7 @@ interface SideBarFilterMenuProps {
     filters: {
       property: keyof Product;
       values: string[];
-    } | null
+    } | null,
   ) => void;
   sort_Alphabetically: (order: string) => void;
   sort_PricePoint: (order: string | number) => void;
@@ -58,7 +58,7 @@ const SideBarFilterMenu = ({
 
   const handleFieldFilter = (
     field: keyof Product,
-    rule: Product[keyof Product]
+    rule: Product[keyof Product],
   ) => {
     console.log("handleFieldFilter: " + field + " rule: " + rule);
     sort_ByField(field, rule);

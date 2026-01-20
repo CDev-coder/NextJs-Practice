@@ -1,7 +1,7 @@
 // src/app/page.tsx
 "use client";
 
-import HomePageShowcase from "./components/HomePageShowcase";
+import HomePageShowcase from "./shared_components/HomePage/HomePageShowcase";
 import { useProducts } from "@/hooks/useProducts";
 export default function HomePage() {
   ///Discover by Collection

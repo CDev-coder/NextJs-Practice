@@ -1,5 +1,5 @@
 import React from "react";
-import { ActiveFilters } from "../types";
+import { ActiveFilters } from "../../types";
 
 interface GroupedReviewStarsProps {
   activeFilters: ActiveFilters;
@@ -27,7 +27,7 @@ const SideBarRatings: React.FC<GroupedReviewStarsProps> = ({
       acc[r] = (acc[r] || 0) + 1;
       return acc;
     },
-    {}
+    {},
   );
 
   // Sort ratings descending

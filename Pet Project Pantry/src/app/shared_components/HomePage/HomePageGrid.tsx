@@ -1,11 +1,11 @@
 // components/HomePageGrid.tsx
 "use client";
 
-import ProductCard from "./ProductCard";
-import SideBarFilterMenu from "./SideBarFilterMenu";
-import { capitalizeFirst, deslugify } from "../context/helperFunctions";
-import { ActiveFilters, Product } from "../types";
-import { useFilters } from "../context/FilterContext";
+import ProductCard from "../ProductCard";
+import SideBarFilterMenu from "../SideBar/SideBarFilterMenu";
+import { capitalizeFirst, deslugify } from "../../context/helperFunctions";
+import { ActiveFilters, Product } from "../../types";
+import { useFilters } from "../../context/FilterContext";
 
 interface HomePageGridProps {
   activeFilters: ActiveFilters | null;
@@ -18,7 +18,7 @@ interface HomePageGridProps {
   clearFilters: () => void;
   handleFilterClick: (
     copyCurrentFilter: ActiveFilters,
-    searchBy: string
+    searchBy: string,
   ) => void;
 }
 

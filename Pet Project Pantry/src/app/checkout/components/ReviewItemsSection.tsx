@@ -1,4 +1,4 @@
-import CartCard from "@/app/components/CartCard";
+import CartCard from "@/app/shared_components/Cart/CartCard";
 import { CartItem } from "@/app/context/CartContext";
 
 const ReviewItemsSection = ({ cart }: { cart: CartItem[] }) => {

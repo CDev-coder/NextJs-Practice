@@ -3,10 +3,10 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Product } from "../types";
+import { Product } from "../../types";
 import { useStickyNav } from "@/hooks/useStickyNav";
-import { useFilters } from "../context/FilterContext";
-import { slugify, normalizeSubcategory } from "../context/helperFunctions";
+import { useFilters } from "../../context/FilterContext";
+import { slugify, normalizeSubcategory } from "../../context/helperFunctions";
 
 // Define TypeScript interfaces for the props
 interface MenuItem {
@@ -70,14 +70,14 @@ const MainNavigation = () => {
   const handleSubcategoryClick = (
     category: keyof Product | string,
     animal: string,
-    subcategory: keyof Product | string
+    subcategory: keyof Product | string,
   ) => {
     const normalizedSubcategory = normalizeSubcategory(String(subcategory));
     // Navigate to the new shop route
     router.push(
       `/shop/${slugify(String(category))}/${slugify(animal)}/${slugify(
-        normalizedSubcategory
-      )}`
+        normalizedSubcategory,
+      )}`,
     );
   };
 
@@ -86,7 +86,7 @@ const MainNavigation = () => {
       "MainNavigation handleCategoryClick animal: " +
         animal +
         " category: " +
-        category
+        category,
     );
     setFallbackMessage(null);
     router.push(`/shop/${slugify(category)}/${slugify(animal)}/all`);

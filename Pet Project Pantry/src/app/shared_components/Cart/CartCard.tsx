@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { CartItem, useCart } from "../context/CartContext";
+import { CartItem, useCart } from "../../context/CartContext";
 
 export default function CartCard({ product }: { product: CartItem }) {
   const { removeItem } = useCart();

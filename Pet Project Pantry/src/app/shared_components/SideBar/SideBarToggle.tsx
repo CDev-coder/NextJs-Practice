@@ -1,5 +1,5 @@
-import { capitalizeFirst } from "../context/helperFunctions";
-import { ActiveFilters } from "../types";
+import { capitalizeFirst } from "../../context/helperFunctions";
+import { ActiveFilters } from "../../types";
 
 interface ToggleOption<T extends string | number> {
   label: string;

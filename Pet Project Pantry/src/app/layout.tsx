@@ -2,7 +2,7 @@
 import "./globals.css";
 import { FilterProvider } from "./context/FilterContext";
 import NavBarWrapper from "./wrappers/NavBarWrapper";
-import Footer from "./components/Footer";
+import Footer from "./shared_components/Footer";
 import { getProducts } from "./lib/products";
 import { CartProvider } from "./context/CartContext";
 import { UserProvider } from "./context/UserContext";

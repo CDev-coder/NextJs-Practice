@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import CartIcon from "./CartIcon";
-import SearchBar from "./SearchBar";
+import CartIcon from "../Cart/CartIcon";
+import SearchBar from "../SearchBar";
 
 interface NavBarProps {
   onHomeClick?: () => void;

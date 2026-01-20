@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Slider from "@mui/material/Slider";
-import { ActiveFilters } from "../types";
+import { ActiveFilters } from "../../types";
 
 interface PriceRangeSliderProps {
   activeFilters: ActiveFilters;
@@ -32,7 +32,7 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
   // Handle slider change
   const handleRangeChange = (
     event: Event | React.SyntheticEvent,
-    newValue: number | number[]
+    newValue: number | number[],
   ) => {
     const newRange = newValue as number[];
     setRange(newRange);
@@ -41,7 +41,7 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
 
   const handleRangeCommit = (
     event: Event | React.SyntheticEvent,
-    newValue: number | number[]
+    newValue: number | number[],
   ) => {
     const newRange = newValue as number[];
 
@@ -51,7 +51,7 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
     // Start a new debounce timer
     debounceRef.current = setTimeout(() => {
       const filteredProducts = activeFilters.filtered_prices.filter(
-        (price) => price >= newRange[0] && price <= newRange[1]
+        (price) => price >= newRange[0] && price <= newRange[1],
       );
 
       if (onPriceRangeChange) {
@@ -112,7 +112,7 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
             Showing{" "}
             {
               activeFilters.filtered_prices.filter(
-                (p) => p >= range[0] && p <= range[1]
+                (p) => p >= range[0] && p <= range[1],
               ).length
             }{" "}
             products
