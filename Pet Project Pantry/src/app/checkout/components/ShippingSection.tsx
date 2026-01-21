@@ -9,17 +9,18 @@ const ShippingSection = ({ user }: ShippingSectionProps) => {
   return (
     <section className="border rounded p-4">
       <h2 className="text-xl font-semibold mb-2">1. Shipping Address</h2>
-      <p className="text-sm text-gray-600 mb-3">Delivery to {user.name}</p>
+      <div className="border-b pb-3 mb-3  bg-white shadow rounded-lg">
+        <h5 className="text-l font-semibold mb-2">Delivery to {user.name}</h5>
+        {user.address ? (
+          <p className="text-sm text-gray-600 mb-3">
+            {user.address.city}, {user.address.state} {user.address.zip}
+          </p>
+        ) : (
+          <p className="text-sm text-gray-600 mb-3">No address selected</p>
+        )}
 
-      {user.address ? (
-        <p className="text-sm text-gray-600 mb-3">
-          {user.address.city}, {user.address.state} {user.address.zip}
-        </p>
-      ) : (
-        <p className="text-sm text-gray-600 mb-3">No address selected</p>
-      )}
-
-      <button className="text-blue-600 underline">Add a new address</button>
+        <button className="text-blue-600 underline">Add a new address</button>
+      </div>
     </section>
   );
 };
