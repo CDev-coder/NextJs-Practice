@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useFilters } from "@context/FilterContext";
-import { useRouter, usePathname } from "next/navigation";
-import { slugify } from "@context/helperFunctions";
+import { useRouter } from "next/navigation";
+import { capitalizeFirst, slugify } from "@context/helperFunctions";
 
 interface SearchBarProps {
   placeholder?: string;
@@ -17,14 +17,7 @@ interface SuggestionItem {
 
 const SearchBar = ({
   placeholder = "Search products...",
-  onSuggestionSelect,
-}: SearchBarProps & {
-  onSuggestionSelect?: (
-    category: string,
-    animal: string,
-    subcategory: string
-  ) => void;
-}) => {
+}: SearchBarProps & {}) => {
   const {
     baseProducts,
     applyFilter,
@@ -43,133 +36,88 @@ const SearchBar = ({
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const router = useRouter();
-  const pathname = usePathname();
 
-  // -------------------------
-  // Hide suggestion menu on outside click
-  // -------------------------
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
+  const updateSuggestions = useCallback(
+    (term: string) => {
+      const lowerTerm = term.trim().toLowerCase();
+      if (!lowerTerm) {
+        setSuggestions([]);
         setShowSuggestions(false);
+        return;
       }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
-  // -------------------------
-  // Hide suggestions when category changes
-  // -------------------------
-  useEffect(() => {
-    setShowSuggestions(false);
-  }, [selectedCategory]);
+      const productPool =
+        selectedCategory === "all"
+          ? baseProducts
+          : baseProducts.filter(
+              (p) =>
+                p.category.toLowerCase() === selectedCategory.toLowerCase(),
+            );
 
-  // -------------------------
-  // Debounced suggestions
-  // -------------------------
-  useEffect(() => {
-    if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
-    debounceTimeout.current = setTimeout(
-      () => updateSuggestions(searchTerm),
-      250
-    );
-    return () => {
-      if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
-    };
-  }, [searchTerm, selectedCategory]);
+      const results: SuggestionItem[] = [];
 
-  // -------------------------
-  // Fuzzy match scoring
-  // -------------------------
-  const getScore = (source: string, term: string) => {
-    const lowerSource = source.toLowerCase();
-    const index = lowerSource.indexOf(term);
-    if (index === -1) return 0;
-    return term.length / lowerSource.length + 1 / (index + 1);
-  };
-
-  const updateSuggestions = (term: string) => {
-    const lowerTerm = term.trim().toLowerCase();
-    if (!lowerTerm) {
-      setSuggestions([]);
-      setShowSuggestions(false);
-      return;
-    }
-
-    const productPool =
-      selectedCategory === "all"
-        ? baseProducts
-        : baseProducts.filter(
-            (p) => p.category.toLowerCase() === selectedCategory.toLowerCase()
+      const addSuggestion = (
+        value: string,
+        type: SuggestionItem["type"],
+        score: number,
+      ) => {
+        if (!results.find((s) => s.value === value && s.type === type)) {
+          results.push({ value, type, score });
+        } else {
+          const existing = results.find(
+            (s) => s.value === value && s.type === type,
           );
+          if (existing && score > existing.score) existing.score = score;
+        }
+      };
 
-    const results: SuggestionItem[] = [];
+      // Priority: animal → product → brand → category → subcategory
+      productPool.forEach((p) => {
+        const scoreAnimal = getScore(p.animal, lowerTerm);
+        if (scoreAnimal > 0) addSuggestion(p.animal, "animal", scoreAnimal);
 
-    const addSuggestion = (
-      value: string,
-      type: SuggestionItem["type"],
-      score: number
-    ) => {
-      if (!results.find((s) => s.value === value && s.type === type)) {
-        results.push({ value, type, score });
-      } else {
-        const existing = results.find(
-          (s) => s.value === value && s.type === type
-        );
-        if (existing && score > existing.score) existing.score = score;
-      }
-    };
+        const scoreName = getScore(p.name, lowerTerm);
+        if (scoreName > 0) addSuggestion(p.name, "product", scoreName);
 
-    // Priority: animal → product → brand → category → subcategory
-    productPool.forEach((p) => {
-      const scoreAnimal = getScore(p.animal, lowerTerm);
-      if (scoreAnimal > 0) addSuggestion(p.animal, "animal", scoreAnimal);
+        const scoreBrand = getScore(p.brand, lowerTerm);
+        if (scoreBrand > 0) addSuggestion(p.brand, "brand", scoreBrand);
 
-      const scoreName = getScore(p.name, lowerTerm);
-      if (scoreName > 0) addSuggestion(p.name, "product", scoreName);
-
-      const scoreBrand = getScore(p.brand, lowerTerm);
-      if (scoreBrand > 0) addSuggestion(p.brand, "brand", scoreBrand);
-
-      const scoreSub = getScore(p.subcategory, lowerTerm);
-      if (scoreSub > 0) addSuggestion(p.subcategory, "subcategory", scoreSub);
-    });
-
-    if (selectedCategory === "all") {
-      baseProducts.forEach((p) => {
-        const scoreCat = getScore(p.category, lowerTerm);
-        if (scoreCat > 0) addSuggestion(p.category, "category", scoreCat);
+        const scoreSub = getScore(p.subcategory, lowerTerm);
+        if (scoreSub > 0) addSuggestion(p.subcategory, "subcategory", scoreSub);
       });
-    }
 
-    // Sort by type priority + score
-    const blendedResults = [
-      ...results
-        .filter((s) => s.type === "animal")
-        .sort((a, b) => b.score - a.score),
-      ...results
-        .filter((s) => s.type === "product")
-        .sort((a, b) => b.score - a.score),
-      ...results
-        .filter((s) => s.type === "brand")
-        .sort((a, b) => b.score - a.score),
-      ...results
-        .filter((s) => s.type === "category")
-        .sort((a, b) => b.score - a.score),
-      ...results
-        .filter((s) => s.type === "subcategory")
-        .sort((a, b) => b.score - a.score),
-    ];
+      if (selectedCategory === "all") {
+        baseProducts.forEach((p) => {
+          const scoreCat = getScore(p.category, lowerTerm);
+          if (scoreCat > 0) addSuggestion(p.category, "category", scoreCat);
+        });
+      }
 
-    setSuggestions(blendedResults.slice(0, 12));
-    setShowSuggestions(true);
-    setHighlightIndex(null);
-  };
+      // Sort by type priority + score
+      const blendedResults = [
+        ...results
+          .filter((s) => s.type === "animal")
+          .sort((a, b) => b.score - a.score),
+        ...results
+          .filter((s) => s.type === "product")
+          .sort((a, b) => b.score - a.score),
+        ...results
+          .filter((s) => s.type === "brand")
+          .sort((a, b) => b.score - a.score),
+        ...results
+          .filter((s) => s.type === "category")
+          .sort((a, b) => b.score - a.score),
+        ...results
+          .filter((s) => s.type === "subcategory")
+          .sort((a, b) => b.score - a.score),
+      ];
 
+      setSuggestions(blendedResults.slice(0, 12));
+      setShowSuggestions(true);
+      setHighlightIndex(null);
+    },
+    [baseProducts, selectedCategory],
+  );
   // -------------------------
   // Handle search
   // -------------------------
@@ -203,7 +151,7 @@ const SearchBar = ({
     // -------------------------
     if (!item && term && suggestions.length > 0) {
       const matchedSuggestion = suggestions.find(
-        (s) => s.value.toLowerCase() === term
+        (s) => s.value.toLowerCase() === term,
       );
       if (matchedSuggestion) {
         item = matchedSuggestion;
@@ -232,18 +180,18 @@ const SearchBar = ({
           matchedProducts =
             selectedCategory === "all"
               ? baseProducts.filter(
-                  (p) => p.brand.toLowerCase() === item.value.toLowerCase()
+                  (p) => p.brand.toLowerCase() === item.value.toLowerCase(),
                 )
               : baseProducts.filter(
                   (p) =>
                     p.brand.toLowerCase() === item.value.toLowerCase() &&
-                    p.category.toLowerCase() === selectedCategory.toLowerCase()
+                    p.category.toLowerCase() === selectedCategory.toLowerCase(),
                 );
           setDisplayProducts(matchedProducts);
           break;
         case "product":
           matchedProducts = baseProducts.filter(
-            (p) => p.name.toLowerCase() === item.value.toLowerCase()
+            (p) => p.name.toLowerCase() === item.value.toLowerCase(),
           );
           // Navigate to product details instead of setting displayProducts
           if (matchedProducts.length > 0) {
@@ -286,7 +234,7 @@ const SearchBar = ({
           .map((p) => p.product);
 
         setFallbackMessage(
-          `Can't find "${rawTerm}", but here are a few items that might match:`
+          `Can't find "${rawTerm}", but here are a few items that might match:`,
         );
         console.log("SUGGESTION MATCHES");
         // Navigate to the first top match's product details instead of setting displayProducts
@@ -300,7 +248,7 @@ const SearchBar = ({
         // Navigate to the first matched product's details
         //router.push(`/products/${matchedProducts[0].id}`);
         router.push(
-          `/shop/${matchedProducts[0].category}/${matchedProducts[0].animal}/${matchedProducts[0].subcategory}`
+          `/shop/${matchedProducts[0].category}/${matchedProducts[0].animal}/${matchedProducts[0].subcategory}`,
         );
       }
     }
@@ -320,12 +268,12 @@ const SearchBar = ({
 
     if (e.key === "ArrowDown") {
       setHighlightIndex((prev) =>
-        prev === null || prev >= suggestions.length - 1 ? 0 : prev + 1
+        prev === null || prev >= suggestions.length - 1 ? 0 : prev + 1,
       );
       e.preventDefault();
     } else if (e.key === "ArrowUp") {
       setHighlightIndex((prev) =>
-        prev === null || prev <= 0 ? suggestions.length - 1 : prev - 1
+        prev === null || prev <= 0 ? suggestions.length - 1 : prev - 1,
       );
       e.preventDefault();
     } else if (e.key === "Enter") {
@@ -338,20 +286,58 @@ const SearchBar = ({
     }
   };
 
-  const handleSuggestionClick = (suggestion) => {
-    // Assuming suggestion has category, animal, subcategory
-    const { category, animal, subcategory } = suggestion;
-    if (onSuggestionSelect) onSuggestionSelect(category, animal, subcategory);
-    // Navigate to the new shop route (category first)
-    router.push(
-      `/shop/${slugify(category)}/${slugify(animal)}/${slugify(
-        subcategory || "all"
-      )}`
+  // -------------------------
+  // Hide suggestion menu on outside click
+  // -------------------------
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // -------------------------
+  // Hide suggestions when category changes
+  // -------------------------
+  useEffect(() => {
+    setShowSuggestions(false);
+  }, [selectedCategory]);
+
+  // -------------------------
+  // Debounced suggestions
+  // -------------------------
+  useEffect(() => {
+    if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
+    debounceTimeout.current = setTimeout(
+      () => updateSuggestions(searchTerm),
+      250,
     );
+    return () => {
+      if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
+    };
+  }, [searchTerm, selectedCategory, updateSuggestions]);
+
+  // -------------------------
+  // Fuzzy match scoring
+  // -------------------------
+  const getScore = (source: string, term: string) => {
+    const lowerSource = source.toLowerCase();
+    const index = lowerSource.indexOf(term);
+    if (index === -1) return 0;
+    return term.length / lowerSource.length + 1 / (index + 1);
   };
 
   return (
-    <div ref={containerRef} className="relative w-full max-w-md">
+    <div
+      ref={containerRef}
+      className="searchBar bg-white relative w-full max-w-md"
+    >
       <div className="flex">
         <select
           value={selectedCategory}
@@ -361,10 +347,10 @@ const SearchBar = ({
           <option value="all">All Categories</option>
           {Array.from(new Set(baseProducts.map((p) => p.category))).map(
             (cat) => (
-              <option key={cat} value={cat.toLowerCase()}>
-                {cat}
+              <option key={cat} value={cat.toLocaleLowerCase()}>
+                {capitalizeFirst(cat)}
               </option>
-            )
+            ),
           )}
         </select>
 
@@ -380,7 +366,7 @@ const SearchBar = ({
               e.preventDefault();
               handleSearch(); // always use current searchTerm
             } else {
-              handleKeyDown;
+              handleKeyDown(e);
             }
           }}
         />
@@ -388,7 +374,7 @@ const SearchBar = ({
         <button
           type="button"
           onClick={() => handleSearch()} // uses current searchTerm
-          className="px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600"
+          className="px-4 py-2 bg-buttonPrimary text-white rounded-r-md hover:bg-blue-600"
         >
           Go
         </button>
