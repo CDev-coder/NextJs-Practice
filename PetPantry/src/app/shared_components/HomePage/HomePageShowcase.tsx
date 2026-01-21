@@ -58,6 +58,7 @@ const HomePageShowcase = ({ products }: HomePageShowcaseProps) => {
                 key={p.id}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
+                className="productCardHolderDiv"
               >
                 <ProductCard
                   product={p}

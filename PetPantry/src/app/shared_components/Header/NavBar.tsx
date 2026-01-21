@@ -16,7 +16,7 @@ export default function NavBar({ onHomeClick }: NavBarProps) {
   };
 
   return (
-    <header className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-4 bg-white shadow text-black gap-3 sm:gap-0">
+    <header className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-4 shadow text-black gap-3 sm:gap-0">
       {/* Left: Logo / Home */}
       <Link
         href="/"

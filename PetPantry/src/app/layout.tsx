@@ -6,6 +6,13 @@ import Footer from "./shared_components/Footer/Footer";
 import { getProducts } from "./lib/products";
 import { CartProvider } from "./context/CartContext";
 import { UserProvider } from "./context/UserContext";
+import { Merriweather } from "next/font/google";
+
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  weight: ["400", "700"], // regular and bold
+  variable: "--font-merriweather",
+});
 
 export const metadata = {
   title: "Pet Pantry",
@@ -24,8 +31,8 @@ export default async function RootLayout({
 }) {
   const products = await getProducts();
   return (
-    <html lang="en">
-      <body className="font-sans text-gray-900 bg-(--background)">
+    <html lang="en" className={merriweather.variable}>
+      <body className="font-sans text-gray-900 bg-background">
         <FilterProvider products={products}>
           <UserProvider>
             <CartProvider>

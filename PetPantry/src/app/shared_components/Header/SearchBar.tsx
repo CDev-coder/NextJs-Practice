@@ -342,7 +342,7 @@ const SearchBar = ({
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="border border-gray-300 rounded-l-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-card border border-input-border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-input-focus"
         >
           <option value="all">All Categories</option>
           {Array.from(new Set(baseProducts.map((p) => p.category))).map(
@@ -374,7 +374,7 @@ const SearchBar = ({
         <button
           type="button"
           onClick={() => handleSearch()} // uses current searchTerm
-          className="px-4 py-2 bg-buttonPrimary text-white rounded-r-md hover:bg-blue-600"
+          className="px-4 py-2 bg-btn-primary text-white rounded-r-md hover:bg-btn-primary-hover0"
         >
           Go
         </button>
