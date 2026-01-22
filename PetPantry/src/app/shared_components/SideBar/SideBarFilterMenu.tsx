@@ -90,7 +90,7 @@ const SideBarFilterMenu = ({
                 filterChange={handleFieldFilter}
               />
               <SideBarToggle<string>
-                filterName="name"
+                filterby={"filtered_names"}
                 activeFilters={activeFilters}
                 options={[
                   { label: "A to Z", value: "asc" },
@@ -100,7 +100,7 @@ const SideBarFilterMenu = ({
               />
 
               <SideBarToggle<number>
-                filterName="price"
+                filterby={"filtered_prices"}
                 activeFilters={activeFilters}
                 options={[
                   { label: "$ to $$$", value: 1 },

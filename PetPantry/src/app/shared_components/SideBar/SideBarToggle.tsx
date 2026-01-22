@@ -7,7 +7,7 @@ interface ToggleOption<T extends string | number> {
 }
 
 interface SideBarToggleProps<T extends string | number> {
-  filterName: string;
+  filterby: string;
   title?: string;
   activeFilters?: ActiveFilters | null;
   options: ToggleOption<T>[];
@@ -15,7 +15,7 @@ interface SideBarToggleProps<T extends string | number> {
 }
 
 const SideBarToggle = <T extends string | number>({
-  filterName,
+  filterby,
   title,
   activeFilters,
   options,
@@ -24,9 +24,16 @@ const SideBarToggle = <T extends string | number>({
   if (!activeFilters) {
     return null; // Or handle the null case appropriately, e.g., return an empty div
   }
-  const copyList = activeFilters[filterName as keyof ActiveFilters] as T[];
+  const filterName = filterby === "filtered_names" ? "Name" : "Price";
+
+  const copyList = activeFilters
+    ? activeFilters[filterby as keyof ActiveFilters]
+    : undefined;
+
+  //console.log("SIDEBARTOGGLE - rawValue: ", copyList);
+
   const handleClick = (value: T) => {
-    console.log(`Toggling ${filterName} with value: ${value}`);
+    //console.log(`Toggling ${filterby} with value: ${value}`);
     onChange(value);
   };
 

@@ -20,6 +20,7 @@ module.exports = {
         link: "#7DA7C0", // Link / clickable text
         "link-alt": "#EFA78B", // Alternate link / clickable text
         "navbar-text": "#FFFFFF", // Navbar text
+        "navbar-text2": "#C27E6F", // Navbar text
 
         // Buttons
         "btn-primary": "#4C9085", // Primary button
