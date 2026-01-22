@@ -1,5 +1,7 @@
 // ProductCardStoryWrapper.tsx
 import Link from "next/link";
+import Image from "next/image";
+import { Product } from "../types";
 
 const MockAddToCartButton = () => (
   <button className="mt-2 w-full rounded bg-blue-600 text-white py-2">
@@ -7,13 +9,15 @@ const MockAddToCartButton = () => (
   </button>
 );
 
-export default function ProductCardStory({ product }: { product: any }) {
+export default function ProductCardStory({ product }: { product: Product }) {
   return (
     <div className="ProductCardDiv border rounded-lg p-4 shadow hover:shadow-lg transition max-w-xs mx-auto">
       <Link href={`/products/${product.id}`}>
-        <img
+        <Image
           src={product.image}
           alt={product.name}
+          width={500}
+          height={500}
           className="ProductCard_Link w-full h-48 sm:h-40 md:h-52 lg:h-56 object-cover rounded"
         />
         <div className="flex justify-between items-center mt-2 mb-2">

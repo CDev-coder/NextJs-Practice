@@ -108,93 +108,75 @@ const MainNavigation = () => {
               onMouseLeave={handleCategoryLeave}
             >
               <button
-                className="px-3 py-2 hover:text-white hover:bg-nav-hover rounded transition-colors"
+                className="bg-white/15 text-navbar-text antialiased tracking-wide [text-shadow:_0_-1.5px_0_rgba(0,0,0,0.5),_0_1px_0_rgba(255,255,255,0.3)] hover:bg-white/30 px-5 py-2 rounded-full transition-all duration-300 font-medium flex items-center gap-2"
                 onClick={() => handleCategoryClick("all", key)}
               >
                 {item.name}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2.5"
+                  stroke="currentColor"
+                  className="w-3 h-3"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
               </button>
 
               {/* Dropdown menu */}
               {activeCategory === key && (
-                <div className="absolute left-0 top-full w-max bg-white shadow-xl z-50 rounded-b-md overflow-hidden text-black">
-                  <div className="p-6 grid grid-cols-3 gap-8">
-                    {/* Dogs column */}
-                    <div>
-                      <h3
-                        className="dropdown-header"
-                        onClick={() => handleCategoryClick("dog", key)}
-                      >
-                        Dogs
-                      </h3>
-                      <ul className="space-y-2">
-                        {item.subcategories.dog.map((subcat, index) => (
-                          <li key={index}>
-                            <button
-                              className="dropdown-btn"
-                              onClick={() =>
-                                handleSubcategoryClick(key, "dog", subcat)
-                              }
-                            >
-                              {subcat}
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                <div className="absolute left-0 top-full w-max bg-[#FAF9F6] shadow-2xl z-50 rounded-3xl overflow-hidden text-stone-700 border border-orange-100/50">
+                  <div className="p-8 grid grid-cols-3 gap-10">
+                    {/* Column mapping (Dogs, Cats, Birds) */}
+                    {["dog", "cat", "bird"].map((category_animal) => (
+                      <div key={category_animal}>
+                        <h3
+                          className="text-[#C27E6F] font-bold mb-4 text-lg cursor-pointer hover:opacity-80 transition-opacity"
+                          onClick={() =>
+                            handleCategoryClick(category_animal, key)
+                          }
+                        >
+                          {category_animal.charAt(0).toUpperCase() +
+                            category_animal.slice(1)}
+                          s
+                        </h3>
+                        <ul className="space-y-1">
+                          {item.subcategories[
+                            category_animal as keyof typeof item.subcategories
+                          ].map((subcat: string, index: number) => (
+                            /* 1. Added group/item here so the dot knows when to show up */
+                            <li key={index} className="group/item">
+                              <button
+                                className="text-stone-500 hover:text-navbar-text2 hover:bg-orange-50 px-3 py-1.5 -ml-3 rounded-lg transition-all duration-200 w-full text-left flex items-center"
+                                onClick={() =>
+                                  handleSubcategoryClick(
+                                    key,
+                                    category_animal,
+                                    subcat,
+                                  )
+                                }
+                              >
+                                {/* 2. The Marker*/}
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#C27E6F] mr-0 opacity-0 group-hover/item:mr-2 group-hover/item:opacity-100 transition-all duration-300 flex-shrink-0"></span>
 
-                    {/* Cats column */}
-                    <div>
-                      <h3
-                        className="dropdown-header"
-                        onClick={() => handleCategoryClick("cat", key)}
-                      >
-                        Cats
-                      </h3>
-                      <ul className="space-y-2">
-                        {item.subcategories.cat.map((subcat, index) => (
-                          <li key={index}>
-                            <button
-                              className="dropdown-btn"
-                              onClick={() =>
-                                handleSubcategoryClick(key, "cat", subcat)
-                              }
-                            >
-                              {subcat}
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Birds column */}
-                    <div>
-                      <h3
-                        className="dropdown-header"
-                        onClick={() => handleCategoryClick("bird", key)}
-                      >
-                        Birds
-                      </h3>
-                      <ul className="space-y-2">
-                        {item.subcategories.bird.map((subcat, index) => (
-                          <li key={index}>
-                            <button
-                              className="dropdown-btn"
-                              onClick={() =>
-                                handleSubcategoryClick(key, "bird", subcat)
-                              }
-                            >
-                              {subcat}
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                                <span className="tracking-tight">{subcat}</span>
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
                   </div>
 
-                  {/* View all button */}
-                  <div className="bg-gray-100 px-6 py-3 border-t text-black">
+                  {/* View all button - "Cozy Footer" */}
+                  <div className="bg-orange-100/30 px-6 py-4 border-t border-dashed border-orange-200 text-center">
                     <button
-                      className="text-petflow-blue font-semibold hover:underline"
+                      className="text-[#C27E6F] font-bold hover:scale-105 transition-transform duration-200"
                       onClick={() => handleCategoryClick("all", key)}
                     >
                       View All {item.name}

@@ -7,8 +7,11 @@ module.exports = {
         // Backgrounds
         background: "#FFF5E6", // Main canvas / page
         card: "#F2E0C9", // Cards / panels / forms
-        navbar: "#A8B8A2", // Floating navbar / sticky elements (alternate: #A67C52)
+        //navbar: "#A8B8A2", // Floating navbar / sticky elements (alternate: #A67C52)
+        navbar: "#C27E6F",
         footer: "#EDE0CF", // Footer
+        "sidemenu-border1": "#D99A70", // Side menu border 1
+        "sidemenu-border2": "#EFA78B", // Side menu border 2
 
         // Text
         sofwords: "#A67C52", // Primary text
@@ -16,9 +19,10 @@ module.exports = {
         "sofwords-disabled": "rgba(140,123,106,0.5)", // Disabled text
         link: "#7DA7C0", // Link / clickable text
         "link-alt": "#EFA78B", // Alternate link / clickable text
+        "navbar-text": "#FFFFFF", // Navbar text
 
         // Buttons
-        "btn-primary": "#7DA7C0", // Primary button
+        "btn-primary": "#4C9085", // Primary button
         "btn-primary-hover": "#D99A70", // Primary hover
         "btn-secondary": "#EFA78B", // Secondary button
         "btn-secondary-hover": "#F7D78D", // Secondary hover
@@ -41,6 +45,10 @@ module.exports = {
         "card-border": "rgba(166,124,82,0.15)", // Card border / shadow
         "card-title": "#A67C52", // Card title
         "card-subtext": "#8C7B6A", // Card description / subtext
+
+        //Borders
+        mborder: "#800020", //Menu Borders
+        cborder: "#7B3F00", //Card Borders
 
         // Icons / Graphics / Decorative accents
         icon: "#A67C52", // Icons in nav or actions

@@ -25,10 +25,10 @@ export default function CartIcon({ size = 64 }: CartIconProps) {
   }, [totalItems, badgeControls]);
   // Select base icon variant based on totalItems
   const baseIcon = useMemo(() => {
-    if (totalItems === 0) return "/icons/cart_0_compressed.jpg";
-    if (totalItems < 3) return "/icons/cart_1_compressed.jpg";
-    if (totalItems < 6) return "/icons/cart_3_compressed.jpg";
-    return "/icons/cart_5_compressed.jpg";
+    if (totalItems === 0) return "/icons/cart_0_compressed.png";
+    if (totalItems < 3) return "/icons/cart_1_compressed.png";
+    if (totalItems < 6) return "/icons/cart_3_compressed.png";
+    return "/icons/cart_5_compressed.png";
   }, [totalItems]);
 
   return (

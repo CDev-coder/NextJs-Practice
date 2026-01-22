@@ -76,7 +76,7 @@ const SideBarFilterMenu = ({
       <>
         {activeFilters && (
           <div className="w-64 flex-shrink-0">
-            <div className="bg-white rounded-lg shadow-md p-4 text-black">
+            <div className="bg-white rounded-lg shadow-md p-4 text-black border border-mborder">
               <SideBarList
                 filterName={"animal"}
                 filterby={"filtered_animals"}

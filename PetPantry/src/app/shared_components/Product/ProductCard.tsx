@@ -17,7 +17,7 @@ export default function ProductCard({
   onInfoClick,
 }: ProductCardProps) {
   return (
-    <div className="ProductCardDiv group relative overflow-hidden rounded-xl border border-input-border bg-card p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+    <div className="ProductCardDiv group relative overflow-hidden rounded-xl border border-cborder bg-card p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
       <Link href={`/products/${product.id}`} className="block">
         <div className="relative mb-3 h-40 w-full overflow-hidden rounded-lg">
           <Image
@@ -44,7 +44,7 @@ export default function ProductCard({
         <AddToCartButton product={product} className="flex-1" />
         {infoButton && (
           <button
-            className="mt-4 bg-btn-secondary border px-3 py-2 rounded-md text-sm font-medium transition hover:bg-gray-100 hover:bg-btn-secondary-hover focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            className="mt-4 bg-btn-secondary border px-3 py-2 rounded-md text-sm font-medium transition hover:bg-btn-secondary-hover focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
             onClick={onInfoClick}
           >
             Info
