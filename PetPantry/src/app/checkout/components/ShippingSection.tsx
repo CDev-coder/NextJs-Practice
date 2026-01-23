@@ -74,12 +74,9 @@ const ShippingSection = ({ user }: ShippingSectionProps) => {
               )}
             </div>
           ) : currentAddress ? (
-            <div>
-              <span className="font-medium capitalize block text-sm mb-1">
-                {selectedKey}
-              </span>
+            <div className="py-1">
               <p className="text-sm text-gray-600 mb-3">
-                {currentAddress.street}, {currentAddress.city},{" "}
+                {currentAddress.street}, {currentAddress.city},
                 {currentAddress.state} {currentAddress.zip}
               </p>
             </div>

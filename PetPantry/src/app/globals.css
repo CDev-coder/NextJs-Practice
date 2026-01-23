@@ -32,6 +32,7 @@
   --card-title: #a67c52;
   --card-subtext: #8c7b6a;
   --cart-card: #fffaf0;
+  --cart-card-buttonborder: #78716c;
   --mborder: #800020;
   --cborder: #7b3f00;
   --icon: #a67c52;
@@ -78,6 +79,8 @@
   --card-border: rgba(212, 182, 146, 0.2);
   --card-title: #d4b692;
   --card-subtext: #b8a899;
+  --cart-card: #fffaf0;
+  --cart-card-buttonborder: #78716c;
   --mborder: #993d3d;
   --cborder: #9c6b3c;
   --icon: #d4b692;

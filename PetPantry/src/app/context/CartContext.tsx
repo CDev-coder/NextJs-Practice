@@ -16,6 +16,7 @@ interface CartContextType {
   cart: CartItem[];
   addItem: (product: Product) => void;
   removeItem: (SKU: string) => void;
+  updateItemQuantity: (SKU: string, quantity: number) => void;
   clearCart: () => void;
   totalPrice: number;
   syncCartWithServer: (userId: string) => Promise<void>;
@@ -86,6 +87,18 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const clearCart = () => setCart([]);
+
+  const updateItemQuantity = (SKU: string, quantity: number) => {
+    setCart((prev) => {
+      const existing = prev.find((item) => item.SKU === SKU);
+      if (existing) {
+        return prev.map((item) =>
+          item.SKU === SKU ? { ...item, quantity: quantity } : item,
+        );
+      }
+      return prev;
+    });
+  };
 
   const totalPrice = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -158,6 +171,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
         cart,
         addItem,
         removeItem,
+        updateItemQuantity,
         clearCart,
         totalPrice,
         syncCartWithServer,

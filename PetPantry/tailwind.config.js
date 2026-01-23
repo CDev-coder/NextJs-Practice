@@ -49,6 +49,7 @@ module.exports = {
         "shadow-card": "var(--shadow-card)",
         "shadow-floating": "var(--shadow-floating)",
         "slider-shadow": "var(--slider-shadow)",
+        "cart-card-buttonborder": "var(--cart-card-buttonborder)",
       },
       fontFamily: {
         sans: ["Merriweather", "serif"],

@@ -7,6 +7,7 @@ import { getProducts } from "./lib/products";
 import { CartProvider } from "./context/CartContext";
 import { UserProvider } from "./context/UserContext";
 import { Merriweather } from "next/font/google";
+import { ToastProvider } from "./context/ToastContext";
 
 const merriweather = Merriweather({
   subsets: ["latin"],
@@ -36,9 +37,11 @@ export default async function RootLayout({
         <FilterProvider products={products}>
           <UserProvider>
             <CartProvider>
-              <NavBarWrapper>
-                <main className="min-h-screen">{children}</main>
-              </NavBarWrapper>
+              <ToastProvider>
+                <NavBarWrapper>
+                  <main className="min-h-screen">{children}</main>
+                </NavBarWrapper>
+              </ToastProvider>
             </CartProvider>
           </UserProvider>
           <Footer />
