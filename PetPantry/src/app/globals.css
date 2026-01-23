@@ -3,31 +3,96 @@
 @tailwind utilities;
 
 :root {
-  --background: #f5e9da;
-  --foreground: #6b4f3c;
-  --accent-1: #e3b7a0;
-  --accent-2: #a8b8a2;
-  --accent-2-text: #3b3b33;
-  --accent-3: #f2c2b1;
-  --secondary-bg: #d8cfc4;
-  --petflow-blue: #0077cc;
+  /* Light Theme (Normal) */
+  --background: #fff5e6;
+  --card: #f2e0c9;
+  --navbar: #c27e6f;
+  --footer: #ede0cf;
+  --sofwords: #a67c52;
+  --sofwords-secondary: #8c7b6a;
+  --sofwords-disabled: rgba(140, 123, 106, 0.5);
+  --link: #7da7c0;
+  --link-alt: #efa78b;
+  --navbar-text: #ffffff;
+  --btn-primary: #4c9085;
+  --btn-primary-hover: #d99a70;
+  --btn-secondary: #efa78b;
+  --btn-secondary-hover: #f7d78d;
+  --btn-disabled: rgba(140, 123, 106, 0.5);
+  --btn-text: #a67c52;
+  --input: #f2e0c9;
+  --input-border: #a67c52;
+  --input-placeholder: #8c7b6a;
+  --input-focus: #7da7c0;
+  --input-error: #f4b8a3;
+  --nav-text: #fff5e6;
+  --nav-active: #efa78b;
+  --nav-hover: #d99a70;
+  --card-border: rgba(166, 124, 82, 0.15);
+  --card-title: #a67c52;
+  --card-subtext: #8c7b6a;
+  --cart-card: #fffaf0;
+  --mborder: #800020;
+  --cborder: #7b3f00;
+  --icon: #a67c52;
+  --icon-alt: #7da7c0;
+  --accent: #f7d78d;
+  --badge: #f4b8a3;
+  --success: #f7d78d;
+  --warning: #efa78b;
+  --error: #f4b8a3;
+  --info: #7da7c0;
+  --divider: rgba(166, 124, 82, 0.25);
+  --section: #f2e0c9;
+  --shadow-card: rgba(166, 124, 82, 0.1);
+  --shadow-floating: rgba(168, 184, 162, 0.1);
+  --slider-shadow: #faf9f6;
 }
 
-.dropdown-header {
-  cursor: pointer;
-  text-decoration: underline;
-}
-.dropdown-btn {
-  text-align: left;
-  cursor: pointer;
-  transition:
-    color 0.2s,
-    background-color 0.2s;
-}
-.dropdown-btn:hover,
-.dropdown-header:hover {
-  background-color: var(--accent-2-text);
-  color: white;
+.dark {
+  /* Dark Theme */
+  --background: #1a1a1a;
+  --card: #2d2d2d;
+  --navbar: #4a2c2a;
+  --footer: #262626;
+  --sofwords: #d4b692;
+  --sofwords-secondary: #b8a899;
+  --sofwords-disabled: rgba(184, 168, 153, 0.5);
+  --link: #6ba8d4;
+  --link-alt: #e89d83;
+  --navbar-text: #ffffff;
+  --btn-primary: #3c756d;
+  --btn-primary-hover: #b87e5a;
+  --btn-secondary: #d9876c;
+  --btn-secondary-hover: #e6c078;
+  --btn-disabled: rgba(184, 168, 153, 0.5);
+  --btn-text: #d4b692;
+  --input: #3d3d3d;
+  --input-border: #d4b692;
+  --input-placeholder: #b8a899;
+  --input-focus: #6ba8d4;
+  --input-error: #d49e8a;
+  --nav-text: #f5f5f5;
+  --nav-active: #e89d83;
+  --nav-hover: #b87e5a;
+  --card-border: rgba(212, 182, 146, 0.2);
+  --card-title: #d4b692;
+  --card-subtext: #b8a899;
+  --mborder: #993d3d;
+  --cborder: #9c6b3c;
+  --icon: #d4b692;
+  --icon-alt: #6ba8d4;
+  --accent: #e6c078;
+  --badge: #d49e8a;
+  --success: #e6c078;
+  --warning: #d9876c;
+  --error: #d49e8a;
+  --info: #6ba8d4;
+  --divider: rgba(212, 182, 146, 0.3);
+  --section: #363636;
+  --shadow-card: rgba(0, 0, 0, 0.3);
+  --shadow-floating: rgba(0, 0, 0, 0.4);
+  --slider-shadow: #2d2d2d;
 }
 
 .ProductCardDiv {

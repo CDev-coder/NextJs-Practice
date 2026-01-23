@@ -4,11 +4,19 @@
     "name": "John Developer",
     "email": "john@petstore.dev",
     "password": "test123",
-    "address": {
-      "street": "123 Main St",
-      "city": "Anytown",
-      "state": "CA",
-      "zip": "12345"
+    "addresses": {
+      "primary": {
+        "street": "123 Main St",
+        "city": "Anytown",
+        "state": "CA",
+        "zip": "12345"
+      },
+      "secondary": {
+        "street": "456 Oak Ave",
+        "city": "Somewhere",
+        "state": "NY",
+        "zip": "67890"
+      }
     },
     "paymentMethod": {
       "creditcard": {
@@ -29,11 +37,19 @@
     "name": "Jane Developer",
     "email": "jane@petstore.dev",
     "password": "test123",
-    "address": {
-      "street": "123 Main St",
-      "city": "Anytown",
-      "state": "CA",
-      "zip": "12345"
+    "addresses": {
+      "primary": {
+        "street": "123 Main St",
+        "city": "Anytown",
+        "state": "CA",
+        "zip": "12345"
+      },
+      "secondary": {
+        "street": "456 Oak Ave",
+        "city": "Somewhere",
+        "state": "NY",
+        "zip": "67890"
+      }
     },
     "paymentMethod": {
       "creditcard": {

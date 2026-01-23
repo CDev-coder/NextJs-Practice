@@ -16,6 +16,6 @@ export async function GET(req: NextRequest) {
     id: user.id,
     name: user.name,
     email: user.email,
-    address: user.address ?? null,
+    addresses: user.addresses ?? null,
   });
 }

@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     id: user.id,
     name: user.name,
     email: user.email,
-    address: user.address ?? null,
+    address: user.addresses ?? null,
     paymentmethod: user.paymentMethod ?? null,
   });
   // Store token in a cookie (dev-only)

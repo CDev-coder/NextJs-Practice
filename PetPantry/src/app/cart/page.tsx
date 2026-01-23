@@ -57,7 +57,6 @@ export default function CartPage() {
           </div>
         ) : (
           <>
-            {/* Cart Items - Swapped divide-y for a custom container gap */}
             <div className="flex flex-col gap-2 ">
               {cart.map((item) => (
                 <CartCard key={item.id} product={item} />

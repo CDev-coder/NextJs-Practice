@@ -1,8 +1,19 @@
+interface Addresses {
+  primary: Address;
+  secondary: Address;
+}
+
 interface Address {
   street: string;
   city: string;
   state: string;
   zip: string;
+}
+
+interface Paymethods {
+  creditcard: CreditInfo;
+  paypal: PayPalInfo;
+  giftCard: GiftCardInfo;
 }
 
 interface Paymethods {
@@ -31,7 +42,7 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  address: Address | null;
+  addresses: Addresses | null;
   paymentMethod?: Paymethods;
 }
 
@@ -51,7 +62,7 @@ export async function getCurrentUser(): Promise<User | null> {
       id: data.id,
       name: data.name,
       email: data.email,
-      address: data.address ?? null,
+      addresses: data.addresses ?? null,
     };
   } catch {
     return null;
@@ -79,7 +90,7 @@ export interface RegisterData {
   name: string;
   email: string;
   password: string;
-  address?: Address;
+  addresses?: Addresses;
   paymentMethod?: Paymethods;
 }
 
