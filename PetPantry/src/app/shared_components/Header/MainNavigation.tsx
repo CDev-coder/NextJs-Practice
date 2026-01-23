@@ -116,7 +116,7 @@ const MainNavigation = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="2.5"
+                  strokeWidth="2.5"
                   stroke="currentColor"
                   className="w-3 h-3"
                 >
@@ -136,7 +136,7 @@ const MainNavigation = () => {
                     {["dog", "cat", "bird"].map((category_animal) => (
                       <div key={category_animal}>
                         <h3
-                          className="text-[#C27E6F] font-bold mb-4 text-lg cursor-pointer hover:opacity-80 transition-opacity"
+                          className="text-navbar-text2 font-bold mb-4 text-lg cursor-pointer hover:opacity-80 transition-opacity"
                           onClick={() =>
                             handleCategoryClick(category_animal, key)
                           }
@@ -152,7 +152,7 @@ const MainNavigation = () => {
                             /* 1. Added group/item here so the dot knows when to show up */
                             <li key={index} className="group/item">
                               <button
-                                className="text-stone-500 hover:text-navbar-text2 hover:bg-orange-50 px-3 py-1.5 -ml-3 rounded-lg transition-all duration-200 w-full text-left flex items-center"
+                                className="relative text-stone-500 hover:text-navbar-text2 hover:bg-orange-50 px-3 py-1.5 -ml-3 rounded-lg transition-all duration-200 w-full text-left flex items-center"
                                 onClick={() =>
                                   handleSubcategoryClick(
                                     key,
@@ -162,9 +162,10 @@ const MainNavigation = () => {
                                 }
                               >
                                 {/* 2. The Marker*/}
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#C27E6F] mr-0 opacity-0 group-hover/item:mr-2 group-hover/item:opacity-100 transition-all duration-300 flex-shrink-0"></span>
-
-                                <span className="tracking-tight">{subcat}</span>
+                                <span className="absolute left-2 w-1.5 h-1.5 rounded-full bg-navbar opacity-0 group-hover/item:opacity-100 transition-opacity duration-300" />
+                                <span className="tracking-tight pl-3">
+                                  {subcat}
+                                </span>
                               </button>
                             </li>
                           ))}
@@ -176,7 +177,7 @@ const MainNavigation = () => {
                   {/* View all button - "Cozy Footer" */}
                   <div className="bg-orange-100/30 px-6 py-4 border-t border-dashed border-orange-200 text-center">
                     <button
-                      className="text-[#C27E6F] font-bold hover:scale-105 transition-transform duration-200"
+                      className="text-navbar-text2 font-bold hover:scale-105 transition-transform duration-200"
                       onClick={() => handleCategoryClick("all", key)}
                     >
                       View All {item.name}

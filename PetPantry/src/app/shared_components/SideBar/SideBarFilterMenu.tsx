@@ -71,62 +71,103 @@ const SideBarFilterMenu = ({
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const SidebarSection = ({
+    condition,
+    children,
+    isLast = false,
+  }: {
+    condition: boolean | string[] | number[] | ActiveFilters | undefined;
+    children: React.ReactNode;
+    isLast?: boolean;
+  }) => {
+    if (!condition || (Array.isArray(condition) && condition.length === 0))
+      return null;
+    return (
+      <div className="space-y-6">
+        {children}
+        {!isLast && <div className="border-b border-dashed border-stone-500" />}
+      </div>
+    );
+  };
+
   return (
     <>
       <>
         {activeFilters && (
           <div className="w-64 flex-shrink-0">
-            <div className="bg-white rounded-lg shadow-md p-4 text-black border border-mborder">
-              <SideBarList
-                filterName={"animal"}
-                filterby={"filtered_animals"}
-                activeFilters={activeFilters}
-                filterChange={handleFieldFilter}
-              />
-              <SideBarList
-                filterName={"brand"}
-                filterby={"filtered_brands"}
-                activeFilters={activeFilters}
-                filterChange={handleFieldFilter}
-              />
-              <SideBarToggle<string>
-                filterby={"filtered_names"}
-                activeFilters={activeFilters}
-                options={[
-                  { label: "A to Z", value: "asc" },
-                  { label: "Z to A", value: "dsc" },
-                ]}
-                onChange={handleAlphabeticalFilter}
-              />
+            <div className="bg-orange-50/50 rounded-3xl p-6 text-stone-700 space-y-8">
+              <SidebarSection
+                condition={activeFilters.filtered_animals.length > 1}
+              >
+                <SideBarList
+                  filterName={"animal"}
+                  filterby={"filtered_animals"}
+                  activeFilters={activeFilters}
+                  filterChange={handleFieldFilter}
+                />
+              </SidebarSection>
 
-              <SideBarToggle<number>
-                filterby={"filtered_prices"}
-                activeFilters={activeFilters}
-                options={[
-                  { label: "$ to $$$", value: 1 },
-                  { label: "$$$ to $", value: 2 },
-                ]}
-                onChange={handlePricePointFilter}
-              />
+              <SidebarSection condition={activeFilters.filtered_brands}>
+                <SideBarList
+                  filterName={"brand"}
+                  filterby={"filtered_brands"}
+                  activeFilters={activeFilters}
+                  filterChange={handleFieldFilter}
+                />
+              </SidebarSection>
 
-              <SideBarSlider
-                activeFilters={activeFilters}
-                increments={1}
-                onPriceRangeChange={handlePriceRangeFilter}
-              />
+              <SidebarSection condition={activeFilters.filtered_names}>
+                <SideBarToggle<string>
+                  filterby={"filtered_names"}
+                  activeFilters={activeFilters}
+                  options={[
+                    { label: "A to Z", value: "asc" },
+                    { label: "Z to A", value: "dsc" },
+                  ]}
+                  onChange={handleAlphabeticalFilter}
+                />
+              </SidebarSection>
 
-              <SideBarRatings
-                activeFilters={activeFilters}
-                size={20}
-                color="#FF9900"
-                onRatingClick={handleRatingClick}
-              />
-              <SideBarList
-                filterName={"subcategory"}
-                filterby={"filtered_subcategories"}
-                activeFilters={activeFilters}
-                filterChange={handleFieldFilter}
-              />
+              <SidebarSection condition={activeFilters.filtered_prices}>
+                <SideBarToggle<number>
+                  filterby={"filtered_prices"}
+                  activeFilters={activeFilters}
+                  options={[
+                    { label: "$ to $$$", value: 1 },
+                    { label: "$$$ to $", value: 2 },
+                  ]}
+                  onChange={handlePricePointFilter}
+                />
+              </SidebarSection>
+
+              <SidebarSection condition={activeFilters}>
+                <SideBarSlider
+                  activeFilters={activeFilters}
+                  increments={1}
+                  onPriceRangeChange={handlePriceRangeFilter}
+                />
+              </SidebarSection>
+
+              <SidebarSection condition={activeFilters}>
+                <SideBarRatings
+                  activeFilters={activeFilters}
+                  size={20}
+                  color="#FF9900"
+                  onRatingClick={handleRatingClick}
+                />
+              </SidebarSection>
+
+              <SidebarSection
+                condition={activeFilters.filtered_subcategories}
+                isLast={true}
+              >
+                <SideBarList
+                  filterName={"sub-category"}
+                  filterby={"filtered_subcategories"}
+                  activeFilters={activeFilters}
+                  filterChange={handleFieldFilter}
+                />
+              </SidebarSection>
             </div>
           </div>
         )}

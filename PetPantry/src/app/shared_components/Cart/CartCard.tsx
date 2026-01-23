@@ -18,57 +18,71 @@ export default function CartCard({ product }: { product: CartItem }) {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-gray-200 py-4">
-      {/* Product image */}
-      <Link href={`/products/${product.id}`} className="shrink-0">
-        <Image
-          src={product.image}
-          alt={product.name}
-          width={120}
-          height={120}
-          className="rounded-md object-cover"
-        />
-      </Link>
-
-      {/* Product details */}
-      <div className="flex flex-col sm:flex-row justify-between flex-grow gap-4 w-full">
-        <div className="flex flex-col flex-grow">
-          <Link href={`/products/${product.id}`}>
-            <h3 className="text-lg font-semibold text-blue-600 hover:underline">
-              {product.name}
-            </h3>
-          </Link>
-          <p className="text-sm text-gray-500 mt-1">
-            Brand: <span className="text-gray-700">{product.brand}</span>
-          </p>
-          <p className="text-sm text-gray-500">
-            Category: <span className="text-gray-700">{product.category}</span>
-          </p>
-
-          <div className="flex gap-4 mt-3">
-            <button
-              onClick={handleRemove}
-              className="text-red-600 hover:text-red-700 text-sm font-medium"
-            >
-              Remove
-            </button>
-            <button
-              onClick={handleSaveForLater}
-              className="text-blue-600 hover:text-blue-700 text-sm font-medium"
-            >
-              Save for later
-            </button>
+    <div className="cartCardDiv bg-cart-card border rounded-[2rem] flex flex-col  p-4 shadow-sm">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 py-6 border-b border-dashed border-stone-200 last:border-0">
+        {/* Product image */}
+        <Link href={`/products/${product.id}`} className="shrink-0 group">
+          <div className="overflow-hidden rounded-2xl border border-orange-100/50 shadow-sm">
+            <Image
+              src={product.image}
+              alt={product.name}
+              width={110}
+              height={110}
+              className="object-cover transform group-hover:scale-110 transition-transform duration-500"
+            />
           </div>
-        </div>
+        </Link>
 
-        {/* Price */}
-        <div className="text-right sm:min-w-[80px]">
-          <span className="text-lg font-semibold text-green-700">
-            ${product.price.toFixed(2)}
-          </span>
-          {product.quantity > 1 && (
-            <p className="text-sm text-gray-500">Qty: {product.quantity}</p>
-          )}
+        {/* Product details */}
+        <div className="flex flex-col sm:flex-row justify-between flex-grow gap-4 w-full">
+          <div className="flex flex-col flex-grow">
+            <Link href={`/products/${product.id}`}>
+              <h3 className="text-lg font-bold text-stone-800 hover:text-[#C27E6F] transition-colors">
+                {product.name}
+              </h3>
+            </Link>
+            <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1 text-sm">
+              <p className="text-stone-400">
+                Brand:{" "}
+                <span className="text-stone-600 font-medium">
+                  {product.brand}
+                </span>
+              </p>
+              <p className="text-stone-400">
+                Category:{" "}
+                <span className="text-stone-600 font-medium">
+                  {product.category}
+                </span>
+              </p>
+            </div>
+
+            <div className="flex gap-6 mt-4">
+              <button
+                onClick={handleRemove}
+                className="text-stone-400 hover:text-red-500 text-xs font-bold uppercase tracking-widest transition-colors"
+              >
+                Remove
+              </button>
+              <button
+                onClick={handleSaveForLater}
+                className="text-stone-400 hover:text-[#C27E6F] text-xs font-bold uppercase tracking-widest transition-colors"
+              >
+                Save for later
+              </button>
+            </div>
+          </div>
+
+          {/* Price */}
+          <div className="text-right sm:min-w-[100px] flex flex-col justify-center">
+            <span className="text-xl font-bold text-[#2D4F40]">
+              ${product.price.toFixed(2)}
+            </span>
+            {product.quantity > 1 && (
+              <p className="text-xs font-medium text-stone-400 mt-1 uppercase tracking-tighter">
+                Qty: {product.quantity}
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>

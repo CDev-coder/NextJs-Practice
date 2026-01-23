@@ -69,7 +69,7 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
       currency: "USD",
     }).format(price);
   };
-
+  ///id={`sbfm_h3_PriceRange`}
   return (
     <div className="sideBar-price-slider">
       <h3
@@ -78,9 +78,8 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
       >
         Filter by Price Range
       </h3>
-      <h3>Price Range</h3>
-
-      <div className="slider-container mb-6">
+      {/* Apply your Tailwind color class here (e.g., text-terracotta) to control the slider color */}
+      <div className="slider-container mb-8 px-4 py-8 bg-slider-shadow/50 rounded-2xl text-navbar-text2">
         <Slider
           value={range}
           onChange={handleRangeChange}
@@ -91,31 +90,76 @@ const SideBarSlider: React.FC<PriceRangeSliderProps> = ({
           max={absoluteMax}
           step={increments}
           sx={{
-            color: "#3f51b5", // Custom color
-            height: 8,
+            color: "currentColor", // Inherits from the parent's Tailwind class
+            height: 6, // Slightly thinner track for a more refined look
+            "& .MuiSlider-track": {
+              border: "none",
+              borderRadius: 4,
+            },
+            "& .MuiSlider-rail": {
+              opacity: 0.3,
+              backgroundColor: "#d6d3d1", // Stone-300 for a warm gray rail
+            },
             "& .MuiSlider-thumb": {
-              height: 24,
+              height: 24, // Increased size for better "touchability"
               width: 24,
-              backgroundColor: "#fff",
-              border: "2px solid currentColor",
+              backgroundColor: "#FFF7ED", // Solid Warm Cream center
+              border: "5px solid currentColor", // Extra thick terracotta ring to look like a "shell"
+              boxShadow: "0 3px 6px rgba(0,0,0,0.15)", // Deeper shadow to give it physical "weight"
+
+              // This removes the "hollow" look and ensures it's a solid bead
+              "&:before": {
+                display: "none",
+              },
+
+              // Subtle "squish" effect when clicking to make it feel tactile
+              "&:active": {
+                transform: "translate(-50%, -50%) scale(0.9)",
+                boxShadow: "0 1px 2px rgba(0,0,0,0.2)",
+              },
+
+              "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
+                // A soft terracotta glow that stays tight to the button
+                boxShadow:
+                  "0 0 0 6px color-mix(in srgb, currentColor 20%, transparent)",
+              },
             },
             "& .MuiSlider-valueLabel": {
-              backgroundColor: "#3f51b5",
+              lineHeight: 1.2,
+              fontSize: 12,
+              background: "unset",
+              padding: 0,
+              width: 42, // Slightly wider label
+              height: 42,
+              borderRadius: "50% 50% 50% 0", // "Teardrop" shape
+              backgroundColor: "currentColor",
+              transformOrigin: "bottom left",
+              transform: "translate(50%, -100%) rotate(-45deg) scale(0)",
+              "&:before": { display: "none" },
+              "&.MuiSlider-valueLabelOpen": {
+                transform: "translate(50%, -100%) rotate(-45deg) scale(1)",
+              },
+              "& > *": {
+                transform: "rotate(45deg)",
+              },
             },
           }}
         />
-        <div className="selected-range-details">
+
+        <div className="mt-4 space-y-1 text-sm text-stone-500 italic">
           <p>
-            Selected range: {formatPrice(range[0])} - {formatPrice(range[1])}
+            Selected:{" "}
+            <span className="text-navbar-text2 font-semibold">
+              {formatPrice(range[0])} — {formatPrice(range[1])}
+            </span>
           </p>
-          <p>
-            Showing{" "}
+          <p className="text-s">
             {
               activeFilters.filtered_prices.filter(
                 (p) => p >= range[0] && p <= range[1],
               ).length
             }{" "}
-            products
+            items found
           </p>
         </div>
       </div>

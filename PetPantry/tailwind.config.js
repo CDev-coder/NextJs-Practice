@@ -12,7 +12,8 @@ module.exports = {
         footer: "#EDE0CF", // Footer
         "sidemenu-border1": "#D99A70", // Side menu border 1
         "sidemenu-border2": "#EFA78B", // Side menu border 2
-
+        "cart-background": "#FAF9F6", // Cart background
+        "cart-card": "white", // Cart item cards
         // Text
         sofwords: "#A67C52", // Primary text
         "sofwords-secondary": "#8C7B6A", // Secondary text / meta info / captions
@@ -70,6 +71,7 @@ module.exports = {
         // Shadows
         "shadow-card": "rgba(166,124,82,0.1)", // Card / modal shadows
         "shadow-floating": "rgba(168,184,162,0.1)", // Floating elements
+        "slider-shadow": "#FAF9F6", // Slider shadow
       },
       fontFamily: {
         sans: ["Merriweather", "serif"], // set Merriweather as the default

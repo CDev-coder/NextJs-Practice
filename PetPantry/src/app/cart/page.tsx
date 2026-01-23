@@ -37,65 +37,68 @@ export default function CartPage() {
   const totalPrice = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
 
   return (
-    <div className="cartDiv pt-2">
-      <div className="max-w-3xl mx-auto p-6 bg-white shadow rounded-lg">
-        <h1 className="text-2xl font-bold mb-4 text-blue-600">Shopping Cart</h1>
+    <div className="cartDiv pt-10 pb-20 bg-cart-background">
+      <div className="max-w-3xl mx-auto p-10 bg-background shadow-sm border border-orange-100/50 rounded-[2.5rem]">
+        <h1 className="text-3xl font-bold mb-8 text-[#C27E6F] tracking-tight">
+          Shopping Cart
+        </h1>
+
         {cart.length === 0 ? (
-          <div className="flex flex-col items-center gap-3">
-            <p className="text-sm text-gray-500">
-              Your cart is empty. Start shopping!
+          <div className="flex flex-col items-center gap-6 py-12 bg-">
+            <p className="text-stone-500 italic">
+              Your pantry is empty. Let&apos;s find some treats!
             </p>
             <button
               onClick={handleHomeClick}
-              className="bg-gray-200 text-black px-4 py-2 rounded hover:bg-gray-300"
+              className="bg-[#C27E6F] text-white px-8 py-3 rounded-full hover:bg-[#A36658] transition-all shadow-md"
             >
               Browse Products
             </button>
           </div>
         ) : (
           <>
-            {/* Cart Items */}
-            <div className="divide-y divide-gray-200">
+            {/* Cart Items - Swapped divide-y for a custom container gap */}
+            <div className="flex flex-col gap-2 ">
               {cart.map((item) => (
                 <CartCard key={item.id} product={item} />
               ))}
             </div>
 
             {/* Clear Cart */}
-            <div className="flex justify-end mt-4">
+            <div className="flex justify-end mt-6">
               <button
                 onClick={() => clearCart()}
-                className="text-sm text-gray-500 hover:text-red-600 underline"
+                className="text-xs uppercase tracking-widest text-stone-400 hover:text-red-500 transition-colors"
               >
                 Clear Cart
               </button>
             </div>
 
             {/* Summary + Checkout */}
-            <div className="mt-6 border-t pt-4">
-              <div className="flex justify-between items-center mb-4">
-                <div className="text-lg font-semibold">
+            <div className="mt-8 border-t border-dashed border-stone-200 pt-8">
+              <div className="flex justify-between items-center mb-8">
+                <div className="text-xl font-bold text-stone-800">
                   Subtotal ({totalQuantity} items):
-                  <span className="text-green-700 ml-2">
+                  <span className="text-[#2D4F40] ml-3 text-2xl">
                     ${totalPrice.toFixed(2)}
                   </span>
                 </div>
               </div>
 
-              <div className="flex justify-between items-center gap-3">
+              <div className="flex justify-between items-center gap-4">
                 <button
                   onClick={() => router.back()}
-                  className="bg-gray-200 text-black px-4 py-2 rounded hover:bg-gray-300"
+                  className="px-8 py-3 rounded-full font-medium text-stone-500 border border-stone-200 hover:bg-stone-50 transition-all"
                 >
                   Back
                 </button>
 
                 <button
                   onClick={handleCheckout}
-                  className={`px-6 py-2 rounded-lg font-semibold ${
+                  className={`px-10 py-3 rounded-full font-bold shadow-lg transform transition-all active:scale-95 ${
                     user
-                      ? "bg-blue-600 text-white hover:bg-blue-700"
-                      : "bg-gray-300 text-gray-700 cursor-not-allowed"
+                      ? "bg-[#C27E6F] text-white hover:bg-[#A36658]"
+                      : "bg-stone-200 text-stone-400 cursor-not-allowed"
                   }`}
                 >
                   {user ? "Checkout" : "Sign in to Checkout"}
@@ -103,15 +106,15 @@ export default function CartPage() {
               </div>
 
               {!user && (
-                <p className="text-sm text-gray-500 mt-2">
+                <p className="text-sm text-stone-500 mt-6 text-center italic">
                   You need an account to complete checkout.{" "}
                   <button
                     onClick={() => router.push("/login?redirect=/cart")}
-                    className="text-blue-600 underline"
+                    className="text-[#C27E6F] font-semibold underline decoration-dashed underline-offset-4"
                   >
                     Sign in
                   </button>{" "}
-                  or create a new account.
+                  to continue.
                 </p>
               )}
             </div>

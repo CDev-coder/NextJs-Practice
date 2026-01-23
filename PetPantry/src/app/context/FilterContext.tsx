@@ -52,10 +52,10 @@ export function FilterProvider({
   const [currentFilter, setCurrentFilter] = useState("All Products");
 
   const [activeFilters, setActiveFilters] = useState<ActiveFilters | null>(
-    null
+    null,
   );
   const [selectedFilterValue, setSelectedFilterValue] = useState<string | null>(
-    null
+    null,
   );
 
   const [currentAnimal, setCurrentAnimal] = useState("All");
@@ -77,7 +77,7 @@ export function FilterProvider({
     setSearchedBrand([...new Set(productsToUse.map((p) => p.brand))].sort());
     setSearchedAnimal([...new Set(productsToUse.map((p) => p.animal))].sort());
     setSearchedPrices(
-      [...new Set(productsToUse.map((p) => p.price.toString()))].sort()
+      [...new Set(productsToUse.map((p) => p.price.toString()))].sort(),
     );
   };
 
@@ -86,7 +86,7 @@ export function FilterProvider({
       category: string = "all",
       animal: string = "all",
       subcategory: string = "all",
-      brand?: string // optional for future expansion
+      brand?: string, // optional for future expansion
     ) => {
       // Always filter from baseProducts
       const newFilteredProducts = baseProducts.filter((product) => {
@@ -133,7 +133,7 @@ export function FilterProvider({
       ].sort();
 
       setCurrentFilter(
-        `${capitalizeFirst(category)} / ${capitalizeFirst(animal)}`
+        `${capitalizeFirst(category)} / ${capitalizeFirst(animal)}`,
       );
 
       setActiveFilters({
@@ -150,7 +150,7 @@ export function FilterProvider({
         filtered_names,
       });
     },
-    [baseProducts]
+    [baseProducts],
   );
 
   const resetFilters = () => {
@@ -182,7 +182,7 @@ export function FilterProvider({
       const sorted = [...filteredProducts].sort((a, b) =>
         order === "asc"
           ? a.name.localeCompare(b.name)
-          : b.name.localeCompare(a.name)
+          : b.name.localeCompare(a.name),
       );
       setDisplayProducts(sorted);
     },
@@ -190,11 +190,16 @@ export function FilterProvider({
       const sorted = [...filteredProducts].sort((a, b) =>
         order === "low"
           ? (a.price || 0) - (b.price || 0)
-          : (b.price || 0) - (a.price || 0)
+          : (b.price || 0) - (a.price || 0),
       );
       setDisplayProducts(sorted);
     },
     sort_PriceRange: (order: number[]) => {
+      /* console.log(
+        "UPDATING PRODUCTS IN FILTERCONTEXT WITH PRICE RANGE: ",
+        order,
+      );
+      */
       const priceSet = new Set(order);
       setDisplayProducts(filteredProducts.filter((p) => priceSet.has(p.price)));
     },

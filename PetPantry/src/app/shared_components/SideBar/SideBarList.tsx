@@ -1,4 +1,3 @@
-import { capitalizeFirst } from "../../context/helperFunctions";
 import { ActiveFilters, Product } from "../../types";
 
 interface SideBarListProps {
@@ -41,26 +40,21 @@ const SideBarList = ({
   return (
     <>
       {copyList && copyList.length > 1 && (
-        <div className="sideBar-list" id={`sideBar-list_${filterName}`}>
-          <h3
-            className="font-semibold text-lg mb-4 border-b pb-2"
-            id={`sbfm_h3_${filterName}`}
-          >
-            Filter {capitalizeFirst(activeFilters?.category || "")} by{" "}
+        <div className="sideBar-list mb-8" id={`sideBar-list_${filterName}`}>
+          <h3 className=" font-bold text-sm uppercase tracking-[0.2em] mb-4">
             {filterName}
           </h3>
 
-          <div key={filterName} className="mb-6">
-            <ul className="space-y-2">
+          <div key={filterName}>
+            <ul className="space-y-1">
               {copyList.map((value, index) => (
-                <li key={index}>
+                <li key={index} className="group/item">
                   <button
-                    className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
-                    onClick={() => {
-                      handleDoubleFilterClick(value);
-                    }}
+                    className="w-full text-left px-3 py-1.5 -ml-3 rounded-xl text-stone-600 hover:text-navbar-text2 hover:bg-orange-100/40 transition-all duration-200 flex items-center"
+                    onClick={() => handleDoubleFilterClick(value)}
                   >
-                    {value}
+                    <span className="w-1.5 h-1.5 rounded-full bg-navbar mr-0 opacity-0 group-hover/item:mr-2 group-hover/item:opacity-100 transition-all duration-300 flex-shrink-0"></span>
+                    <span className="tracking-tight">{value}</span>
                   </button>
                 </li>
               ))}

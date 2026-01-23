@@ -105,24 +105,26 @@ const SideBarRatings: React.FC<GroupedReviewStarsProps> = ({
       </svg>
     );
   }
-  //////  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
   return (
     <div className="sideBar-rating-stars">
-      <h3
-        className="font-semibold text-lg mb-4 border-b pb-2"
-        id={`sbfm_h3_RatingStars`}
-      >
+      <h3 className=" font-bold text-sm uppercase tracking-[0.2em] mb-4">
         Filter by Ratings
       </h3>
-      <div className="mb-6">
+
+      <div className="space-y-1">
         {sortedRatings.map((rating) => (
           <div
             key={rating}
-            style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+            className="group flex items-center p-2 -ml-2 rounded-xl cursor-pointer transition-all duration-200 hover:bg-orange-100/40"
             onClick={() => onRatingClick && onRatingClick(rating)}
           >
-            {renderStars(rating)}
-            <span style={{ marginLeft: 8 }}>({ratingCounts[rating]})</span>
+            {/* The Stars Container */}
+            <div className="transition-transform duration-200 group-hover:scale-110">
+              {renderStars(rating)}
+            </div>
+            <span className="ml-3 text-smfont-medium">
+              ({ratingCounts[rating]})
+            </span>
           </div>
         ))}
       </div>

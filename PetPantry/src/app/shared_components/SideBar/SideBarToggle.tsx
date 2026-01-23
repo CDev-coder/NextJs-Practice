@@ -49,6 +49,23 @@ const SideBarToggle = <T extends string | number>({
   const headerText =
     title || `Filter ${categoryName} by ${capitalizeFirst(filterName)}`;
 
+  const renderLabel = (label: string) => {
+    const parts = label.split(/(A|Z|\${1,3})/g);
+    return parts.map((part, index) => {
+      if (part === "A" || part === "Z" || part.includes("$")) {
+        return (
+          <span
+            key={index}
+            className="group-hover/item:text-navbar-text2 transition-colors duration-200"
+          >
+            {part}
+          </span>
+        );
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
   return (
     <>
       {copyList && copyList.length > 1 && (
@@ -59,12 +76,16 @@ const SideBarToggle = <T extends string | number>({
           <div className="mb-6">
             <ul className="space-y-2">
               {options.map((opt, i) => (
-                <li key={i}>
+                <li key={i} className="group/item">
                   <button
-                    className="w-full text-left px-3 py-2 rounded text-black hover:bg-gray-100"
+                    className="w-full text-left px-3 py-1.5 -ml-3 rounded-xl text-stone-600 hover:bg-orange-100/40 transition-all duration-200 flex items-center"
                     onClick={() => handleClick(opt.value)}
                   >
-                    {opt.label}
+                    <span className="w-1.5 h-1.5 rounded-full bg-navbar mr-0 opacity-0 group-hover/item:mr-2 group-hover/item:opacity-100 transition-all duration-300 flex-shrink-0"></span>
+
+                    <span className="tracking-tight">
+                      {renderLabel(opt.label)}
+                    </span>
                   </button>
                 </li>
               ))}
