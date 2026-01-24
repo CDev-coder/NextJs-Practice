@@ -8,6 +8,7 @@
   --card: #f2e0c9;
   --navbar: #c27e6f;
   --footer: #ede0cf;
+  --review-card: #e35336;
   --sofwords: #a67c52;
   --sofwords-secondary: #8c7b6a;
   --sofwords-disabled: rgba(140, 123, 106, 0.5);
@@ -56,6 +57,7 @@
   --card: #2d2d2d;
   --navbar: #4a2c2a;
   --footer: #262626;
+  --review-card: #e35336;
   --sofwords: #d4b692;
   --sofwords-secondary: #b8a899;
   --sofwords-disabled: rgba(184, 168, 153, 0.5);

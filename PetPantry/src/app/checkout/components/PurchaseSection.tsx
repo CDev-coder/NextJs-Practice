@@ -13,9 +13,15 @@ const PurchaseSection = ({ cart }: { cart: CartItem[] }) => {
         <button className="w-40 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 rounded">
           Place your order
         </button>
-        <div className="flex justify-between font-semibold flex-1 ml-4">
-          <span>Order Total:</span>
-          <span>${orderTotal.toFixed(2)}</span>
+        <div className="section">
+          <div className="flex justify-between font-semibold flex-1 ml-0">
+            <span>Order Total:</span>
+            <span>${orderTotal.toFixed(2)}</span>
+          </div>
+          <span className="text-xs">
+            By placing your order, you agree to Pet Pantry&apos;s privacy notice
+            and conditions of use.
+          </span>
         </div>
       </div>
     </section>

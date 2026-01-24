@@ -50,6 +50,7 @@ module.exports = {
         "shadow-floating": "var(--shadow-floating)",
         "slider-shadow": "var(--slider-shadow)",
         "cart-card-buttonborder": "var(--cart-card-buttonborder)",
+        "review-card": "var(--review-card)",
       },
       fontFamily: {
         sans: ["Merriweather", "serif"],
